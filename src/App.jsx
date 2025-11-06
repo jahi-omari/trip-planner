@@ -1,47 +1,16 @@
 import React from 'react'
 import Navbar from './components/navbar'
 import Hero from './components/Hero'
+import HomeCards from './components/HomeCards'
 
 const App = () => {
   return (
     <>
-    {/* <!-- Navbar --> */}
     <Navbar/>
+    <Hero title="Plan Your Next Trip" subtitle="Keep track of all your past, current and upcoming trips!"/>
+    <HomeCards/>
 
-    {/* <!-- Hero --> */}
-    <Hero/>
-
-    {/* <!-- Developers and Employers --> */}
-    <section className="py-4">
-      <div className="container-xl lg:container m-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg">
-          <div className="bg-gray-100 p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold">Explore</h2>
-            <p className="mt-2 mb-4">
-              Add trip details such as location, date, itinerary, etc.
-            </p>
-            <a
-              href="/jobs.html"
-              className="inline-block bg-black text-white rounded-lg px-4 py-2 hover:bg-gray-700"
-            >
-              Add Trip
-            </a>
-          </div>
-          {/* <div className="bg-indigo-100 p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold">For Employers</h2>
-            <p className="mt-2 mb-4">
-              List your job to find the perfect developer for the role
-            </p>
-            <a
-              href="/add-job.html"
-              className="inline-block bg-indigo-500 text-white rounded-lg px-4 py-2 hover:bg-indigo-600"
-            >
-              Add Job
-            </a>
-          </div> */}
-        </div>
-      </div>
-    </section>
+    
 
     {/* <!-- Browse Jobs --> */}
     <section className="bg-blue-50 px-4 py-10">
