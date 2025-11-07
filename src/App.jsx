@@ -12,15 +12,15 @@ const App = () => {
 
     
 
-    {/* <!-- Browse Jobs --> */}
+    {/* <!-- View Current Trips --> */}
     <section className="bg-blue-50 px-4 py-10">
-      <div className="container-xl lg:container m-auto">
-        <h2 className="text-3xl font-bold text-indigo-500 mb-6 text-center">
-          Current Trips
+      <div className="max-w-4xl mx-auto px-4 m-auto">
+        <h2 className="text-3xl font-bold text-indigo-900 mb-6 text-center">
+          Upcoming Trips
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* <!-- Job Listing 1 --> */}
-          <div className="bg-white rounded-xl shadow-md relative">
+        <div className="grid grid-cols-1 gap-6">
+          {/* <!-- Trip 1 --> */}
+          <div className="bg-white rounded-xl shadow-md relative border-3">
             <div className="p-4">
               <div className="mb-6">
                 <div className="text-gray-600 my-2">November 3rd, 2025</div>
@@ -49,8 +49,8 @@ const App = () => {
               </div>
             </div>
           </div>
-          {/* <!-- Job Listing 2 --> */}
-          <div className="bg-white rounded-xl shadow-md relative">
+          {/* <!-- Trip 2 --> */}
+          <div className="bg-white rounded-xl shadow-md relative border-3">
             <div className="p-4">
               <div className="mb-6">
                 <div className="text-gray-600 my-2">November 25th</div>
@@ -79,8 +79,8 @@ const App = () => {
               </div>
             </div>
           </div>
-          {/* <!-- Job Listing 3 --> */}
-          <div className="bg-white rounded-xl shadow-md relative">
+          {/* <!-- Trip 3 --> */}
+          <div className="bg-white rounded-xl shadow-md relative border-3">
             <div className="p-4">
               <div className="mb-6">
                 <div className="text-gray-600 my-2">December 10th, 2025</div>
