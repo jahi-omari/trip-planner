@@ -1,6 +1,10 @@
 import React from 'react'
 
 const UpcomingTrips = () => {
+
+    // Limit Trips to 3 on homepage
+    // const recentUpcomingTrips = trips.slice(0,3) 
+
   return (
     <>
         {/* <!-- View Current Trips --> */}
@@ -14,8 +18,8 @@ const UpcomingTrips = () => {
           <div className="bg-white rounded-xl shadow-md relative border-3">
             <div className="p-4">
               <div className="mb-6">
-                <div className="text-gray-600 my-2">November 3rd, 2025</div>
-                <h3 className="text-xl font-bold">Paris, France</h3>
+                <div className="text-gray-600 my-2">November 3rd, 2025 - November 12th, 2025</div>
+                <h3 className="text-xl font-bold">Mom's Birthday</h3>
               </div>
 
               <div className="mb-5">
@@ -27,10 +31,10 @@ const UpcomingTrips = () => {
               <div className="border border-gray-100 mb-5"></div>
 
               <div className="flex flex-col lg:flex-row justify-between mb-4">
-                {/* <div className="text-orange-700 mb-3">
+                <div className="text-orange-500 mb-3">
                   <i className="fa-solid fa-location-dot text-lg"></i>
-                  Boston, MA
-                </div> */}
+                  Castries, ST. LUCIA
+                </div>
                 <a
                   href="job.html"
                   className="h-[36px] bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg text-center text-sm"
@@ -44,8 +48,8 @@ const UpcomingTrips = () => {
           <div className="bg-white rounded-xl shadow-md relative border-3">
             <div className="p-4">
               <div className="mb-6">
-                <div className="text-gray-600 my-2">November 25th</div>
-                <h3 className="text-xl font-bold">London, England</h3>
+                <div className="text-gray-600 my-2">November 25th, 2025 - December 1st, 2025</div>
+                <h3 className="text-xl font-bold">Tottenham Game</h3>
               </div>
 
               <div className="mb-5">
@@ -57,10 +61,10 @@ const UpcomingTrips = () => {
               <div className="border border-gray-100 mb-5"></div>
 
               <div className="flex flex-col lg:flex-row justify-between mb-4">
-                {/* <div className="text-orange-700 mb-3">
+                <div className="text-orange-500 mb-3">
                   <i className="fa-solid fa-location-dot text-lg"></i>
-                  Boston, MA
-                </div> */}
+                  London, ENGLAND
+                </div>
                 <a
                   href="job.html"
                   className="h-[36px] bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg text-center text-sm"
@@ -74,8 +78,8 @@ const UpcomingTrips = () => {
           <div className="bg-white rounded-xl shadow-md relative border-3">
             <div className="p-4">
               <div className="mb-6">
-                <div className="text-gray-600 my-2">December 10th, 2025</div>
-                <h3 className="text-xl font-bold">Venice, Italy</h3>
+                <div className="text-gray-600 my-2">December 10th, 2025 - December 18th, 2025</div>
+                <h3 className="text-xl font-bold">Staff Christmas Italy Trip</h3>
               </div>
 
               <div className="mb-5">
@@ -87,10 +91,10 @@ const UpcomingTrips = () => {
               <div className="border border-gray-100 mb-5"></div>
 
               <div className="flex flex-col lg:flex-row justify-between mb-4">
-                {/* <div className="text-orange-700 mb-3">
+                <div className="text-orange-500 mb-3">
                   <i className="fa-solid fa-location-dot text-lg"></i>
-                  Boston, MA
-                </div> */}
+                  Venice, ITALY
+                </div>
                 <a
                   href="job.html"
                   className="h-[36px] bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg text-center text-sm"
