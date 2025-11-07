@@ -12,12 +12,16 @@ const HomeCards = () => {
             <p className="mt-2 mb-4">
               Add trip details such as location, date, itinerary, etc.
             </p>
-            <a
-              href="/new.html"
-              className="inline-block bg-black text-white rounded-lg px-4 py-2 hover:bg-gray-700"
-            >
-              Add Trip
+            {/* Move button to the right of the card */}
+            <div className="flex justify-end">
+                <a
+                    href="/new.html"
+                    className="inline-block bg-black text-white rounded-lg px-4 py-2 hover:bg-gray-700"
+                >
+                    Add Trip
             </a>
+            </div>
+            
           </Card>
           {/* <div className="bg-indigo-100 p-6 rounded-lg shadow-md">
             <h2 className="text-2xl font-bold">For Employers</h2>
