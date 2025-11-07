@@ -1,5 +1,6 @@
 import React from 'react'
 import Card from './Card'
+import { FaGlobeAmericas } from 'react-icons/fa'
 
 const HomeCards = () => {
   return (
@@ -8,7 +9,10 @@ const HomeCards = () => {
       <div className="max-w-2xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-1 gap-4 p-4 rounded-lg">
           <Card>
-            <h2 className="text-2xl font-bold">Explore</h2>
+            <h2 className="text-2xl font-bold">
+              <FaGlobeAmericas className='inline text-xl mr-2 mb-1'/>
+                Explore
+              </h2>
             <p className="mt-2 mb-4">
               Add trip details such as location, date, itinerary, etc.
             </p>
