@@ -1,20 +1,17 @@
 import React from 'react'
-import Navbar from './components/navbar'
-import Hero from './components/Hero'
-import HomeCards from './components/HomeCards'
-import UpcomingTrips from './components/UpcomingTrips'
-import ViewAllTrips from './components/ViewAllTrips'
+import {Route, createBrowserRouter, RouterProvider} from 'react-router-dom'
+import Homepage from './pages/Homepage'
+import Navbar from './components/Navbar'
+
+
+const router = createBrowserRouter(
+  [{path: "/", element: <Homepage/>}]
+)
 
 const App = () => {
-  return (
-    <>
-      <Navbar/>
-      <Hero title="Plan Your Next Trip" subtitle="Keep track of all your past, current and upcoming trips!"/>
-      <HomeCards/>
-      <UpcomingTrips/>
-      <ViewAllTrips/>
-    </>
-  )
+  return <RouterProvider router={router}/>
 }
 
 export default App
+
+
