@@ -12,7 +12,7 @@ const RecentUpcomingTrips = () => {
         {/* <!-- View Current Trips --> */}
     <section className="bg-indigo-50 px-4 py-10">
       <div className="max-w-4xl mx-auto px-4 m-auto">
-        <h2 className="text-3xl font-bold text-indigo-900 mb-6 text-center">
+        <h2 className="text-3xl font-bold text-black-900 mb-6 text-center">
           Upcoming Trips
         </h2>
         <div className="grid grid-cols-1 gap-6">

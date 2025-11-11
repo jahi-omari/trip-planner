@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { FaArrowLeft } from 'react-icons/fa'
 
-const TripPage = () => {
+const TripDetailsPage = () => {
   return (
     <>
     <section>
@@ -11,7 +11,7 @@ const TripPage = () => {
           to="/upcoming-trips-page"
           className="text-indigo-500 hover:text-indigo-600 flex items-center"
         >
-          <FaArrowLeft className='mr-2'/> Back to Job Listings 
+          <FaArrowLeft className='mr-2'/> Back to Upcoming Trips 
         </Link>
       </div>
     </section>
@@ -44,21 +44,20 @@ const TripPage = () => {
 
               <p className="mb-4">
                 Textbox details that the user types in. Still need to add word processor tools in final build.
-                <p>E.g. Monday [Date]: Details</p>
-                <p>E.g. Tuesday [Date]: Details</p>
               </p>
+              <p>E.g. Monday [Date]: Details</p>
+              <p>E.g. Tuesday [Date]: Details</p>
             </div>
           </main>
 
-          {/* <!-- Sidebar --> */}
           <aside>
             {/* <!-- Manage --> */}
             <div className="bg-white p-6 rounded-lg shadow-md mt-6 border-3">
               <h3 className="text-xl font-bold mb-6">Manage Trip</h3>
-              <a
-                href="/add-job.html"
+              <Link
+                to="edit-trip"
                 className="bg-indigo-900 hover:bg-indigo-600 text-white text-center font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
-                >Edit Trip</a
+                >Edit Trip</Link
               >
               <button
                 className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
@@ -74,4 +73,4 @@ const TripPage = () => {
   )
 }
 
-export default TripPage
+export default TripDetailsPage
