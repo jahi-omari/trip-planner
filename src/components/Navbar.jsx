@@ -28,15 +28,15 @@ const navbar = () => {
                   >Home</a
                 >
                 <a
-                  href="/jobs.html"
+                  href="/upcoming-trips.html"
                   className="text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
-                  > Past Trips</a
+                  > Upcoming Trips</a
                 >
-                {/* <a
-                  href="/add-job.html"
+                <a
+                  href="/past-trips.html"
                   className="text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
-                  >Add Trip</a
-                > */}
+                  >Past Trips</a
+                >
               </div>
             </div>
           </div>

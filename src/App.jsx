@@ -1,11 +1,17 @@
 import React from 'react'
 import {Route, createBrowserRouter, RouterProvider} from 'react-router-dom'
 import Homepage from './pages/Homepage'
-import Navbar from './components/Navbar'
+import AddTrip from './pages/UpcomingTripsPage'
+import MainLayout from './layouts/MainLayout'
 
 
 const router = createBrowserRouter(
-  [{path: "/", element: <Homepage/>}]
+  [{path: "/", 
+    element: <MainLayout/>,
+    children: [
+      {index: true, element: <Homepage/>}
+    ]
+  }]
 )
 
 const App = () => {
