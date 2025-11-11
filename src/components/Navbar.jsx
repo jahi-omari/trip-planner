@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import logo from '../assets/images/logo.png'
 
 const navbar = () => {
@@ -10,7 +11,7 @@ const navbar = () => {
             className="flex flex-1 items-center justify-center md:items-stretch md:justify-start"
           >
             {/* <!-- Logo --> */}
-            <a className="flex flex-shrink-0 items-center mr-4" href="/index.html">
+            <Link className="flex flex-shrink-0 items-center mr-4" to="/">
               <img
                 className="h-10 w-auto"
                 src={logo}
@@ -19,23 +20,23 @@ const navbar = () => {
               <span className="hidden md:block text-white text-2xl font-bold ml-2"
                 >SmartTrip Planner</span
               >
-            </a>
+            </Link>
             <div className="md:ml-auto">
               <div className="flex space-x-2">
-                <a
-                  href="/index.html"
+                <Link
+                  to="/"
                   className="text-white bg-black hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
-                  >Home</a
+                  >Home</Link
                 >
-                <a
-                  href="/upcoming-trips.html"
+                <Link
+                  to="/upcoming-trips-page"
                   className="text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
-                  > Upcoming Trips</a
+                  > Upcoming Trips</Link
                 >
-                <a
-                  href="/past-trips.html"
+                <Link
+                  to="/past-trips"
                   className="text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
-                  >Past Trips</a
+                  >Past Trips</Link
                 >
               </div>
             </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaMapMarker, FaGlobeAmericas} from 'react-icons/fa'
 
-const UpcomingTrips = () => {
+const RecentUpcomingTrips = () => {
 
     // Limit Trips to 3 on homepage
     // const recentUpcomingTrips = trips.slice(0,3) 
@@ -113,4 +113,4 @@ const UpcomingTrips = () => {
   )
 }
 
-export default UpcomingTrips
+export default RecentUpcomingTrips
