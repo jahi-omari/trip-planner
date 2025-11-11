@@ -7,6 +7,7 @@ import NotFoundPage from './pages/NotFoundPage'
 import TripDetailsPage from './pages/TripDetailsPage'
 import AddTripPage from './pages/AddTripPage'
 import EditTripPage from './pages/EditTripPage'
+import PastTripsPage from './pages/PastTripsPage'
 
 const router = createBrowserRouter(
   [{path: "/", 
@@ -20,6 +21,7 @@ const router = createBrowserRouter(
       {path: "add-trip", element: <AddTripPage/>},
       {path: "trip-details/edit-trip", element: <EditTripPage/>},
       {path: "upcoming-trips-page/trip-details/edit-trip", element: <EditTripPage/>},
+      {path: "past-trips", element: <PastTripsPage/>},
       {path: "*", element: <NotFoundPage/>},
     ]
   }]
