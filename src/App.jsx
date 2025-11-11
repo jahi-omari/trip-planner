@@ -4,6 +4,7 @@ import Homepage from './pages/Homepage'
 import UpcomingTripsPage from './pages/UpcomingTripsPage'
 import MainLayout from './layouts/MainLayout'
 import NotFoundPage from './pages/NotFoundPage'
+import TripPage from './pages/TripPage'
 
 const router = createBrowserRouter(
   [{path: "/", 
@@ -12,6 +13,8 @@ const router = createBrowserRouter(
       {index: true, element: <Homepage/>},
       {path: "homepage", element: <Homepage/>},
       {path: "upcoming-trips-page", element: <UpcomingTripsPage/>},
+      {path: "upcoming-trips-page/trip-details", element: <TripPage/>},
+      {path: "trip-details", element: <TripPage/>},
       {path: "*", element: <NotFoundPage/>},
     ]
   }]

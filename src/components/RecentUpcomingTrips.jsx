@@ -28,8 +28,6 @@ const RecentUpcomingTrips = () => {
                Itinerary Details
               </div>
 
-              {/* <h3 className="text-indigo-500 mb-2">$70 - $80K / Year</h3> */}
-
               <div className="border border-gray-100 mb-5"></div>
 
               <div className="flex flex-col lg:flex-row justify-between mb-4">
@@ -38,7 +36,7 @@ const RecentUpcomingTrips = () => {
                   Castries, ST. LUCIA
                 </div>
                 <Link
-                  to="trip.id"
+                  to="trip-details"
                   className="h-[36px] bg-indigo-900 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg text-center text-sm"
                 >
                  View Trip
@@ -58,8 +56,6 @@ const RecentUpcomingTrips = () => {
                Itinerary Details
               </div>
 
-              {/* <h3 className="text-indigo-500 mb-2">$70 - $80K / Year</h3> */}
-
               <div className="border border-gray-100 mb-5"></div>
 
               <div className="flex flex-col lg:flex-row justify-between mb-4">
@@ -68,7 +64,7 @@ const RecentUpcomingTrips = () => {
                   London, ENGLAND
                 </div>
                 <Link
-                  to="job.id"
+                  to="trip-details"
                   className="h-[36px] bg-indigo-900 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg text-center text-sm"
                 >
                  View Trip
@@ -88,7 +84,6 @@ const RecentUpcomingTrips = () => {
                Itinerary Details
               </div>
 
-              {/* <h3 className="text-indigo-500 mb-2">$70 - $80K / Year</h3> */}
 
               <div className="border border-gray-100 mb-5"></div>
 
@@ -98,8 +93,8 @@ const RecentUpcomingTrips = () => {
                   Venice, ITALY
                 </div>
                 <Link
-                  to="{job.id}"
-                  className="h-[36px] bg-indigo-900 hover:bg-indigo-900 text-white px-4 py-2 rounded-lg text-center text-sm"
+                  to="trip-details"
+                  className="h-[36px] bg-indigo-900 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg text-center text-sm"
                 >
                  View Trip
                 </Link>
