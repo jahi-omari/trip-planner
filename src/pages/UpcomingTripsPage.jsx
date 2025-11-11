@@ -10,11 +10,3 @@ const UpcomingTripsPage = () => {
 }
 
 export default UpcomingTripsPage
-
-// const AddTrip = () => {
-//   return (
-//     <div>AddTrip</div>
-//   )
-// }
-
-// export default AddTrip
