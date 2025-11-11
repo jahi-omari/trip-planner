@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { FaMapMarker, FaGlobeAmericas} from 'react-icons/fa'
 
 const RecentUpcomingTrips = () => {
@@ -36,12 +37,12 @@ const RecentUpcomingTrips = () => {
                   <FaMapMarker className="inline text-lg mr-2 mb-1"/>
                   Castries, ST. LUCIA
                 </div>
-                <a
-                  href="job.html"
-                  className="h-[36px] bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg text-center text-sm"
+                <Link
+                  to="trip.id"
+                  className="h-[36px] bg-indigo-900 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg text-center text-sm"
                 >
                  View Trip
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -62,16 +63,16 @@ const RecentUpcomingTrips = () => {
               <div className="border border-gray-100 mb-5"></div>
 
               <div className="flex flex-col lg:flex-row justify-between mb-4">
-                <div className="text-orange-500 mb-3">
-                  <i className="fa-solid fa-location-dot text-lg"></i>
+                <div className="text-red-500 mb-3">
+                  <FaMapMarker className="inline text-lg mr-2 mb-1"/>
                   London, ENGLAND
                 </div>
-                <a
-                  href="job.html"
-                  className="h-[36px] bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg text-center text-sm"
+                <Link
+                  to="job.id"
+                  className="h-[36px] bg-indigo-900 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg text-center text-sm"
                 >
                  View Trip
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -92,16 +93,16 @@ const RecentUpcomingTrips = () => {
               <div className="border border-gray-100 mb-5"></div>
 
               <div className="flex flex-col lg:flex-row justify-between mb-4">
-                <div className="text-orange-500 mb-3">
-                  <i className="fa-solid fa-location-dot text-lg"></i>
+                <div className="text-red-500 mb-3">
+                  <FaMapMarker className="inline text-lg mr-2 mb-1"/>
                   Venice, ITALY
                 </div>
-                <a
-                  href="job.html"
-                  className="h-[36px] bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg text-center text-sm"
+                <Link
+                  to="{job.id}"
+                  className="h-[36px] bg-indigo-900 hover:bg-indigo-900 text-white px-4 py-2 rounded-lg text-center text-sm"
                 >
                  View Trip
-                </a>
+                </Link>
               </div>
             </div>
           </div>

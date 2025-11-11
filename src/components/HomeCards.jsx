@@ -1,5 +1,6 @@
 import React from 'react'
 import Card from './Card'
+import { Link } from 'react-router-dom'
 import { FaGlobeAmericas } from 'react-icons/fa'
 
 const HomeCards = () => {
@@ -18,12 +19,12 @@ const HomeCards = () => {
             </p>
             {/* Move button to the right of the card */}
             <div className="flex justify-end">
-                <a
-                    href="/new.html"
+                <Link
+                    to="/add-trip"
                     className="inline-block bg-black text-white rounded-lg px-4 py-2 hover:bg-gray-700"
                 >
                     Add Trip
-            </a>
+            </Link>
             </div>
             
           </Card>
