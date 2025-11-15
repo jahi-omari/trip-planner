@@ -1,5 +1,4 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import AddTrip from '../components/AddTrip'
 import RecentUpcomingTrips from '../components/RecentUpcomingTrips'

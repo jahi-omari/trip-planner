@@ -8,13 +8,15 @@ import TripDetailsPage from './pages/TripDetailsPage'
 import AddTripPage from './pages/AddTripPage'
 import EditTripPage from './pages/EditTripPage'
 import PastTripsPage from './pages/PastTripsPage'
+import LoginPage from './pages/LoginPage'
 
 const router = createBrowserRouter(
   [{path: "/", 
     element: <MainLayout/>,
     children: [
-      {index: true, element: <Homepage/>},
+      {index: true, element: <LoginPage/>},
       {path: "homepage", element: <Homepage/>},
+      // {path: "signup", element: <SignUpPage/>},
       {path: "upcoming-trips-page", element: <UpcomingTripsPage/>},
       {path: "upcoming-trips-page/trip-details", element: <TripDetailsPage/>},
       {path: "trip-details", element: <TripDetailsPage/>},
