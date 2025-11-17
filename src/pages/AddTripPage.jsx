@@ -43,39 +43,55 @@ const AddTripPage = () => {
               <label className="block text-gray-700 font-bold mb-2"
                 >Start Date</label
               >
-              <input
-                type="text"
-                id="title"
-                name="title"
-                className="border rounded w-full py-2 px-3 mb-2"
-                placeholder="mm/dd/yyyy"
-                required
-              />
+              <div className="flex gap-2">
+                <input
+                  type="date"
+                  id="startDatePicker"
+                  name="startDatePicker"
+                  className="border rounded py-2 px-3 mb-2"
+                />
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  className="border rounded w-full py-2 px-3 mb-2"
+                  placeholder="mm/dd/yyyy"
+                  required
+                />
+              </div>
             </div>
 
             <div className="mb-4">
               <label className="block text-gray-700 font-bold mb-2"
                 >End Date</label
               >
-              <input
-                type="text"
-                id="title"
-                name="title"
-                className="border rounded w-full py-2 px-3 mb-2"
-                placeholder="mm/dd/yyyy"
-                required
-              />
+              <div className="flex gap-2">
+                <input
+                  type="date"
+                  id="endDatePicker"
+                  name="endDatePicker"
+                  className="border rounded py-2 px-3 mb-2"
+                />
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  className="border rounded w-full py-2 px-3 mb-2"
+                  placeholder="mm/dd/yyyy"
+                  required
+                />
+              </div>
             </div>
 
             <div className="mb-4">
               <label
-                htmlFor="itinerary"
+                htmlFor="description"
                 className="block text-gray-700 font-bold mb-2"
-                >Itinerary/Description</label
+                >Description</label
               >
               <textarea
-                id="itinerary"
-                name="itinerary"
+                id="description"
+                name="description"
                 className="border rounded w-full py-2 px-3"
                 rows="4"
                 placeholder="Add daily activities etc."

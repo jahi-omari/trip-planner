@@ -1,6 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-const EditTripPage = () => {
+const SignUpPage = () => {
   return (
     <>
     <section className="bg-indigo-50">
@@ -9,85 +10,68 @@ const EditTripPage = () => {
           className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border-3 m-4 md:m-0"
         >
           <form>
-            <h2 className="text-3xl text-center font-semibold mb-6">Edit Trip</h2>
+            <h2 className="text-3xl text-center font-semibold mb-6">Sign Up</h2>
 
             <div className="mb-4">
               <label className="block text-gray-700 font-bold mb-2"
-                >Trip Name</label
+                >Name</label
               >
               <input
                 type="text"
                 id="title"
                 name="title"
                 className="border rounded w-full py-2 px-3 mb-2"
-                placeholder="eg. Family Holiday"
-                required
+                placeholder="eg. John Smith"
               />
             </div>
 
             <div className="mb-4">
               <label className="block text-gray-700 font-bold mb-2"
-                >Trip Location</label
+                >Email</label
               >
               <input
-                type="text"
-                id="title"
-                name="title"
+                type="email"
+                id="email"
+                name="email"
                 className="border rounded w-full py-2 px-3 mb-2"
                 placeholder="eg. Hagerstown, Maryland"
-                required
               />
             </div>
 
             <div className="mb-4">
               <label className="block text-gray-700 font-bold mb-2"
-                >Start Date</label
+                >Password</label
               >
               <input
-                type="text"
-                id="title"
-                name="title"
+                type="password"
+                id="password"
+                name="password"
                 className="border rounded w-full py-2 px-3 mb-2"
-                placeholder="mm/dd/yyyy"
+                placeholder="Enter your password"
                 required
               />
             </div>
 
-            <div className="mb-4">
+             <div className="mb-4">
               <label className="block text-gray-700 font-bold mb-2"
-                >End Date</label
+                >Re-Enter Your Password</label
               >
               <input
-                type="text"
-                id="title"
-                name="title"
+                type="password"
+                id="re-enter-password"
+                name="re-enter-password"
                 className="border rounded w-full py-2 px-3 mb-2"
-                placeholder="mm/dd/yyyy"
+                placeholder="Enter your password"
                 required
               />
-            </div>
-
-            <div className="mb-4">
-              <label
-                htmlFor="description"
-                className="block text-gray-700 font-bold mb-2"
-                >Description</label
-              >
-              <textarea
-                id="description"
-                name="description"
-                className="border rounded w-full py-2 px-3"
-                rows="4"
-                placeholder="Add daily activities etc."
-              ></textarea>
             </div>
 
             <div>
               <button
-                className="bg-indigo-900 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+                className="bg-indigo-900 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg w-full focus:outline-none focus:shadow-outline"
                 type="submit"
               >
-                Save Trip
+                <Link to="/LoginPage">Save</Link>
               </button>
             </div>
           </form>
@@ -98,4 +82,4 @@ const EditTripPage = () => {
   )
 }
 
-export default EditTripPage
+export default SignUpPage

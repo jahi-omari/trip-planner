@@ -59,13 +59,15 @@ const LoginPage = () => {
                 className="bg-indigo-900 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg w-full focus:outline-none focus:shadow-outline"
                 type="submit"
               >
-                Sign Up
+                <Link to="/signup">
+                  Sign Up
+                </Link>
               </button>
             </div>
 
             <div className='flex flex-row mb-4 mt-4'>
                 <div className='flex-grow border-t border-gray-400 mt-3 mr-3'></div>
-                <p className='text-black'>OR</p>
+                <p className='text-black'>or sign in with:</p>
                 <div className='flex-grow border-t border-gray-400 mt-3 ml-3'></div>    
             </div>
             

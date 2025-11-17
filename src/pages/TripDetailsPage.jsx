@@ -56,11 +56,11 @@ const TripDetailsPage = () => {
               <h3 className="text-xl font-bold mb-6">Manage Trip</h3>
               <Link
                 to="edit-trip"
-                className="bg-indigo-900 hover:bg-indigo-600 text-white text-center font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
+                className="bg-indigo-900 hover:bg-indigo-600 text-white text-center font-bold py-2 px-4 rounded-lg w-full focus:outline-none focus:shadow-outline mt-4 block"
                 >Edit Trip</Link
               >
               <button
-                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block"
+                className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg w-full focus:outline-none focus:shadow-outline mt-4 block"
               >
                 Delete Trip
               </button>
