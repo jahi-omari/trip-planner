@@ -1,6 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { FaCalendarAlt, FaPlane, FaHotel, FaCar } from 'react-icons/fa'
 
 const AddTripPage = () => {
+  const [startDate, setStartDate] = useState('')
+  const [endDate, setEndDate] = useState('')
+
+  // Convert mm/dd/yyyy to yyyy-mm-dd
+  const formatDateToInput = (dateStr) => {
+    if (!dateStr) return ''
+    const parts = dateStr.split('/')
+    if (parts.length !== 3) return ''
+    const [month, day, year] = parts
+    return `${year}-${month}-${day}`
+  }
+
+  const handleStartDateChange = (e) => {
+    setStartDate(e.target.value)
+  }
+
+  const handleEndDateChange = (e) => {
+    setEndDate(e.target.value)
+  }
   return (
     <>
       <section className="bg-indigo-50">
@@ -43,44 +63,44 @@ const AddTripPage = () => {
               <label className="block text-gray-700 font-bold mb-2"
                 >Start Date</label
               >
-              <div className="flex gap-2">
-                <input
-                  type="date"
-                  id="startDatePicker"
-                  name="startDatePicker"
-                  className="border rounded py-2 px-3 mb-2"
-                />
-                <input
-                  type="text"
-                  id="title"
-                  name="title"
-                  className="border rounded w-full py-2 px-3 mb-2"
-                  placeholder="mm/dd/yyyy"
-                  required
-                />
-              </div>
+              <input
+                type="date"
+                id="startDate"
+                name="startDate"
+                value={startDate}
+                onChange={handleStartDateChange}
+                onBlur={(e) => {
+                  const textValue = e.target.value
+                  if (textValue && !textValue.match(/^\d{4}-\d{2}-\d{2}$/)) {
+                    const dateValue = formatDateToInput(textValue)
+                    if (dateValue) setStartDate(dateValue)
+                  }
+                }}
+                className="border rounded w-full py-2 px-3 mb-2"
+                placeholder="mm/dd/yyyy"
+              />
             </div>
 
             <div className="mb-4">
               <label className="block text-gray-700 font-bold mb-2"
                 >End Date</label
               >
-              <div className="flex gap-2">
-                <input
-                  type="date"
-                  id="endDatePicker"
-                  name="endDatePicker"
-                  className="border rounded py-2 px-3 mb-2"
-                />
-                <input
-                  type="text"
-                  id="title"
-                  name="title"
-                  className="border rounded w-full py-2 px-3 mb-2"
-                  placeholder="mm/dd/yyyy"
-                  required
-                />
-              </div>
+              <input
+                type="date"
+                id="endDate"
+                name="endDate"
+                value={endDate}
+                onChange={handleEndDateChange}
+                onBlur={(e) => {
+                  const textValue = e.target.value
+                  if (textValue && !textValue.match(/^\d{4}-\d{2}-\d{2}$/)) {
+                    const dateValue = formatDateToInput(textValue)
+                    if (dateValue) setEndDate(dateValue)
+                  }
+                }}
+                className="border rounded w-full py-2 px-3 mb-2"
+                placeholder="mm/dd/yyyy"
+              />
             </div>
 
             <div className="mb-4">
@@ -98,9 +118,36 @@ const AddTripPage = () => {
               ></textarea>
             </div>
 
+            <div className="mb-6 grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 focus:outline-none focus:shadow-outline"
+              >
+                <FaCalendarAlt /> Add Activity
+              </button>
+              <button
+                type="button"
+                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 focus:outline-none focus:shadow-outline"
+              >
+                <FaPlane /> Add Flight
+              </button>
+              <button
+                type="button"
+                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 focus:outline-none focus:shadow-outline"
+              >
+                <FaHotel /> Add Lodging
+              </button>
+              <button
+                type="button"
+                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 focus:outline-none focus:shadow-outline"
+              >
+                <FaCar /> Add Car Rental
+              </button>
+            </div>
+
             <div>
               <button
-                className="bg-indigo-900 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+                className="bg-indigo-900 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg w-full focus:outline-none focus:shadow-outline"
                 type="submit"
               >
                 Save Trip
