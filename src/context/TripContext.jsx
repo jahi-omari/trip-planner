@@ -1,3 +1,4 @@
+// Lodging data (array of lodgings) will be defined inside TripProvider
 
 import React, { createContext, useState } from 'react'
 
@@ -6,6 +7,7 @@ export const TripContext = createContext()
 
 
 export const TripProvider = ({ children }) => {
+  const [lodgingData, setLodgingData] = useState([])
   const [flightData, setFlightData] = useState({
     flights: [],
     totalCost: ''
@@ -105,6 +107,8 @@ export const TripProvider = ({ children }) => {
       setCarRentalData,
       activityData,
       setActivityData,
+      lodgingData,
+      setLodgingData,
       upcomingTrips,
       addTrip,
       updateTrip,

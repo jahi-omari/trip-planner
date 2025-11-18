@@ -10,7 +10,7 @@ const AddTripPage = () => {
   const [tripName, setTripName] = useState('')
   const [tripLocation, setTripLocation] = useState('')
   const [description, setDescription] = useState('')
-  const { flightData, carRentalData, activityData, addTrip, clearFlightData, clearCarRentalData, setActivityData } = useContext(TripContext)
+  const { flightData, carRentalData, activityData, lodgingData, addTrip, clearFlightData, clearCarRentalData, setActivityData, setLodgingData } = useContext(TripContext)
 
   // Convert mm/dd/yyyy to yyyy-mm-dd
   const formatDateToInput = (dateStr) => {
@@ -42,17 +42,19 @@ const AddTripPage = () => {
       description,
       flightData,
       carRentalData,
-      activityData
+      activityData,
+      lodgingData
     }
 
     // Save trip to context
     addTrip(tripData)
 
 
-    // Clear flight, car rental, and activity data
+    // Clear flight, car rental, activity, and lodging data
     clearFlightData()
     clearCarRentalData()
     setActivityData([])
+    setLodgingData([])
 
     // Reset form
     setTripName('')
@@ -250,6 +252,27 @@ const AddTripPage = () => {
                     <p className="text-sm text-gray-700">Website: {activity.website}</p>
                     <p className="text-sm text-gray-700">Email: {activity.email}</p>
                     <p className="text-sm text-gray-700">Total Cost: ${activity.totalCost}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Display Lodging if it exists */}
+            {lodgingData.length > 0 && (
+              <div className="mb-6 p-4 bg-purple-100 rounded-md border border-purple-300">
+                <h3 className="text-lg font-semibold mb-3">Lodging Details</h3>
+                {lodgingData.map((lodging) => (
+                  <div key={lodging.id} className="mb-3 p-3 bg-white rounded border">
+                    <p className="font-semibold">{lodging.lodgingName}</p>
+                    <p className="text-sm text-gray-700">Start: {lodging.startDate} {lodging.startTime}</p>
+                    <p className="text-sm text-gray-700">End: {lodging.endDate} {lodging.endTime}</p>
+                    <p className="text-sm text-gray-700">Venue: {lodging.venue}</p>
+                    <p className="text-sm text-gray-700">Address: {lodging.address}</p>
+                    <p className="text-sm text-gray-700">Phone: {lodging.phone}</p>
+                    <p className="text-sm text-gray-700">Website: {lodging.website}</p>
+                    <p className="text-sm text-gray-700">Email: {lodging.email}</p>
+                    <p className="text-sm text-gray-700">Confirmation: {lodging.confirmationNumber}</p>
+                    <p className="text-sm text-gray-700">Total Cost: ${lodging.totalCost}</p>
                   </div>
                 ))}
               </div>

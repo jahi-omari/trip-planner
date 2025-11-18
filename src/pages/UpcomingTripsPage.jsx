@@ -61,6 +61,17 @@ const UpcomingTripsPage = () => {
                       </div>
                     )}
 
+
+                    {/* Show lodging details if available */}
+                    {trip.lodgingData && trip.lodgingData.length > 0 && (
+                      <div className="mb-4 p-3 bg-purple-100 border-3 border-black">
+                        <p className="text-xs font-black uppercase mb-2">🏨 Lodging ({trip.lodgingData.length})</p>
+                        {trip.lodgingData.map((lodging) => (
+                          <p key={lodging.id} className="text-sm font-bold text-gray-800 mb-1">{lodging.lodgingName} - {lodging.venue}</p>
+                        ))}
+                      </div>
+                    )}
+
                     {/* Show activity details if available */}
                     {trip.activityData && trip.activityData.length > 0 && (
                       <div className="mb-4 p-3 bg-yellow-100 border-3 border-black">
