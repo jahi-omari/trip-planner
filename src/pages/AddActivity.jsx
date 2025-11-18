@@ -88,7 +88,7 @@ const AddActivity = () => {
             </div>
 
             <div>
-              <button className="bg-indigo-900 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg w-full" type="submit">Save Lodging</button>
+              <button className="bg-indigo-900 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg w-full" type="submit">Save Activity</button>
             </div>
           </form>
         </div>
