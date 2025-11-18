@@ -13,6 +13,7 @@ import SignUpPage from './pages/SignUpPage'
 import AddFlight from './pages/AddFlight'
 import AddLodging from './pages/AddLodging'
 import AddActivity from './pages/AddActivity'
+import AddCarRental from './pages/AddCarRental'
 
 const router = createBrowserRouter(
   [{path: "/", 
@@ -30,7 +31,8 @@ const router = createBrowserRouter(
       {path: "past-trips", element: <PastTripsPage/>},
       {path: "add-trip/add-flight", element: <AddFlight/>},
       {path: "add-trip/add-lodging", element: <AddLodging/>},
-      {path: "add-trip/add-activity", element: <AddActivity/>}, 
+      {path: "add-trip/add-activity", element: <AddActivity/>},
+      {path: "add-trip/add-car", element: <AddCarRental/>},
       {path: "*", element: <NotFoundPage/>},
     ]
   }]
