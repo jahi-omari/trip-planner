@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { FaCalendarAlt, FaPlane, FaHotel, FaCar, FaPencilAlt } from 'react-icons/fa'
 
 // Single flight component used for each created flight
-const FlightItem = ({ flight, onChange, onRemove, onAdd }) => {
+const FlightItem = ({ flight, onChange, onRemove, onAdd, canRemove }) => {
   const { id, departure, airline, flightNumber, seats, customName } = flight
   const [isEditingName, setIsEditingName] = useState(false)
   const [editNameValue, setEditNameValue] = useState(customName || `Flight ${id}`)
@@ -32,7 +32,9 @@ const FlightItem = ({ flight, onChange, onRemove, onAdd }) => {
             </button>
           )}
         </div>
-        <button type="button" onClick={() => onRemove(id)} className="text-sm text-red-600 hover:underline">Remove</button>
+        {canRemove && (
+          <button type="button" onClick={() => onRemove(id)} className="text-sm text-red-600 hover:underline">Remove</button>
+        )}
       </div>
 
       {isEditingName && (
@@ -153,22 +155,17 @@ const AddFlight = () => {
               </div>
 
 
-              {/* Show Add Flight button if no flights exist */}
-              {flights.length === 0 && (
-                <div className="flex justify-end mb-6">
-                  <button
-                    type="button"
-                    onClick={addFlight}
-                    className="bg-indigo-900 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg"
-                  >
-                    Add Flight
-                  </button>
-                </div>
-              )}
 
               {/* Render dynamic flight items */}
               {flights.map((f) => (
-                <FlightItem key={f.id} flight={f} onChange={updateFlight} onRemove={removeFlight} onAdd={addFlight} />
+                <FlightItem
+                  key={f.id}
+                  flight={f}
+                  onChange={updateFlight}
+                  onRemove={removeFlight}
+                  onAdd={addFlight}
+                  canRemove={flights.length > 1}
+                />
               ))}
 
               <div>
