@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
-import { FaCalendarAlt, FaPlane, FaHotel, FaCar } from 'react-icons/fa'
+import { FaCalendarAlt, FaPlane, FaHotel, FaCar, FaPencilAlt } from 'react-icons/fa'
 
 // Single flight component used for each created flight
 const FlightItem = ({ flight, onChange, onRemove, onAdd }) => {
-  const { id, departure, airline, flightNumber, seats } = flight
+  const { id, departure, airline, flightNumber, seats, customName } = flight
+  const [isEditingName, setIsEditingName] = useState(false)
+  const [editNameValue, setEditNameValue] = useState(customName || `Flight ${id}`)
 
   const handlePickerChange = (e) => {
     const val = e.target.value // yyyy-mm-dd
@@ -12,26 +14,51 @@ const FlightItem = ({ flight, onChange, onRemove, onAdd }) => {
     onChange(id, 'departure', `${m}/${d}/${y}`)
   }
 
+  const handleSaveName = () => {
+    onChange(id, 'customName', editNameValue)
+    setIsEditingName(false)
+  }
+
+  const displayName = customName || `Flight ${id}`
+
   return (
     <div className="mb-6 p-4 border rounded-md bg-white">
       <div className="flex items-center justify-between mb-3">
-        <h3 className="font-semibold">Flight {id}</h3>
+        <div className="flex items-center gap-2">
+          <h3 className="font-semibold">{displayName}</h3>
+          {!isEditingName && (
+            <button type="button" onClick={() => setIsEditingName(true)} title="Edit Flight Name" className="text-blue-600 hover:text-blue-800">
+              <FaPencilAlt />
+            </button>
+          )}
+        </div>
         <button type="button" onClick={() => onRemove(id)} className="text-sm text-red-600 hover:underline">Remove</button>
       </div>
+
+      {isEditingName && (
+        <div className="mb-4 flex gap-2 items-center">
+          <input
+            type="text"
+            value={editNameValue}
+            onChange={(e) => setEditNameValue(e.target.value)}
+            className="border rounded py-2 px-3 flex-1"
+            placeholder="Enter flight name"
+            autoFocus
+          />
+          <button type="button" onClick={handleSaveName} className="text-sm text-green-600 hover:underline">Save</button>
+          <button type="button" onClick={() => setIsEditingName(false)} className="text-sm text-gray-600 hover:underline">Cancel</button>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <div>
           <label className="block text-gray-700 font-bold mb-2">Departure</label>
-          <div className="flex gap-2">
-            <input
-              type="text"
-              value={departure}
-              onChange={(e) => onChange(id, 'departure', e.target.value)}
-              className="border rounded w-full py-2 px-3"
-              placeholder="mm/dd/yyyy"
-            />
-            <input type="date" onChange={handlePickerChange} className="border rounded py-2 px-3" aria-label={`Flight ${id} date picker`} />
-          </div>
+          <input
+            type="date"
+            value={departure}
+            onChange={(e) => onChange(id, 'departure', e.target.value)}
+            className="border rounded w-full py-2 px-3"
+          />
         </div>
 
         <div>
@@ -67,9 +94,9 @@ const AddFlight = () => {
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
 
-  // dynamic flights list
-  const [flights, setFlights] = useState([])
-  const [nextId, setNextId] = useState(1)
+  // dynamic flights list - initialize with one flight
+  const [flights, setFlights] = useState([{ id: 1, departure: '', airline: '', flightNumber: '', seats: '', customName: '' }])
+  const [nextId, setNextId] = useState(2)
 
   // Convert mm/dd/yyyy to yyyy-mm-dd (kept for parity with other pages)
   const formatDateToInput = (dateStr) => {
@@ -84,7 +111,7 @@ const AddFlight = () => {
   const handleEndDateChange = (e) => setEndDate(e.target.value)
 
   const addFlight = () => {
-    setFlights((prev) => [...prev, { id: nextId, departure: '', airline: '', flightNumber: '', seats: '' }])
+    setFlights((prev) => [...prev, { id: nextId, departure: '', airline: '', flightNumber: '', seats: '', customName: '' }])
     setNextId((n) => n + 1)
   }
 
@@ -109,27 +136,8 @@ const AddFlight = () => {
               <h2 className="text-3xl text-center font-semibold mb-6">Add Flight</h2>
 
               <div className="mb-4">
-                <label className="block text-gray-700 font-bold mb-2">Flight Confirmation Number</label>
-                <input type="text" id="flightConfirmationNumber" name="flightConfirmationNumber" className="border rounded w-full py-2 px-3 mb-2" placeholder="Enter Confirmation Number" />
-              </div>
-
-              <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2">Total Cost</label>
                 <input type="text" id="totalCost" name="totalCost" className="border rounded w-full py-2 px-3 mb-2" placeholder="eg. 299.99" />
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-gray-700 font-bold mb-2">Start Date</label>
-                <input type="date" id="startDate" name="startDate" value={startDate} onChange={handleStartDateChange} className="border rounded w-full py-2 px-3 mb-2" />
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-gray-700 font-bold mb-2">End Date</label>
-                <input type="date" id="endDate" name="endDate" value={endDate} onChange={handleEndDateChange} className="border rounded w-full py-2 px-3 mb-2" />
-              </div>
-
-              <div className="mb-4 flex justify-end">
-                <button type="button" onClick={addFlight} className="bg-indigo-900 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg">Add Flight</button>
               </div>
 
               {/* Render dynamic flight items */}
@@ -137,11 +145,9 @@ const AddFlight = () => {
                 <FlightItem key={f.id} flight={f} onChange={updateFlight} onRemove={removeFlight} onAdd={addFlight} />
               ))}
 
-              {flights.length > 0 && (
-                <div>
-                  <button className="bg-indigo-900 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg w-full" type="submit">Save Flights</button>
-                </div>
-              )}
+              <div>
+                <button className="bg-indigo-900 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg w-full" type="submit">Save Flights</button>
+              </div>
             </form>
           </div>
         </div>
