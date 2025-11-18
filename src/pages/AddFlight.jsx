@@ -152,6 +152,20 @@ const AddFlight = () => {
                 }} className="border rounded w-full py-2 px-3 mb-2" placeholder="eg. 299.99" />
               </div>
 
+
+              {/* Show Add Flight button if no flights exist */}
+              {flights.length === 0 && (
+                <div className="flex justify-end mb-6">
+                  <button
+                    type="button"
+                    onClick={addFlight}
+                    className="bg-indigo-900 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg"
+                  >
+                    Add Flight
+                  </button>
+                </div>
+              )}
+
               {/* Render dynamic flight items */}
               {flights.map((f) => (
                 <FlightItem key={f.id} flight={f} onChange={updateFlight} onRemove={removeFlight} onAdd={addFlight} />
