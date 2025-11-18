@@ -52,7 +52,7 @@ const FlightItem = ({ flight, onChange, onRemove, onAdd }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <div>
-          <label className="block text-gray-700 font-bold mb-2">Departure</label>
+          <label className="block text-gray-700 font-bold mb-2">Departure Date</label>
           <input
             type="date"
             value={departure}
@@ -73,7 +73,12 @@ const FlightItem = ({ flight, onChange, onRemove, onAdd }) => {
 
         <div>
           <label className="block text-gray-700 font-bold mb-2">Seats</label>
-          <input type="number" value={seats} onChange={(e) => onChange(id, 'seats', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Seats" min="0" />
+          <input type="text" value={seats} onChange={(e) => {
+            const val = e.target.value;
+            if (/^[a-zA-Z0-9]*$/.test(val)) {
+              onChange(id, 'seats', val);
+            }
+          }} className="border rounded w-full py-2 px-3" placeholder="Seats" />
         </div>
       </div>
       <div className="flex justify-end mt-3">
@@ -137,7 +142,14 @@ const AddFlight = () => {
 
               <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2">Total Cost</label>
-                <input type="text" id="totalCost" name="totalCost" className="border rounded w-full py-2 px-3 mb-2" placeholder="eg. 299.99" />
+                <input type="text" id="totalCost" name="totalCost" onChange={(e) => {
+                  const val = e.target.value;
+                  if (/^[0-9.]*$/.test(val)) {
+                    e.target.value = val;
+                  } else {
+                    e.target.value = val.replace(/[^0-9.]/g, '');
+                  }
+                }} className="border rounded w-full py-2 px-3 mb-2" placeholder="eg. 299.99" />
               </div>
 
               {/* Render dynamic flight items */}
