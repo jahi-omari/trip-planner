@@ -12,6 +12,7 @@ import LoginPage from './pages/LoginPage'
 import SignUpPage from './pages/SignUpPage'
 import AddFlight from './pages/AddFlight'
 import AddLodging from './pages/AddLodging'
+import AddActivity from './pages/AddActivity'
 
 const router = createBrowserRouter(
   [{path: "/", 
@@ -29,6 +30,7 @@ const router = createBrowserRouter(
       {path: "past-trips", element: <PastTripsPage/>},
       {path: "add-trip/add-flight", element: <AddFlight/>},
       {path: "add-trip/add-lodging", element: <AddLodging/>},
+      {path: "add-trip/add-activity", element: <AddActivity/>}, 
       {path: "*", element: <NotFoundPage/>},
     ]
   }]
