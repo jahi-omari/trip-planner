@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { FaCalendarAlt, FaPlane, FaHotel, FaCar } from 'react-icons/fa'
 
 const AddTripPage = () => {
@@ -37,8 +38,8 @@ const AddTripPage = () => {
               >
               <input
                 type="text"
-                id="title"
-                name="title"
+                id="tripName"
+                name="tripName"
                 className="border rounded w-full py-2 px-3 mb-2"
                 placeholder="eg. Family Holiday"
                 required
@@ -119,30 +120,18 @@ const AddTripPage = () => {
             </div>
 
             <div className="mb-6 grid grid-cols-2 gap-3">
-              <button
-                type="button"
-                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 focus:outline-none focus:shadow-outline"
-              >
+              <Link to="add-activity" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 focus:outline-none focus:shadow-outline w-full">
                 <FaCalendarAlt /> Add Activity
-              </button>
-              <button
-                type="button"
-                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 focus:outline-none focus:shadow-outline"
-              >
+              </Link>
+              <Link to="add-flight" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 focus:outline-none focus:shadow-outline w-full">
                 <FaPlane /> Add Flight
-              </button>
-              <button
-                type="button"
-                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 focus:outline-none focus:shadow-outline"
-              >
+              </Link>
+              <Link to="add-lodging" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 focus:outline-none focus:shadow-outline w-full">
                 <FaHotel /> Add Lodging
-              </button>
-              <button
-                type="button"
-                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 focus:outline-none focus:shadow-outline"
-              >
+              </Link>
+              <Link to="add-car" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 focus:outline-none focus:shadow-outline w-full">
                 <FaCar /> Add Car Rental
-              </button>
+              </Link>
             </div>
 
             <div>

@@ -10,6 +10,8 @@ import EditTripPage from './pages/EditTripPage'
 import PastTripsPage from './pages/PastTripsPage'
 import LoginPage from './pages/LoginPage'
 import SignUpPage from './pages/SignUpPage'
+import AddFlight from './pages/AddFlight'
+import AddLodging from './pages/AddLodging'
 
 const router = createBrowserRouter(
   [{path: "/", 
@@ -25,6 +27,8 @@ const router = createBrowserRouter(
       {path: "trip-details/edit-trip", element: <EditTripPage/>},
       {path: "upcoming-trips-page/trip-details/edit-trip", element: <EditTripPage/>},
       {path: "past-trips", element: <PastTripsPage/>},
+      {path: "add-trip/add-flight", element: <AddFlight/>},
+      {path: "add-trip/add-lodging", element: <AddLodging/>},
       {path: "*", element: <NotFoundPage/>},
     ]
   }]

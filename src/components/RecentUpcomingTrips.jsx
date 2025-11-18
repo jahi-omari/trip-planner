@@ -36,7 +36,7 @@ const RecentUpcomingTrips = () => {
                   Castries, ST. LUCIA
                 </div>
                 <Link
-                  to="trip-details"
+                  to="/upcoming-trips-page/trip-details"
                   className="h-[36px] bg-indigo-900 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg text-center text-sm"
                 >
                  View Trip
@@ -64,7 +64,7 @@ const RecentUpcomingTrips = () => {
                   London, ENGLAND
                 </div>
                 <Link
-                  to="trip-details"
+                  to="/upcoming-trips-page/trip-details"
                   className="h-[36px] bg-indigo-900 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg text-center text-sm"
                 >
                  View Trip
@@ -93,7 +93,7 @@ const RecentUpcomingTrips = () => {
                   Venice, ITALY
                 </div>
                 <Link
-                  to="trip-details"
+                  to="/upcoming-trips-page/trip-details"
                   className="h-[36px] bg-indigo-900 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg text-center text-sm"
                 >
                  View Trip

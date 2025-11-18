@@ -6,10 +6,10 @@ const ViewAllTrips = () => {
     <>
     <section className="m-auto max-w-lg my-10 px-6">
       <Link
-        to="upcoming-trips-page"
+        to="/homepage/upcoming-trips-page"
         className="block bg-black text-white text-center py-4 px-6 rounded-xl hover:bg-gray-700"
-        >View All Upcoming Trips</Link
-      >
+        >View All Upcoming Trips
+      </Link>
     </section>
     </>
   )
