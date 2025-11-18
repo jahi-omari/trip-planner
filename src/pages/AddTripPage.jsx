@@ -6,7 +6,7 @@ import { TripContext } from '../context/TripContext'
 const AddTripPage = () => {
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
-  const { flightData } = useContext(TripContext)
+  const { flightData, carRentalData } = useContext(TripContext)
 
   // Convert mm/dd/yyyy to yyyy-mm-dd
   const formatDateToInput = (dateStr) => {
@@ -136,6 +136,54 @@ const AddTripPage = () => {
                 ))}
                 <div className="border-t pt-3 mt-3">
                   <p className="font-semibold">Total Cost: ${flightData.totalCost || '0.00'}</p>
+                </div>
+              </div>
+            )}
+
+            {/* Display Car Rental if it exists */}
+            {carRentalData.rentalAgency && (
+              <div className="mb-6 p-4 bg-green-100 rounded-md border border-green-300">
+                <h3 className="text-lg font-semibold mb-3">Car Rental Details</h3>
+                
+                <div className="mb-3 p-3 bg-white rounded border">
+                  <p className="font-semibold text-base mb-2">Rental Information</p>
+                  <p className="text-sm text-gray-700">Agency: {carRentalData.rentalAgency}</p>
+                  <p className="text-sm text-gray-700">Pickup: {carRentalData.pickupDate} at {carRentalData.pickupTime}</p>
+                  <p className="text-sm text-gray-700">Dropoff: {carRentalData.dropoffDate} at {carRentalData.dropoffTime}</p>
+                  <p className="text-sm text-gray-700">Confirmation: {carRentalData.confirmationNumber}</p>
+                  {carRentalData.website && <p className="text-sm text-gray-700">Website: {carRentalData.website}</p>}
+                  {carRentalData.email && <p className="text-sm text-gray-700">Email: {carRentalData.email}</p>}
+                </div>
+
+                {(carRentalData.pickupLocation.location || carRentalData.pickupLocation.address) && (
+                  <div className="mb-3 p-3 bg-white rounded border">
+                    <p className="font-semibold text-sm mb-2">Pickup Location</p>
+                    {carRentalData.pickupLocation.location && <p className="text-sm text-gray-700">Location: {carRentalData.pickupLocation.location}</p>}
+                    {carRentalData.pickupLocation.address && <p className="text-sm text-gray-700">Address: {carRentalData.pickupLocation.address}</p>}
+                    {carRentalData.pickupLocation.phone && <p className="text-sm text-gray-700">Phone: {carRentalData.pickupLocation.phone}</p>}
+                  </div>
+                )}
+
+                {(carRentalData.dropoffLocation.location || carRentalData.dropoffLocation.address) && (
+                  <div className="mb-3 p-3 bg-white rounded border">
+                    <p className="font-semibold text-sm mb-2">Dropoff Location</p>
+                    {carRentalData.dropoffLocation.location && <p className="text-sm text-gray-700">Location: {carRentalData.dropoffLocation.location}</p>}
+                    {carRentalData.dropoffLocation.address && <p className="text-sm text-gray-700">Address: {carRentalData.dropoffLocation.address}</p>}
+                    {carRentalData.dropoffLocation.phone && <p className="text-sm text-gray-700">Phone: {carRentalData.dropoffLocation.phone}</p>}
+                  </div>
+                )}
+
+                {(carRentalData.rentalInfo.carType || carRentalData.rentalInfo.mileageCharges) && (
+                  <div className="mb-3 p-3 bg-white rounded border">
+                    <p className="font-semibold text-sm mb-2">Vehicle Information</p>
+                    {carRentalData.rentalInfo.carType && <p className="text-sm text-gray-700">Car Type: {carRentalData.rentalInfo.carType}</p>}
+                    {carRentalData.rentalInfo.mileageCharges && <p className="text-sm text-gray-700">Mileage Charges: ${carRentalData.rentalInfo.mileageCharges}</p>}
+                    {carRentalData.rentalInfo.carDetails && <p className="text-sm text-gray-700">Details: {carRentalData.rentalInfo.carDetails}</p>}
+                  </div>
+                )}
+
+                <div className="border-t pt-3 mt-3">
+                  <p className="font-semibold">Total Cost: ${carRentalData.totalCost || '0.00'}</p>
                 </div>
               </div>
             )}

@@ -8,8 +8,35 @@ export const TripProvider = ({ children }) => {
     totalCost: ''
   })
 
+  const [carRentalData, setCarRentalData] = useState({
+    rentalAgency: '',
+    pickupDate: '',
+    pickupTime: '',
+    dropoffDate: '',
+    dropoffTime: '',
+    website: '',
+    email: '',
+    confirmationNumber: '',
+    totalCost: '',
+    pickupLocation: {
+      location: '',
+      address: '',
+      phone: ''
+    },
+    dropoffLocation: {
+      location: '',
+      address: '',
+      phone: ''
+    },
+    rentalInfo: {
+      carType: '',
+      mileageCharges: '',
+      carDetails: ''
+    }
+  })
+
   return (
-    <TripContext.Provider value={{ flightData, setFlightData }}>
+    <TripContext.Provider value={{ flightData, setFlightData, carRentalData, setCarRentalData }}>
       {children}
     </TripContext.Provider>
   )
