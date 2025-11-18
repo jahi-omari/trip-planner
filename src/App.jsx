@@ -14,6 +14,7 @@ import AddFlight from './pages/AddFlight'
 import AddLodging from './pages/AddLodging'
 import AddActivity from './pages/AddActivity'
 import AddCarRental from './pages/AddCarRental'
+import { TripProvider } from './context/TripContext'
 
 const router = createBrowserRouter(
   [{path: "/", 
@@ -39,7 +40,11 @@ const router = createBrowserRouter(
 )
 
 const App = () => {
-  return <RouterProvider router={router}/>
+  return (
+    <TripProvider>
+      <RouterProvider router={router}/>
+    </TripProvider>
+  )
 }
 
 export default App

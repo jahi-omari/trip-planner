@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { FaCalendarAlt, FaPlane, FaHotel, FaCar } from 'react-icons/fa'
+import { TripContext } from '../context/TripContext'
 
 const AddTripPage = () => {
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
+  const { flightData } = useContext(TripContext)
 
   // Convert mm/dd/yyyy to yyyy-mm-dd
   const formatDateToInput = (dateStr) => {
@@ -118,6 +120,25 @@ const AddTripPage = () => {
                 placeholder="Add daily activities etc."
               ></textarea>
             </div>
+
+            {/* Display Flights if they exist */}
+            {flightData.flights.length > 0 && (
+              <div className="mb-6 p-4 bg-indigo-100 rounded-md border border-indigo-300">
+                <h3 className="text-lg font-semibold mb-3">Flight Details</h3>
+                {flightData.flights.map((flight) => (
+                  <div key={flight.id} className="mb-3 p-3 bg-white rounded border">
+                    <p className="font-semibold">{flight.customName || `Flight ${flight.id}`}</p>
+                    <p className="text-sm text-gray-700">Departure: {flight.departure}</p>
+                    <p className="text-sm text-gray-700">Airline: {flight.airline}</p>
+                    <p className="text-sm text-gray-700">Flight Number: {flight.flightNumber}</p>
+                    <p className="text-sm text-gray-700">Seats: {flight.seats}</p>
+                  </div>
+                ))}
+                <div className="border-t pt-3 mt-3">
+                  <p className="font-semibold">Total Cost: ${flightData.totalCost || '0.00'}</p>
+                </div>
+              </div>
+            )}
 
             <div className="mb-6 grid grid-cols-2 gap-3">
               <Link to="add-activity" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 focus:outline-none focus:shadow-outline w-full">

@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { FaCalendarAlt, FaPlane, FaHotel, FaCar, FaPencilAlt } from 'react-icons/fa'
+import { TripContext } from '../context/TripContext'
 
 // Single flight component used for each created flight
 const FlightItem = ({ flight, onChange, onRemove, onAdd, canRemove }) => {
@@ -97,6 +99,9 @@ const FlightItem = ({ flight, onChange, onRemove, onAdd, canRemove }) => {
 }
 
 const AddFlight = () => {
+  const navigate = useNavigate()
+  const { setFlightData } = useContext(TripContext)
+
   // keep the per-page start/end states if you need them for the overall flight booking
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
@@ -104,6 +109,7 @@ const AddFlight = () => {
   // dynamic flights list - initialize with one flight
   const [flights, setFlights] = useState([{ id: 1, departure: '', airline: '', flightNumber: '', seats: '', customName: '' }])
   const [nextId, setNextId] = useState(2)
+  const [totalCost, setTotalCost] = useState('')
 
   // Convert mm/dd/yyyy to yyyy-mm-dd (kept for parity with other pages)
   const formatDateToInput = (dateStr) => {
@@ -130,8 +136,13 @@ const AddFlight = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // placeholder: do something with flights
-    console.log('Submitted flights:', flights)
+    // Save flight data to context
+    setFlightData({
+      flights: flights,
+      totalCost: totalCost
+    })
+    // Redirect to add-trip page
+    navigate('/add-trip')
   }
 
   return (
@@ -144,12 +155,10 @@ const AddFlight = () => {
 
               <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2">Total Cost</label>
-                <input type="text" id="totalCost" name="totalCost" onChange={(e) => {
+                <input type="text" id="totalCost" name="totalCost" value={totalCost} onChange={(e) => {
                   const val = e.target.value;
                   if (/^[0-9.]*$/.test(val)) {
-                    e.target.value = val;
-                  } else {
-                    e.target.value = val.replace(/[^0-9.]/g, '');
+                    setTotalCost(val);
                   }
                 }} className="border rounded w-full py-2 px-3 mb-2" placeholder="eg. 299.99" />
               </div>
