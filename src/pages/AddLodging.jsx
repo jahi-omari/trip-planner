@@ -9,10 +9,10 @@ const AddLodging = () => {
           <form>
             <h2 className="text-3xl text-center font-semibold mb-6">Add Lodging</h2>
 
-            {/* Event Name */}
+            {/* Lodging Name */}
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2">Event Name</label>
-              <input type="text" className="border rounded w-full py-2 px-3" placeholder="Event name" />
+              <label className="block text-gray-700 font-bold mb-2">Lodging Name</label>
+              <input type="text" className="border rounded w-full py-2 px-3" placeholder="Lodging Name" />
             </div>
 
             {/* Start Date & Time */}
@@ -73,6 +73,24 @@ const AddLodging = () => {
             <div className="mb-6">
               <label className="block text-gray-700 font-bold mb-2">Confirmation Number</label>
               <input type="text" className="border rounded w-full py-2 px-3" placeholder="Confirmation number" />
+            </div>
+
+            {/* Total Cost */}
+            <div className="mb-6">
+              <label className="block text-gray-700 font-bold mb-2">Total Cost</label>
+              <input
+                type="text"
+                className="border rounded w-full py-2 px-3"
+                placeholder="Total Cost"
+                onChange={e => {
+                  const val = e.target.value;
+                  if (/^[0-9.]*$/.test(val)) {
+                    e.target.value = val;
+                  } else {
+                    e.target.value = val.replace(/[^0-9.]/g, '');
+                  }
+                }}
+              />
             </div>
 
             <div>
