@@ -1,12 +1,16 @@
 import React, { useState, useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FaCalendarAlt, FaPlane, FaHotel, FaCar } from 'react-icons/fa'
 import { TripContext } from '../context/TripContext'
 
 const AddTripPage = () => {
+  const navigate = useNavigate()
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
-  const { flightData, carRentalData } = useContext(TripContext)
+  const [tripName, setTripName] = useState('')
+  const [tripLocation, setTripLocation] = useState('')
+  const [description, setDescription] = useState('')
+  const { flightData, carRentalData, activityData, addTrip, clearFlightData, clearCarRentalData, setActivityData } = useContext(TripContext)
 
   // Convert mm/dd/yyyy to yyyy-mm-dd
   const formatDateToInput = (dateStr) => {
@@ -24,6 +28,42 @@ const AddTripPage = () => {
   const handleEndDateChange = (e) => {
     setEndDate(e.target.value)
   }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    
+    // Create trip object with all data
+
+    const tripData = {
+      tripName,
+      tripLocation,
+      startDate,
+      endDate,
+      description,
+      flightData,
+      carRentalData,
+      activityData
+    }
+
+    // Save trip to context
+    addTrip(tripData)
+
+
+    // Clear flight, car rental, and activity data
+    clearFlightData()
+    clearCarRentalData()
+    setActivityData([])
+
+    // Reset form
+    setTripName('')
+    setTripLocation('')
+    setStartDate('')
+    setEndDate('')
+    setDescription('')
+
+    // Redirect to upcoming trips page
+    navigate('/upcoming-trips-page')
+  }
   return (
     <>
       <section className="bg-indigo-50">
@@ -31,7 +71,7 @@ const AddTripPage = () => {
         <div
           className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border-3 m-4 md:m-0"
         >
-          <form>
+          <form onSubmit={handleSubmit}>
             <h2 className="text-3xl text-center font-semibold mb-6">Add Trip</h2>
 
             <div className="mb-4">
@@ -42,6 +82,8 @@ const AddTripPage = () => {
                 type="text"
                 id="tripName"
                 name="tripName"
+                value={tripName}
+                onChange={(e) => setTripName(e.target.value)}
                 className="border rounded w-full py-2 px-3 mb-2"
                 placeholder="eg. Family Holiday"
                 required
@@ -56,6 +98,8 @@ const AddTripPage = () => {
                 type="text"
                 id="title"
                 name="title"
+                value={tripLocation}
+                onChange={(e) => setTripLocation(e.target.value)}
                 className="border rounded w-full py-2 px-3 mb-2"
                 placeholder="eg. Hagerstown, Maryland"
                 required
@@ -115,6 +159,8 @@ const AddTripPage = () => {
               <textarea
                 id="description"
                 name="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
                 className="border rounded w-full py-2 px-3"
                 rows="4"
                 placeholder="Add daily activities etc."
@@ -185,6 +231,27 @@ const AddTripPage = () => {
                 <div className="border-t pt-3 mt-3">
                   <p className="font-semibold">Total Cost: ${carRentalData.totalCost || '0.00'}</p>
                 </div>
+              </div>
+            )}
+
+
+            {/* Display Activities if they exist */}
+            {activityData.length > 0 && (
+              <div className="mb-6 p-4 bg-yellow-100 rounded-md border border-yellow-300">
+                <h3 className="text-lg font-semibold mb-3">Activity Details</h3>
+                {activityData.map((activity) => (
+                  <div key={activity.id} className="mb-3 p-3 bg-white rounded border">
+                    <p className="font-semibold">{activity.activityName}</p>
+                    <p className="text-sm text-gray-700">Start: {activity.startDate} {activity.startTime}</p>
+                    <p className="text-sm text-gray-700">End: {activity.endDate} {activity.endTime}</p>
+                    <p className="text-sm text-gray-700">Venue: {activity.venue}</p>
+                    <p className="text-sm text-gray-700">Address: {activity.address}</p>
+                    <p className="text-sm text-gray-700">Phone: {activity.phone}</p>
+                    <p className="text-sm text-gray-700">Website: {activity.website}</p>
+                    <p className="text-sm text-gray-700">Email: {activity.email}</p>
+                    <p className="text-sm text-gray-700">Total Cost: ${activity.totalCost}</p>
+                  </div>
+                ))}
               </div>
             )}
 
