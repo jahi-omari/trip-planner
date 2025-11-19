@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { Outlet, Link, useNavigate } from 'react-router-dom'
+import { FaLink } from 'react-icons/fa'
 import { TripContext } from '../context/TripContext'
 
 const UpcomingTripsPage = () => {
@@ -89,6 +90,14 @@ const UpcomingTripsPage = () => {
                     >
                       View Trip
                     </button>
+                      {/* Manage Sharing Button */}
+                      <Link
+                        to="/upcoming-trips-page/manage-sharing"
+                        className="w-full flex items-center justify-center gap-2 bg-white border-4 border-black font-black uppercase py-3 px-4 mt-3 hover:bg-gray-100 transition-colors duration-200 text-lg text-black shadow"
+                        style={{ textDecoration: 'none' }}
+                      >
+                        <FaLink className="text-xl mr-2" /> Manage Sharing
+                      </Link>
                   </div>
                 </div>
               ))}

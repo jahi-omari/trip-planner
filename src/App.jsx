@@ -1,6 +1,7 @@
 import React from 'react'
 import {Route, createBrowserRouter, RouterProvider} from 'react-router-dom'
 import Homepage from './pages/Homepage'
+import ManageSharingPage from './pages/ManageSharingPage'
 import UpcomingTripsPage from './pages/UpcomingTripsPage'
 import MainLayout from './layouts/MainLayout'
 import NotFoundPage from './pages/NotFoundPage'
@@ -24,6 +25,7 @@ const router = createBrowserRouter(
       {path: "homepage", element: <Homepage/>},
       {path: "signup", element: <SignUpPage/>},
       {path: "upcoming-trips-page", element: <UpcomingTripsPage/>},
+      {path: "upcoming-trips-page/manage-sharing", element: <ManageSharingPage/>},
       {path: "upcoming-trips-page/trip-details", element: <TripDetailsPage/>},
       {path: "trip-details", element: <TripDetailsPage/>},
       {path: "add-trip", element: <AddTripPage/>},
