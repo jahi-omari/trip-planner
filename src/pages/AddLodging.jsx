@@ -4,7 +4,8 @@ import { TripContext } from '../context/TripContext'
 
 const AddLodging = () => {
   const navigate = useNavigate()
-  const { lodgingData, setLodgingData } = useContext(TripContext)
+  const _ctx = useContext(TripContext) || {}
+  const { lodgingData, setLodgingData } = _ctx
 
   const [form, setForm] = useState({
     lodgingName: '',

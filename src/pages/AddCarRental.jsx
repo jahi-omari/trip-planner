@@ -4,7 +4,8 @@ import { TripContext } from '../context/TripContext'
 
 const AddCarRental = () => {
   const navigate = useNavigate()
-  const { setCarRentalData } = useContext(TripContext)
+  const _ctx = useContext(TripContext) || {}
+  const { setCarRentalData } = _ctx
 
   const [formData, setFormData] = useState({
     rentalAgency: '',

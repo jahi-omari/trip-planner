@@ -6,7 +6,8 @@ import { TripContext } from '../context/TripContext'
 
 const EditTripPage = () => {
   const navigate = useNavigate()
-  const { selectedTrip, setSelectedTrip, updateTrip } = useContext(TripContext)
+  const _ctx = useContext(TripContext) || {}
+  const { selectedTrip, setSelectedTrip, updateTrip } = _ctx
 
 
   // Trip main fields
@@ -26,6 +27,8 @@ const EditTripPage = () => {
 
   // Activities (array)
   const [activities, setActivities] = useState([])
+  // Lodging (array)
+  const [lodgings, setLodgings] = useState([])
 
 
   useEffect(() => {
@@ -54,6 +57,12 @@ const EditTripPage = () => {
         setActivities(selectedTrip.activityData.map(a => ({ ...a })))
       } else {
         setActivities([])
+      }
+      // Lodging
+      if (selectedTrip.lodgingData && Array.isArray(selectedTrip.lodgingData)) {
+        setLodgings(selectedTrip.lodgingData.map(l => ({ ...l })))
+      } else {
+        setLodgings([])
       }
     }
   }, [selectedTrip])
@@ -110,6 +119,18 @@ const EditTripPage = () => {
     setActivities(prev => prev.filter(a => a.id !== id))
   }
 
+  // --- Lodging handlers ---
+  const handleLodgingChange = (id, field, value) => {
+    setLodgings(prev => prev.map(l => l.id === id ? { ...l, [field]: value } : l))
+  }
+  const handleAddLodging = () => {
+    const nextId = lodgings.length > 0 ? Math.max(...lodgings.map(l => l.id)) + 1 : 1
+    setLodgings(prev => [...prev, { id: nextId, lodgingName: '', startDate: '', startTime: '', endDate: '', endTime: '', venue: '', address: '', phone: '', website: '', email: '', confirmationNumber: '', totalCost: '' }])
+  }
+  const handleRemoveLodging = (id) => {
+    setLodgings(prev => prev.filter(l => l.id !== id))
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
     if (!selectedTrip) return
@@ -122,7 +143,8 @@ const EditTripPage = () => {
       description,
       flightData: flights.length > 0 ? { flights, totalCost: flightTotalCost } : undefined,
       carRentalData: carRental && carRental.rentalAgency ? carRental : undefined,
-      activityData: activities.length > 0 ? activities : undefined
+      activityData: activities.length > 0 ? activities : undefined,
+      lodgingData: lodgings.length > 0 ? lodgings : undefined
     }
     updateTrip(updatedTrip)
     setSelectedTrip(updatedTrip)
@@ -418,6 +440,83 @@ const EditTripPage = () => {
                 <div className="flex justify-end mt-3">
                   <button type="button" onClick={handleAddActivity} className="text-sm text-yellow-700 hover:underline">Add another activity</button>
                 </div>
+              </div>
+            )}
+
+            {/* --- Lodging Section --- */}
+            {lodgings.length > 0 && (
+              <div className="mb-8 p-4 bg-purple-100 rounded-md border border-purple-300">
+                <h3 className="text-lg font-semibold mb-3">Edit Lodging Details</h3>
+                {lodgings.map((lodging, idx) => (
+                  <div key={lodging.id} className="mb-6 p-4 border rounded-md bg-white">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-2">
+                        <h3 className="font-semibold">{lodging.lodgingName || `Lodging ${lodging.id}`}</h3>
+                      </div>
+                      {lodgings.length > 1 && (
+                        <button type="button" onClick={() => handleRemoveLodging(lodging.id)} className="text-sm text-red-600 hover:underline">Remove</button>
+                      )}
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-gray-700 font-bold mb-2">Lodging Name</label>
+                        <input type="text" value={lodging.lodgingName} onChange={e => handleLodgingChange(lodging.id, 'lodgingName', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Lodging name" />
+                      </div>
+                      <div>
+                        <label className="block text-gray-700 font-bold mb-2">Venue</label>
+                        <input type="text" value={lodging.venue} onChange={e => handleLodgingChange(lodging.id, 'venue', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Venue" />
+                      </div>
+                      <div>
+                        <label className="block text-gray-700 font-bold mb-2">Start Date</label>
+                        <input type="date" value={lodging.startDate} onChange={e => handleLodgingChange(lodging.id, 'startDate', e.target.value)} className="border rounded w-full py-2 px-3" />
+                      </div>
+                      <div>
+                        <label className="block text-gray-700 font-bold mb-2">Start Time</label>
+                        <input type="time" value={lodging.startTime} onChange={e => handleLodgingChange(lodging.id, 'startTime', e.target.value)} className="border rounded w-full py-2 px-3" />
+                      </div>
+                      <div>
+                        <label className="block text-gray-700 font-bold mb-2">End Date</label>
+                        <input type="date" value={lodging.endDate} onChange={e => handleLodgingChange(lodging.id, 'endDate', e.target.value)} className="border rounded w-full py-2 px-3" />
+                      </div>
+                      <div>
+                        <label className="block text-gray-700 font-bold mb-2">End Time</label>
+                        <input type="time" value={lodging.endTime} onChange={e => handleLodgingChange(lodging.id, 'endTime', e.target.value)} className="border rounded w-full py-2 px-3" />
+                      </div>
+                      <div>
+                        <label className="block text-gray-700 font-bold mb-2">Address</label>
+                        <input type="text" value={lodging.address} onChange={e => handleLodgingChange(lodging.id, 'address', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Address" />
+                      </div>
+                      <div>
+                        <label className="block text-gray-700 font-bold mb-2">Phone</label>
+                        <input type="text" value={lodging.phone} onChange={e => handleLodgingChange(lodging.id, 'phone', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Phone" />
+                      </div>
+                      <div>
+                        <label className="block text-gray-700 font-bold mb-2">Website</label>
+                        <input type="text" value={lodging.website} onChange={e => handleLodgingChange(lodging.id, 'website', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Website" />
+                      </div>
+                      <div>
+                        <label className="block text-gray-700 font-bold mb-2">Email</label>
+                        <input type="email" value={lodging.email} onChange={e => handleLodgingChange(lodging.id, 'email', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Email" />
+                      </div>
+                      <div>
+                        <label className="block text-gray-700 font-bold mb-2">Confirmation Number</label>
+                        <input type="text" value={lodging.confirmationNumber} onChange={e => handleLodgingChange(lodging.id, 'confirmationNumber', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Confirmation number" />
+                      </div>
+                      <div>
+                        <label className="block text-gray-700 font-bold mb-2">Total Cost</label>
+                        <input type="text" value={lodging.totalCost} onChange={e => { const val = e.target.value; if (/^[0-9.]*$/.test(val)) handleLodgingChange(lodging.id, 'totalCost', val) }} className="border rounded w-full py-2 px-3" placeholder="Total Cost" />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                <div className="flex justify-end mt-3">
+                  <button type="button" onClick={handleAddLodging} className="text-sm text-purple-700 hover:underline">Add another lodging</button>
+                </div>
+              </div>
+            )}
+            {!lodgings.length && (
+              <div className="mb-6">
+                <button type="button" onClick={handleAddLodging} className="text-sm text-purple-700 hover:underline">Add Lodging</button>
               </div>
             )}
 

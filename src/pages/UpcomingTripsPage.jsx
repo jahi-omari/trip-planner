@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import { Outlet, Link, useNavigate } from 'react-router-dom'
-import RecentUpcomingTrips from '../components/RecentUpcomingTrips'
 import { TripContext } from '../context/TripContext'
 
 const UpcomingTripsPage = () => {
-  const { upcomingTrips, setSelectedTrip } = useContext(TripContext)
+  const _ctx = useContext(TripContext) || {}
+  const { upcomingTrips, setSelectedTrip } = _ctx
   const navigate = useNavigate()
 
   const handleViewTrip = (trip) => {
@@ -17,7 +17,7 @@ const UpcomingTripsPage = () => {
       {/* Display newly saved trips */}
       {upcomingTrips.length > 0 && (
         <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-4">Recently Saved Trips</h2>
+          <h2 className="text-2xl font-bold mb-4 text-center">Upcoming Trips</h2>
           <div className="flex justify-center">
             <div className="w-full max-w-md">
               {upcomingTrips.map((trip) => (
@@ -97,7 +97,6 @@ const UpcomingTripsPage = () => {
         </div>
       )}
 
-      <RecentUpcomingTrips/>
       <Outlet/>
     </section>
   )

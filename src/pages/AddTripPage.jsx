@@ -10,7 +10,8 @@ const AddTripPage = () => {
   const [tripName, setTripName] = useState('')
   const [tripLocation, setTripLocation] = useState('')
   const [description, setDescription] = useState('')
-  const { flightData, carRentalData, activityData, lodgingData, addTrip, clearFlightData, clearCarRentalData, setActivityData, setLodgingData } = useContext(TripContext)
+  const _ctx = useContext(TripContext) || {}
+  const { flightData, carRentalData, activityData, lodgingData, addTrip, clearFlightData, clearCarRentalData, setActivityData, setLodgingData } = _ctx
 
   // Convert mm/dd/yyyy to yyyy-mm-dd
   const formatDateToInput = (dateStr) => {

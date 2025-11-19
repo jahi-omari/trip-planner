@@ -4,7 +4,8 @@ import { FaArrowLeft } from 'react-icons/fa'
 import { TripContext } from '../context/TripContext'
 
 const TripDetailsPage = () => {
-  const { selectedTrip } = useContext(TripContext)
+  const ctx = useContext(TripContext)
+  const selectedTrip = ctx?.selectedTrip ?? null
 
   if (!selectedTrip) {
     return (
@@ -150,6 +151,27 @@ const TripDetailsPage = () => {
                   {selectedTrip.carRentalData.totalCost && (
                     <p className="font-bold text-lg mt-3">Total Cost: ${selectedTrip.carRentalData.totalCost}</p>
                   )}
+                </div>
+              )}
+
+              {/* Lodging Details */}
+              {selectedTrip.lodgingData && selectedTrip.lodgingData.length > 0 && (
+                <div className="mb-6 p-4 bg-purple-50 border-2 border-purple-300 rounded-lg">
+                  <h4 className="font-bold text-lg mb-3">🏨 Lodging Details</h4>
+                  {selectedTrip.lodgingData.map((lodging) => (
+                    <div key={lodging.id} className="mb-3 pb-3 border-b border-purple-200 last:border-b-0">
+                      <p className="font-bold">{lodging.lodgingName}</p>
+                      <p className="text-sm text-gray-700">Start: {lodging.startDate} {lodging.startTime}</p>
+                      <p className="text-sm text-gray-700">End: {lodging.endDate} {lodging.endTime}</p>
+                      <p className="text-sm text-gray-700">Venue: {lodging.venue}</p>
+                      <p className="text-sm text-gray-700">Address: {lodging.address}</p>
+                      <p className="text-sm text-gray-700">Phone: {lodging.phone}</p>
+                      <p className="text-sm text-gray-700">Website: {lodging.website}</p>
+                      <p className="text-sm text-gray-700">Email: {lodging.email}</p>
+                      <p className="text-sm text-gray-700">Confirmation: {lodging.confirmationNumber}</p>
+                      <p className="text-sm text-gray-700">Total Cost: ${lodging.totalCost}</p>
+                    </div>
+                  ))}
                 </div>
               )}
             </div>
