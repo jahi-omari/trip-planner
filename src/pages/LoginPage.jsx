@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FaGoogle } from 'react-icons/fa'
 
 const LoginPage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <>
     <section className="bg-white min-h-screen flex items-center justify-center">
@@ -14,29 +16,28 @@ const LoginPage = () => {
             <h2 className="text-3xl text-center font-semibold mb-6">Login</h2>
 
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2"
-                >Email</label
-              >
+              <label className="block text-gray-700 font-bold mb-2">Email</label>
               <input
                 type="email"
                 id="email"
                 name="email"
                 className="border rounded w-full py-2 px-3 mb-2"
                 placeholder="eg. name@domain.com"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
                 required
               />
             </div>
 
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2"
-                >Password</label
-              >
+              <label className="block text-gray-700 font-bold mb-2">Password</label>
               <input
                 type="password"
                 id="password"
                 name="password"
                 className="border rounded w-full py-2 px-3 mb-2"
-                // placeholder="eg. Hagerstown, Maryland"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
                 required
               />
             </div>
@@ -49,20 +50,20 @@ const LoginPage = () => {
               <button
                 className="bg-indigo-900 hover:bg-indigo-600 mt-5 mb-4 text-white font-bold py-2 px-4 rounded-lg w-full focus:outline-none focus:shadow-outline"
                 type="submit"
+                disabled={!email || !password}
               >
                 Login
               </button>
             </div>
 
             <div>
-              <button
-                className="bg-indigo-900 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg w-full focus:outline-none focus:shadow-outline"
-                type="submit"
+              <Link
+                to="/signup"
+                className="block bg-indigo-900 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg w-full text-center focus:outline-none focus:shadow-outline"
+                style={{ textDecoration: 'none' }}
               >
-                <Link to="/signup">
-                  Sign Up
-                </Link>
-              </button>
+                Sign Up
+              </Link>
             </div>
 
             <div className='flex flex-row mb-4 mt-4'>
