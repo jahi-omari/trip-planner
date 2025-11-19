@@ -25,7 +25,7 @@ const router = createBrowserRouter(
       {path: "homepage", element: <Homepage/>},
       {path: "signup", element: <SignUpPage/>},
       {path: "upcoming-trips-page", element: <UpcomingTripsPage/>},
-      {path: "upcoming-trips-page/manage-sharing", element: <ManageSharingPage/>},
+      {path: "upcoming-trips-page/manage-sharing/:tripId", element: <ManageSharingPage/>},
       {path: "upcoming-trips-page/trip-details", element: <TripDetailsPage/>},
       {path: "trip-details", element: <TripDetailsPage/>},
       {path: "add-trip", element: <AddTripPage/>},
