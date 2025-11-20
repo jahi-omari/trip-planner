@@ -1,10 +1,44 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FaGoogle } from 'react-icons/fa'
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+    try {
+      // change URL if your backend uses a different port/path
+      const res = await fetch('http://localhost:3000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        setError(data.message || 'Invalid credentials');
+        setLoading(false);
+        return;
+      }
+
+      const data = await res.json().catch(() => ({}));
+      // Optionally store token: localStorage.setItem('token', data.token)
+      setLoading(false);
+      // navigate to homepage or upcoming trips
+      navigate('/homepage');
+    } catch (err) {
+      setError('Network error. Please try again.');
+      setLoading(false);
+    }
+  }
+
   return (
     <>
     <section className="bg-white min-h-screen flex items-center justify-center">
@@ -46,13 +80,17 @@ const LoginPage = () => {
 
             </div>
 
+            {error && (
+              <div className="mb-4 text-red-600 font-bold text-center">{error}</div>
+            )}
+
             <div>
               <button
                 className="bg-indigo-900 hover:bg-indigo-600 mt-5 mb-4 text-white font-bold py-2 px-4 rounded-lg w-full focus:outline-none focus:shadow-outline"
                 type="submit"
-                disabled={!email || !password}
+                disabled={!email || !password || loading}
               >
-                Login
+                {loading ? 'Signing in...' : 'Login'}
               </button>
             </div>
 
