@@ -1,9 +1,22 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Card from './Card'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { FaGlobeAmericas } from 'react-icons/fa'
+import { TripContext } from '../context/TripContext'
 
 const HomeCards = () => {
+  const navigate = useNavigate()
+  const { clearFlightData, clearCarRentalData, setActivityData, setLodgingData } = useContext(TripContext) || {}
+
+  const handleAddTripClick = () => {
+    // Clear all itinerary data before navigating
+    if (clearFlightData) clearFlightData()
+    if (clearCarRentalData) clearCarRentalData()
+    if (setActivityData) setActivityData([])
+    if (setLodgingData) setLodgingData([])
+    navigate('/add-trip')
+  }
+
   return (
     <section className="py-4">
         {/* Set max width and center card while maintaining responsiveness */}
@@ -19,12 +32,12 @@ const HomeCards = () => {
             </p>
             {/* Move button to the right of the card */}
             <div className="flex justify-end">
-                <Link
-                    to="/add-trip"
-                    className="inline-block bg-black text-white rounded-lg px-4 py-2 hover:bg-gray-700"
+                <button
+                    onClick={handleAddTripClick}
+                    className="inline-block bg-black text-white rounded-lg px-4 py-2 hover:bg-gray-700 cursor-pointer"
                 >
                     Add Trip
-            </Link>
+                </button>
             </div>
             
           </Card>
