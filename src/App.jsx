@@ -15,6 +15,7 @@ import AddFlight from './pages/AddFlight'
 import AddLodging from './pages/AddLodging'
 import AddActivity from './pages/AddActivity'
 import AddCarRental from './pages/AddCarRental'
+import ProfilePage from './pages/ProfilePage'
 import { TripProvider } from './context/TripContext'
 
 const router = createBrowserRouter(
@@ -24,6 +25,7 @@ const router = createBrowserRouter(
       {index: true, element: <LoginPage/>},
       {path: "homepage", element: <Homepage/>},
       {path: "signup", element: <SignUpPage/>},
+      {path: "profile", element: <ProfilePage/>},
       {path: "upcoming-trips-page", element: <UpcomingTripsPage/>},
       {path: "upcoming-trips-page/manage-sharing/:tripId", element: <ManageSharingPage/>},
       {path: "upcoming-trips-page/trip-details", element: <TripDetailsPage/>},
