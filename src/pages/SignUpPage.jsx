@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const SignUpPage = () => {
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
@@ -20,7 +21,7 @@ const SignUpPage = () => {
       const res = await fetch('https://localhost:3000/api', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password })
+        body: JSON.stringify({ firstName, lastName, email, password })
       });
       if (!res.ok) {
         const data = await res.json();
@@ -40,15 +41,27 @@ const SignUpPage = () => {
           <form onSubmit={handleSubmit}>
             <h2 className="text-3xl text-center font-semibold mb-6">Sign Up</h2>
             <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2">Name</label>
+              <label className="block text-gray-700 font-bold mb-2">First Name</label>
               <input
                 type="text"
-                id="name"
-                name="name"
+                id="firstName"
+                name="firstName"
                 className="border rounded w-full py-2 px-3 mb-2"
-                placeholder="eg. John Smith"
-                value={name}
-                onChange={e => setName(e.target.value)}
+                placeholder="eg. John"
+                value={firstName}
+                onChange={e => setFirstName(e.target.value)}
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 font-bold mb-2">Last Name</label>
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                className="border rounded w-full py-2 px-3 mb-2"
+                placeholder="eg. Smith"
+                value={lastName}
+                onChange={e => setLastName(e.target.value)}
               />
             </div>
             <div className="mb-4">
