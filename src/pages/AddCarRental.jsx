@@ -5,32 +5,38 @@ import { TripContext } from '../context/TripContext'
 const AddCarRental = () => {
   const navigate = useNavigate()
   const _ctx = useContext(TripContext) || {}
-  const { setCarRentalData } = _ctx
+  const { setCarRentalData, carRentalData, selectedTrip } = _ctx
 
-  const [formData, setFormData] = useState({
-    rentalAgency: '',
-    pickupDate: '',
-    pickupTime: '',
-    dropoffDate: '',
-    dropoffTime: '',
-    website: '',
-    email: '',
-    confirmationNumber: '',
-    totalCost: '',
-    pickupLocation: {
-      location: '',
-      address: '',
-      phone: ''
-    },
-    dropoffLocation: {
-      location: '',
-      address: '',
-      phone: ''
-    },
-    rentalInfo: {
-      carType: '',
-      mileageCharges: '',
-      carDetails: ''
+  const [formData, setFormData] = useState(() => {
+    // Initialize with context data if available (for edit mode)
+    if (carRentalData?.rentalAgency) {
+      return { ...carRentalData }
+    }
+    return {
+      rentalAgency: '',
+      pickupDate: '',
+      pickupTime: '',
+      dropoffDate: '',
+      dropoffTime: '',
+      website: '',
+      email: '',
+      confirmationNumber: '',
+      totalCost: '',
+      pickupLocation: {
+        location: '',
+        address: '',
+        phone: ''
+      },
+      dropoffLocation: {
+        location: '',
+        address: '',
+        phone: ''
+      },
+      rentalInfo: {
+        carType: '',
+        mileageCharges: '',
+        carDetails: ''
+      }
     }
   })
 
@@ -73,8 +79,12 @@ const AddCarRental = () => {
     e.preventDefault()
     // Save car rental data to context
     setCarRentalData(formData)
-    // Redirect to add-trip page
-    navigate('/add-trip')
+    // Navigate to edit-trip if editing, otherwise add-trip
+    if (selectedTrip) {
+      navigate('/trip-details/edit-trip')
+    } else {
+      navigate('/add-trip')
+    }
   }
   return (
     <section className="bg-indigo-50 min-h-screen flex items-center justify-center">

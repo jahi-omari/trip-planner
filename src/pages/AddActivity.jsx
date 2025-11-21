@@ -5,7 +5,7 @@ import { TripContext } from '../context/TripContext'
 const AddActivity = () => {
   const navigate = useNavigate()
   const _ctx = useContext(TripContext) || {}
-  const { activityData, setActivityData } = _ctx
+  const { activityData, setActivityData, selectedTrip } = _ctx
 
   const [form, setForm] = useState({
     activityName: '',
@@ -45,7 +45,12 @@ const AddActivity = () => {
       email: '',
       totalCost: ''
     })
-    navigate('/add-trip')
+    // Navigate to edit-trip if editing, otherwise add-trip
+    if (selectedTrip) {
+      navigate('/trip-details/edit-trip')
+    } else {
+      navigate('/add-trip')
+    }
   }
 
   return (

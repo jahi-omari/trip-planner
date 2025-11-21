@@ -6,14 +6,15 @@ import { TripContext } from '../context/TripContext'
 
 const HomeCards = () => {
   const navigate = useNavigate()
-  const { clearFlightData, clearCarRentalData, setActivityData, setLodgingData } = useContext(TripContext) || {}
+  const { clearFlightData, clearCarRentalData, setActivityData, setLodgingData, setSelectedTrip } = useContext(TripContext) || {}
 
   const handleAddTripClick = () => {
-    // Clear all itinerary data before navigating
+    // Clear all itinerary data and selected trip before navigating
     if (clearFlightData) clearFlightData()
     if (clearCarRentalData) clearCarRentalData()
     if (setActivityData) setActivityData([])
     if (setLodgingData) setLodgingData([])
+    if (setSelectedTrip) setSelectedTrip(null)
     navigate('/add-trip')
   }
 

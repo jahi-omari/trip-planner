@@ -101,16 +101,24 @@ const FlightItem = ({ flight, onChange, onRemove, onAdd, canRemove }) => {
 const AddFlight = () => {
   const navigate = useNavigate()
   const _ctx = useContext(TripContext) || {}
-  const { setFlightData } = _ctx
+  const { setFlightData, flightData, selectedTrip } = _ctx
 
   // keep the per-page start/end states if you need them for the overall flight booking
   const [startDate, setStartDate] = useState('')
   const [endDate, setEndDate] = useState('')
 
-  // dynamic flights list - initialize with one flight
-  const [flights, setFlights] = useState([{ id: 1, departure: '', airline: '', flightNumber: '', seats: '', customName: '' }])
-  const [nextId, setNextId] = useState(2)
-  const [totalCost, setTotalCost] = useState('')
+  // dynamic flights list - initialize with context data if available, otherwise one empty flight
+  const [flights, setFlights] = useState(() => {
+    if (flightData?.flights?.length > 0) return flightData.flights.map(f => ({ ...f }))
+    return [{ id: 1, departure: '', airline: '', flightNumber: '', seats: '', customName: '' }]
+  })
+  const [nextId, setNextId] = useState(() => {
+    if (flightData?.flights?.length > 0) {
+      return Math.max(...flightData.flights.map(f => f.id)) + 1
+    }
+    return 2
+  })
+  const [totalCost, setTotalCost] = useState(() => flightData?.totalCost || '')
 
   // Convert mm/dd/yyyy to yyyy-mm-dd (kept for parity with other pages)
   const formatDateToInput = (dateStr) => {
@@ -142,8 +150,12 @@ const AddFlight = () => {
       flights: flights,
       totalCost: totalCost
     })
-    // Redirect to add-trip page
-    navigate('/add-trip')
+    // Redirect to edit-trip page if editing, otherwise add-trip page
+    if (selectedTrip) {
+      navigate('/trip-details/edit-trip')
+    } else {
+      navigate('/add-trip')
+    }
   }
 
   return (

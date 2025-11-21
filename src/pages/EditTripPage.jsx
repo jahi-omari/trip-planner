@@ -1,13 +1,14 @@
 
 
 import React, { useContext, useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
+import { FaCalendarAlt, FaPlane, FaHotel, FaCar } from 'react-icons/fa'
 import { TripContext } from '../context/TripContext'
 
 const EditTripPage = () => {
   const navigate = useNavigate()
   const _ctx = useContext(TripContext) || {}
-  const { selectedTrip, setSelectedTrip, updateTrip } = _ctx
+  const { selectedTrip, setSelectedTrip, updateTrip, setFlightData, setCarRentalData, setActivityData, setLodgingData, flightData, carRentalData, activityData, lodgingData } = _ctx
 
 
   // Trip main fields
@@ -38,34 +39,43 @@ const EditTripPage = () => {
       setStartDate(selectedTrip.startDate || '')
       setEndDate(selectedTrip.endDate || '')
       setDescription(selectedTrip.description || '')
-      // Flights
-      if (selectedTrip.flightData && Array.isArray(selectedTrip.flightData.flights)) {
+      // Flights - check context first (for newly added items), then fall back to selectedTrip
+      if (flightData?.flights?.length > 0) {
+        setFlights(flightData.flights.map(f => ({ ...f })))
+        setFlightTotalCost(flightData.totalCost || '')
+      } else if (selectedTrip.flightData && Array.isArray(selectedTrip.flightData.flights)) {
         setFlights(selectedTrip.flightData.flights.map(f => ({ ...f })))
         setFlightTotalCost(selectedTrip.flightData.totalCost || '')
       } else {
         setFlights([])
         setFlightTotalCost('')
       }
-      // Car rental
-      if (selectedTrip.carRentalData && selectedTrip.carRentalData.rentalAgency) {
+      // Car rental - check context first
+      if (carRentalData?.rentalAgency) {
+        setCarRental({ ...carRentalData })
+      } else if (selectedTrip.carRentalData && selectedTrip.carRentalData.rentalAgency) {
         setCarRental({ ...selectedTrip.carRentalData })
       } else {
         setCarRental(null)
       }
-      // Activities
-      if (selectedTrip.activityData && Array.isArray(selectedTrip.activityData)) {
+      // Activities - check context first
+      if (activityData?.length > 0) {
+        setActivities(activityData.map(a => ({ ...a })))
+      } else if (selectedTrip.activityData && Array.isArray(selectedTrip.activityData)) {
         setActivities(selectedTrip.activityData.map(a => ({ ...a })))
       } else {
         setActivities([])
       }
-      // Lodging
-      if (selectedTrip.lodgingData && Array.isArray(selectedTrip.lodgingData)) {
+      // Lodging - check context first
+      if (lodgingData?.length > 0) {
+        setLodgings(lodgingData.map(l => ({ ...l })))
+      } else if (selectedTrip.lodgingData && Array.isArray(selectedTrip.lodgingData)) {
         setLodgings(selectedTrip.lodgingData.map(l => ({ ...l })))
       } else {
         setLodgings([])
       }
     }
-  }, [selectedTrip])
+  }, [selectedTrip, flightData, carRentalData, activityData, lodgingData])
 
   if (!selectedTrip) {
     return (
@@ -519,6 +529,53 @@ const EditTripPage = () => {
                 <button type="button" onClick={handleAddLodging} className="text-sm text-purple-700 hover:underline">Add Lodging</button>
               </div>
             )}
+
+            <div className="mb-6 grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                onClick={() => {
+                  // Sync current state to context before navigating
+                  if (activities.length > 0) setActivityData(activities)
+                  navigate('/add-trip/add-activity')
+                }}
+                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 focus:outline-none focus:shadow-outline w-full"
+              >
+                <FaCalendarAlt /> Add Activity
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  // Sync current state to context before navigating
+                  if (flights.length > 0) setFlightData({ flights, totalCost: flightTotalCost })
+                  navigate('/add-trip/add-flight')
+                }}
+                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 focus:outline-none focus:shadow-outline w-full"
+              >
+                <FaPlane /> Add Flight
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  // Sync current state to context before navigating
+                  if (lodgings.length > 0) setLodgingData(lodgings)
+                  navigate('/add-trip/add-lodging')
+                }}
+                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 focus:outline-none focus:shadow-outline w-full"
+              >
+                <FaHotel /> Add Lodging
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  // Sync current state to context before navigating
+                  if (carRental) setCarRentalData(carRental)
+                  navigate('/add-trip/add-car')
+                }}
+                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 focus:outline-none focus:shadow-outline w-full"
+              >
+                <FaCar /> Add Car Rental
+              </button>
+            </div>
 
             <div>
               <button
