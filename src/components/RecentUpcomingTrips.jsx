@@ -32,37 +32,37 @@ const RecentUpcomingTrips = () => {
   }
 
   return (
-    <section className="bg-indigo-50 px-4 py-10">
-      <div className="max-w-4xl mx-auto px-4 m-auto">
-        <h2 className="text-3xl font-bold text-black-900 mb-6 text-center">
+    <section className="bg-gray-50 px-4 py-10">
+      <div className="max-w-4xl mx-auto px-2 sm:px-4 m-auto">
+        <h2 className="text-3xl sm:text-4xl font-black uppercase text-black mb-6 sm:mb-8 text-center">
           Upcoming Trips
         </h2>
         <div className="flex justify-center">
-          <div className="w-full max-w-md space-y-4">
+          <div className="w-full max-w-md space-y-4 sm:space-y-6">
             {recentTrips.map((trip) => (
               <div key={trip.id}>
                 {/* Neo Brutalism Card */}
-                <div className="bg-white border-4 border-black p-6 shadow-lg">
+                <div className="bg-white border-4 border-black rounded-lg p-4 sm:p-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
                   <div className="mb-4 pb-4 border-b-4 border-black">
-                    <h3 className="text-2xl font-black mb-2 uppercase">{trip.tripName}</h3>
-                    <p className="text-sm font-bold uppercase text-gray-700">📍 {trip.tripLocation}</p>
+                    <h3 className="text-xl sm:text-2xl font-black mb-2 uppercase break-words">{trip.tripName}</h3>
+                    <p className="text-xs sm:text-sm font-bold uppercase text-gray-700 break-words">📍 {trip.tripLocation}</p>
                   </div>
                   
                   <div className="mb-4">
-                    <p className="text-sm font-bold mb-2">📅 DATES</p>
-                    <p className="font-mono text-gray-800">{trip.startDate} → {trip.endDate}</p>
+                    <p className="text-xs sm:text-sm font-bold mb-2">📅 DATES</p>
+                    <p className="font-mono text-xs sm:text-sm text-gray-800 break-all">{trip.startDate} → {trip.endDate}</p>
                   </div>
 
                   {trip.description && (
-                    <div className="mb-4 p-3 bg-gray-100 border-2 border-black">
+                    <div className="mb-4 p-2 sm:p-3 bg-gray-100 border-2 border-black rounded">
                       <p className="text-xs font-black uppercase mb-1">Description</p>
-                      <p className="text-sm text-gray-800">{trip.description}</p>
+                      <p className="text-xs sm:text-sm text-gray-800 break-words">{trip.description}</p>
                     </div>
                   )}
                   
                   {/* Show flight details if available */}
                   {trip.flightData && trip.flightData.flights.length > 0 && (
-                    <div className="mb-4 p-3 bg-blue-100 border-3 border-black">
+                    <div className="mb-4 p-3 bg-blue-100 border-3 border-black rounded">
                       <p className="text-xs font-black uppercase mb-2">✈️ Flights ({trip.flightData.flights.length})</p>
                       {trip.flightData.flights.map((flight) => (
                         <p key={flight.id} className="text-sm font-bold text-gray-800 mb-1">{flight.customName || `Flight ${flight.id}`} - {flight.airline}</p>
@@ -73,7 +73,7 @@ const RecentUpcomingTrips = () => {
 
                   {/* Show car rental details if available */}
                   {trip.carRentalData && trip.carRentalData.rentalAgency && (
-                    <div className="mb-4 p-3 bg-green-100 border-3 border-black">
+                    <div className="mb-4 p-3 bg-green-100 border-3 border-black rounded">
                       <p className="text-xs font-black uppercase mb-2">🚗 Car Rental</p>
                       <p className="text-sm font-bold text-gray-800 mb-1">{trip.carRentalData.rentalAgency}</p>
                       {trip.carRentalData.totalCost && <p className="text-sm font-black mt-2">TOTAL: ${trip.carRentalData.totalCost}</p>}
@@ -82,7 +82,7 @@ const RecentUpcomingTrips = () => {
 
                   {/* Show lodging details if available */}
                   {trip.lodgingData && trip.lodgingData.length > 0 && (
-                    <div className="mb-4 p-3 bg-purple-100 border-3 border-black">
+                    <div className="mb-4 p-3 bg-purple-100 border-3 border-black rounded">
                       <p className="text-xs font-black uppercase mb-2">🏨 Lodging ({trip.lodgingData.length})</p>
                       {trip.lodgingData.map((lodging) => (
                         <p key={lodging.id} className="text-sm font-bold text-gray-800 mb-1">{lodging.lodgingName} - {lodging.venue}</p>
@@ -92,7 +92,7 @@ const RecentUpcomingTrips = () => {
 
                   {/* Show activity details if available */}
                   {trip.activityData && trip.activityData.length > 0 && (
-                    <div className="mb-4 p-3 bg-yellow-100 border-3 border-black">
+                    <div className="mb-4 p-3 bg-yellow-100 border-3 border-black rounded">
                       <p className="text-xs font-black uppercase mb-2">🗓️ Activities ({trip.activityData.length})</p>
                       {trip.activityData.map((activity) => (
                         <p key={activity.id} className="text-sm font-bold text-gray-800 mb-1">{activity.activityName} - {activity.venue}</p>
@@ -103,16 +103,16 @@ const RecentUpcomingTrips = () => {
                   {/* View Trip Button */}
                   <button
                     onClick={() => handleViewTrip(trip)}
-                    className="w-full bg-black text-white border-4 border-black font-black uppercase py-3 px-4 mt-4 hover:scale-105 transition-transform duration-200 text-lg"
+                    className="w-full bg-black text-white border-4 border-black rounded font-black uppercase py-2 sm:py-3 px-3 sm:px-4 mt-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all text-sm sm:text-lg"
                   >
                     View Trip
                   </button>
                   {/* Manage Sharing Button */}
                   <button
                     onClick={() => navigate(`/upcoming-trips-page/manage-sharing/${trip.id}`)}
-                    className="w-full flex items-center justify-center gap-2 bg-white border-4 border-black font-black uppercase py-3 px-4 mt-3 hover:bg-gray-100 transition-colors duration-200 text-lg text-black shadow"
+                    className="w-full flex items-center justify-center gap-2 bg-white border-4 border-black rounded font-black uppercase py-2 sm:py-3 px-3 sm:px-4 mt-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all text-sm sm:text-lg text-black"
                   >
-                    <FaLink className="text-xl" /> Manage Sharing
+                    <FaLink className="text-base sm:text-xl" /> Manage Sharing
                   </button>
                 </div>
               </div>

@@ -69,16 +69,16 @@ const AddTripPage = () => {
   }
   return (
     <>
-      <section className="bg-indigo-50">
-      <div className="container m-auto max-w-2xl py-24">
+      <section className="bg-gray-50 min-h-screen py-6 sm:py-12 px-2 sm:px-4">
+      <div className="container m-auto max-w-2xl py-12 sm:py-24">
         <div
-          className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border-3 m-4 md:m-0"
+          className="bg-white px-4 sm:px-8 py-6 sm:py-10 mb-4 border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] rounded-lg m-2 sm:m-4 md:m-0"
         >
           <form onSubmit={handleSubmit}>
-            <h2 className="text-3xl text-center font-semibold mb-6">Add Trip</h2>
+            <h2 className="text-3xl sm:text-4xl text-center font-black uppercase mb-6 sm:mb-8">Add Trip</h2>
 
-            <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2"
+            <div className="mb-4 sm:mb-6">
+              <label className="block text-gray-900 font-black uppercase mb-2 sm:mb-3 text-xs sm:text-sm"
                 >Trip Name</label
               >
               <input
@@ -87,14 +87,14 @@ const AddTripPage = () => {
                 name="tripName"
                 value={tripName}
                 onChange={(e) => setTripName(e.target.value)}
-                className="border rounded w-full py-2 px-3 mb-2"
+                className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 text-sm sm:text-base font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
                 placeholder="eg. Family Holiday"
                 required
               />
             </div>
 
-            <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2"
+            <div className="mb-6">
+              <label className="block text-gray-900 font-black uppercase mb-3 text-sm"
                 >Trip Location</label
               >
               <input
@@ -103,14 +103,14 @@ const AddTripPage = () => {
                 name="title"
                 value={tripLocation}
                 onChange={(e) => setTripLocation(e.target.value)}
-                className="border rounded w-full py-2 px-3 mb-2"
+                className="border-4 border-black rounded w-full py-3 px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
                 placeholder="eg. Hagerstown, Maryland"
                 required
               />
             </div>
 
-            <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2"
+            <div className="mb-6">
+              <label className="block text-gray-900 font-black uppercase mb-3 text-sm"
                 >Start Date</label
               >
               <input
@@ -128,13 +128,13 @@ const AddTripPage = () => {
                     if (dateValue) setStartDate(dateValue)
                   }
                 }}
-                className="border rounded w-full py-2 px-3 mb-2"
+                className="border-4 border-black rounded w-full py-3 px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
                 placeholder="mm/dd/yyyy"
               />
             </div>
 
-            <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2"
+            <div className="mb-6">
+              <label className="block text-gray-900 font-black uppercase mb-3 text-sm"
                 >End Date</label
               >
               <input
@@ -152,15 +152,15 @@ const AddTripPage = () => {
                     if (dateValue) setEndDate(dateValue)
                   }
                 }}
-                className="border rounded w-full py-2 px-3 mb-2"
+                className="border-4 border-black rounded w-full py-3 px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
                 placeholder="mm/dd/yyyy"
               />
             </div>
 
-            <div className="mb-4">
+            <div className="mb-6">
               <label
                 htmlFor="description"
-                className="block text-gray-700 font-bold mb-2"
+                className="block text-gray-900 font-black uppercase mb-3 text-sm"
                 >Description</label
               >
               <textarea
@@ -168,7 +168,7 @@ const AddTripPage = () => {
                 name="description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="border rounded w-full py-2 px-3"
+                className="border-4 border-black rounded w-full py-3 px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
                 rows="4"
                 placeholder="Add daily activities etc."
               ></textarea>
@@ -283,24 +283,24 @@ const AddTripPage = () => {
               </div>
             )}
 
-            <div className="mb-6 grid grid-cols-2 gap-3">
-              <Link to="add-activity" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 focus:outline-none focus:shadow-outline w-full">
+            <div className="mb-4 sm:mb-6 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              <Link to="add-activity" className="bg-yellow-400 hover:bg-yellow-500 text-black font-black uppercase py-3 px-4 border-4 border-black rounded shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all flex items-center justify-center gap-2 w-full">
                 <FaCalendarAlt /> Add Activity
               </Link>
-              <Link to="add-flight" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 focus:outline-none focus:shadow-outline w-full">
+              <Link to="add-flight" className="bg-blue-400 hover:bg-blue-500 text-black font-black uppercase py-3 px-4 border-4 border-black rounded shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all flex items-center justify-center gap-2 w-full">
                 <FaPlane /> Add Flight
               </Link>
-              <Link to="add-lodging" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 focus:outline-none focus:shadow-outline w-full">
+              <Link to="add-lodging" className="bg-purple-400 hover:bg-purple-500 text-black font-black uppercase py-3 px-4 border-4 border-black rounded shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all flex items-center justify-center gap-2 w-full">
                 <FaHotel /> Add Lodging
               </Link>
-              <Link to="add-car" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 focus:outline-none focus:shadow-outline w-full">
+              <Link to="add-car" className="bg-green-400 hover:bg-green-500 text-black font-black uppercase py-3 px-4 border-4 border-black rounded shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all flex items-center justify-center gap-2 w-full">
                 <FaCar /> Add Car Rental
               </Link>
             </div>
 
             <div>
               <button
-                className="bg-indigo-900 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg w-full focus:outline-none focus:shadow-outline"
+                className="bg-indigo-900 hover:bg-indigo-700 text-white font-black uppercase py-4 px-6 border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all w-full rounded"
                 type="submit"
               >
                 Save Trip

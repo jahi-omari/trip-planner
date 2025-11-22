@@ -15,7 +15,7 @@ const ViewAllTrips = () => {
     <section className="m-auto max-w-lg my-10 px-6">
       <Link
         to="/upcoming-trips-page"
-        className="block bg-black text-white text-center py-4 px-6 rounded-xl hover:bg-gray-700"
+        className="block bg-indigo-900 hover:bg-indigo-700 text-white text-center font-black uppercase py-4 px-6 border-4 border-black rounded shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all"
         >View All Upcoming Trips
       </Link>
     </section>

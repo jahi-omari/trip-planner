@@ -534,7 +534,7 @@ const EditTripPage = () => {
               </div>
             )}
 
-            <div className="mb-6 grid grid-cols-2 gap-3">
+            <div className="mb-6 grid grid-cols-2 gap-4">
               <button
                 type="button"
                 onClick={() => {
@@ -542,7 +542,7 @@ const EditTripPage = () => {
                   if (activities.length > 0) setActivityData(activities)
                   navigate('/add-trip/add-activity')
                 }}
-                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 focus:outline-none focus:shadow-outline w-full"
+                className="bg-yellow-400 hover:bg-yellow-500 text-black font-black uppercase py-3 px-4 border-4 border-black rounded shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all flex items-center justify-center gap-2 w-full"
               >
                 <FaCalendarAlt /> Add Activity
               </button>
@@ -553,7 +553,7 @@ const EditTripPage = () => {
                   if (flights.length > 0) setFlightData({ flights, totalCost: flightTotalCost })
                   navigate('/add-trip/add-flight')
                 }}
-                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 focus:outline-none focus:shadow-outline w-full"
+                className="bg-blue-400 hover:bg-blue-500 text-black font-black uppercase py-3 px-4 border-4 border-black rounded shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all flex items-center justify-center gap-2 w-full"
               >
                 <FaPlane /> Add Flight
               </button>
@@ -564,7 +564,7 @@ const EditTripPage = () => {
                   if (lodgings.length > 0) setLodgingData(lodgings)
                   navigate('/add-trip/add-lodging')
                 }}
-                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 focus:outline-none focus:shadow-outline w-full"
+                className="bg-purple-400 hover:bg-purple-500 text-black font-black uppercase py-3 px-4 border-4 border-black rounded shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all flex items-center justify-center gap-2 w-full"
               >
                 <FaHotel /> Add Lodging
               </button>
@@ -575,7 +575,7 @@ const EditTripPage = () => {
                   if (carRental) setCarRentalData(carRental)
                   navigate('/add-trip/add-car')
                 }}
-                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 focus:outline-none focus:shadow-outline w-full"
+                className="bg-green-400 hover:bg-green-500 text-black font-black uppercase py-3 px-4 border-4 border-black rounded shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all flex items-center justify-center gap-2 w-full"
               >
                 <FaCar /> Add Car Rental
               </button>
@@ -583,7 +583,7 @@ const EditTripPage = () => {
 
             <div>
               <button
-                className="bg-indigo-900 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+                className="bg-indigo-900 hover:bg-indigo-700 text-white font-black uppercase py-4 px-6 border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all w-full rounded"
                 type="submit"
               >
                 Save Trip
