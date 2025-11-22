@@ -203,8 +203,9 @@ const EditTripPage = () => {
                 id="startDate"
                 name="startDate"
                 value={startDate}
-                onChange={e => setStartDate(e.target.value)}
+                onChange={(e) => setStartDate(e.target.value)}
                 className="border rounded w-full py-2 px-3 mb-2"
+                min={new Date().toISOString().split('T')[0]}
                 required
               />
             </div>
@@ -216,8 +217,9 @@ const EditTripPage = () => {
                 id="endDate"
                 name="endDate"
                 value={endDate}
-                onChange={e => setEndDate(e.target.value)}
+                onChange={(e) => setEndDate(e.target.value)}
                 className="border rounded w-full py-2 px-3 mb-2"
+                min={new Date().toISOString().split('T')[0]}
                 required
               />
             </div>
@@ -265,8 +267,10 @@ const EditTripPage = () => {
                         <input
                           type="date"
                           value={flight.departure}
-                          onChange={e => handleFlightChange(flight.id, 'departure', e.target.value)}
+                          onChange={(e) => handleFlightChange(flight.id, 'departure', e.target.value)}
                           className="border rounded w-full py-2 px-3"
+                          min={new Date().toISOString().split('T')[0]}
+                          required
                         />
                       </div>
                       <div>
@@ -301,7 +305,7 @@ const EditTripPage = () => {
                 <div className="mb-4 flex gap-4">
                   <div className="flex-1">
                     <label className="block text-gray-700 font-bold mb-2">Pickup Date</label>
-                    <input type="date" name="pickupDate" value={carRental.pickupDate} onChange={handleCarRentalChange} className="border rounded w-full py-2 px-3" />
+                    <input type="date" name="pickupDate" value={carRental.pickupDate} onChange={handleCarRentalChange} className="border rounded w-full py-2 px-3" min={new Date().toISOString().split('T')[0]} required />
                   </div>
                   <div className="flex-1">
                     <label className="block text-gray-700 font-bold mb-2">Pickup Time</label>
@@ -311,7 +315,7 @@ const EditTripPage = () => {
                 <div className="mb-6 flex gap-4">
                   <div className="flex-1">
                     <label className="block text-gray-700 font-bold mb-2">Dropoff Date</label>
-                    <input type="date" name="dropoffDate" value={carRental.dropoffDate} onChange={handleCarRentalChange} className="border rounded w-full py-2 px-3" />
+                    <input type="date" name="dropoffDate" value={carRental.dropoffDate} onChange={handleCarRentalChange} className="border rounded w-full py-2 px-3" min={new Date().toISOString().split('T')[0]} required />
                   </div>
                   <div className="flex-1">
                     <label className="block text-gray-700 font-bold mb-2">Dropoff Time</label>

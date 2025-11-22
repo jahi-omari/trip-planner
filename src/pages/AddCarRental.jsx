@@ -103,7 +103,7 @@ const AddCarRental = () => {
             <div className="mb-4 flex gap-4">
               <div className="flex-1">
                 <label className="block text-gray-700 font-bold mb-2">Pickup Date</label>
-                <input type="date" name="pickupDate" value={formData.pickupDate} onChange={handleChange} className="border rounded w-full py-2 px-3" />
+                <input type="date" name="pickupDate" value={formData.pickupDate} onChange={handleChange} className="border rounded w-full py-2 px-3" min={new Date().toISOString().split('T')[0]} required />
               </div>
               <div className="flex-1">
                 <label className="block text-gray-700 font-bold mb-2">Pickup Time</label>
@@ -115,7 +115,7 @@ const AddCarRental = () => {
             <div className="mb-6 flex gap-4">
               <div className="flex-1">
                 <label className="block text-gray-700 font-bold mb-2">Dropoff Date</label>
-                <input type="date" name="dropoffDate" value={formData.dropoffDate} onChange={handleChange} className="border rounded w-full py-2 px-3" />
+                <input type="date" name="dropoffDate" value={formData.dropoffDate} onChange={handleChange} className="border rounded w-full py-2 px-3" min={new Date().toISOString().split('T')[0]} required />
               </div>
               <div className="flex-1">
                 <label className="block text-gray-700 font-bold mb-2">Dropoff Time</label>

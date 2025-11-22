@@ -8,6 +8,16 @@ const UpcomingTripsPage = () => {
   const { upcomingTrips, setSelectedTrip } = _ctx
   const navigate = useNavigate()
 
+  // Filter out past trips (only show upcoming/future trips)
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  
+  const futureTrips = upcomingTrips.filter(trip => {
+    if (!trip.endDate) return true // Show trips without end date
+    const endDate = new Date(trip.endDate)
+    return endDate >= today
+  })
+
   const handleViewTrip = (trip) => {
     setSelectedTrip(trip)
     navigate('/upcoming-trips-page/trip-details')
@@ -16,12 +26,12 @@ const UpcomingTripsPage = () => {
   return (
     <section className='bg-gray-50 px-4 py-6'>
       {/* Display newly saved trips */}
-      {upcomingTrips.length > 0 && (
+      {futureTrips.length > 0 && (
         <div className="mb-8">
           <h2 className="text-2xl font-bold mb-4 text-center">Upcoming Trips</h2>
           <div className="flex justify-center">
             <div className="w-full max-w-md">
-              {upcomingTrips.map((trip) => (
+              {futureTrips.map((trip) => (
                 <div key={trip.id} className="mb-4">
                   {/* Neo Brutalism Card */}
                   <div className="bg-white border-4 border-black p-6 shadow-lg">

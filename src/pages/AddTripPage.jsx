@@ -119,6 +119,8 @@ const AddTripPage = () => {
                 name="startDate"
                 value={startDate}
                 onChange={handleStartDateChange}
+                min={new Date().toISOString().split('T')[0]}
+                required
                 onBlur={(e) => {
                   const textValue = e.target.value
                   if (textValue && !textValue.match(/^\d{4}-\d{2}-\d{2}$/)) {
@@ -141,6 +143,8 @@ const AddTripPage = () => {
                 name="endDate"
                 value={endDate}
                 onChange={handleEndDateChange}
+                min={new Date().toISOString().split('T')[0]}
+                required
                 onBlur={(e) => {
                   const textValue = e.target.value
                   if (textValue && !textValue.match(/^\d{4}-\d{2}-\d{2}$/)) {

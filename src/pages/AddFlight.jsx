@@ -62,6 +62,8 @@ const FlightItem = ({ flight, onChange, onRemove, onAdd, canRemove }) => {
             value={departure}
             onChange={(e) => onChange(id, 'departure', e.target.value)}
             className="border rounded w-full py-2 px-3"
+            min={new Date().toISOString().split('T')[0]}
+            required
           />
         </div>
 

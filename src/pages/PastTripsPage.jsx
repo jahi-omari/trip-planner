@@ -1,101 +1,75 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FaMapMarker } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { TripContext } from '../context/TripContext'
 
 const PastTripsPage = () => {
+  const { upcomingTrips, setSelectedTrip } = useContext(TripContext)
+  const navigate = useNavigate()
+
+  // Filter for past trips (end date is before today)
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  
+  const pastTrips = upcomingTrips.filter(trip => {
+    if (!trip.endDate) return false
+    const endDate = new Date(trip.endDate)
+    return endDate < today
+  })
+
+  const handleViewTrip = (trip) => {
+    setSelectedTrip(trip)
+    navigate('/trip-details')
+  }
+
   return (
     <>
-    <section className="bg-indigo-50 px-4 py-10">
+    <section className="bg-gray-50 px-4 py-10">
       <div className="max-w-4xl mx-auto px-4 m-auto">
-        <h2 className="text-3xl font-bold text-black-900 mb-6 text-center">
+        <h2 className="text-4xl font-black uppercase text-black mb-8 text-center">
           Past Trips
         </h2>
         <div className="grid grid-cols-1 gap-6">
-          {/* <!-- Trip 1 --> */}
-          <div className="bg-white rounded-xl shadow-md relative border-3">
-            <div className="p-4">
-              <div className="mb-6">
-                <div className="text-gray-600 my-2">Start Date - End Date</div>
-                <h3 className="text-xl font-bold">Dad's Birthday</h3>
-              </div>
-
-              <div className="mb-5">
-               Itinerary Details
-              </div>
-
-              <div className="border border-gray-100 mb-5"></div>
-
-              <div className="flex flex-col lg:flex-row justify-between mb-4">
-                <div className="text-red-500 mb-3">
-                  <FaMapMarker className="inline text-lg mr-2 mb-1"/>
-                  Tokyo, JAPAN
-                </div>
-                <Link
-                  to="trip-details"
-                  className="h-[36px] bg-indigo-900 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg text-center text-sm"
-                >
-                 View Trip
-                </Link>
-              </div>
+          {pastTrips.length === 0 ? (
+            <div className="bg-white border-4 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-8 text-center">
+              <p className="text-gray-800 text-xl font-black uppercase mb-2">No Past Trips Yet</p>
+              <p className="text-gray-600 font-bold mt-2">Your completed trips will appear here.</p>
             </div>
-          </div>
-          {/* <!-- Trip 2 --> */}
-          <div className="bg-white rounded-xl shadow-md relative border-3">
-            <div className="p-4">
-              <div className="mb-6">
-                <div className="text-gray-600 my-2">November 25th, 2025 - December 1st, 2025</div>
-                <h3 className="text-xl font-bold">Tottenham Game</h3>
-              </div>
+          ) : (
+            pastTrips.map((trip) => (
+              <div key={trip.id} className="bg-white border-4 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] relative">
+                <div className="p-6">
+                  <div className="mb-6">
+                    <div className="text-gray-700 my-2 font-bold">
+                      {trip.startDate && trip.endDate 
+                        ? `${new Date(trip.startDate).toLocaleDateString()} - ${new Date(trip.endDate).toLocaleDateString()}`
+                        : 'Dates not set'}
+                    </div>
+                    <h3 className="text-2xl font-black uppercase">{trip.tripName || 'Untitled Trip'}</h3>
+                  </div>
 
-              <div className="mb-5">
-               Itinerary Details
-              </div>
+                  <div className="mb-5 font-bold text-gray-700">
+                    {trip.description || 'No description'}
+                  </div>
 
-              <div className="border border-gray-100 mb-5"></div>
+                  <div className="border-t-4 border-black mb-5"></div>
 
-              <div className="flex flex-col lg:flex-row justify-between mb-4">
-                <div className="text-red-500 mb-3">
-                  <FaMapMarker className="inline text-lg mr-2 mb-1"/>
-                  London, ENGLAND
+                  <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+                    <div className="text-red-600 font-bold">
+                      <FaMapMarker className="inline text-lg mr-2 mb-1"/>
+                      {trip.tripLocation || 'No location set'}
+                    </div>
+                    <button
+                      onClick={() => handleViewTrip(trip)}
+                      className="bg-indigo-900 hover:bg-indigo-700 text-white font-black uppercase px-6 py-3 border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all rounded"
+                    >
+                      View Trip
+                    </button>
+                  </div>
                 </div>
-                <Link
-                  to="trip-details"
-                  className="h-[36px] bg-indigo-900 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg text-center text-sm"
-                >
-                 View Trip
-                </Link>
               </div>
-            </div>
-          </div>
-          {/* <!-- Trip 3 --> */}
-          <div className="bg-white rounded-xl shadow-md relative border-3">
-            <div className="p-4">
-              <div className="mb-6">
-                <div className="text-gray-600 my-2">December 10th, 2025 - December 18th, 2025</div>
-                <h3 className="text-xl font-bold">Staff Christmas Italy Trip</h3>
-              </div>
-
-              <div className="mb-5">
-               Itinerary Details
-              </div>
-
-
-              <div className="border border-gray-100 mb-5"></div>
-
-              <div className="flex flex-col lg:flex-row justify-between mb-4">
-                <div className="text-red-500 mb-3">
-                  <FaMapMarker className="inline text-lg mr-2 mb-1"/>
-                  Venice, ITALY
-                </div>
-                <Link
-                  to="trip-details"
-                  className="h-[36px] bg-indigo-900 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg text-center text-sm"
-                >
-                 View Trip
-                </Link>
-              </div>
-            </div>
-          </div>
+            ))
+          )}
         </div>
       </div>
     </section>

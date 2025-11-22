@@ -72,7 +72,7 @@ const AddLodging = () => {
             <div className="mb-4 flex gap-4">
               <div className="flex-1">
                 <label className="block text-gray-700 font-bold mb-2">Start Date</label>
-                <input type="date" name="startDate" value={form.startDate} onChange={handleChange} className="border rounded w-full py-2 px-3" />
+                <input type="date" name="startDate" value={form.startDate} onChange={handleChange} className="border rounded w-full py-2 px-3" min={new Date().toISOString().split('T')[0]} required />
               </div>
               <div className="flex-1">
                 <label className="block text-gray-700 font-bold mb-2">Start Time</label>
@@ -84,7 +84,7 @@ const AddLodging = () => {
             <div className="mb-4 flex gap-4">
               <div className="flex-1">
                 <label className="block text-gray-700 font-bold mb-2">End Date</label>
-                <input type="date" name="endDate" value={form.endDate} onChange={handleChange} className="border rounded w-full py-2 px-3" />
+                <input type="date" name="endDate" value={form.endDate} onChange={handleChange} className="border rounded w-full py-2 px-3" min={new Date().toISOString().split('T')[0]} required />
               </div>
               <div className="flex-1">
                 <label className="block text-gray-700 font-bold mb-2">End Time</label>

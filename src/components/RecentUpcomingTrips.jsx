@@ -8,8 +8,18 @@ const RecentUpcomingTrips = () => {
   const { upcomingTrips, setSelectedTrip } = _ctx
   const navigate = useNavigate()
 
+  // Filter out past trips (only show upcoming/future trips)
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  
+  const futureTrips = upcomingTrips.filter(trip => {
+    if (!trip.endDate) return true // Show trips without end date
+    const endDate = new Date(trip.endDate)
+    return endDate >= today
+  })
+
   // Limit Trips to 3 on homepage
-  const recentTrips = upcomingTrips.slice(0, 3)
+  const recentTrips = futureTrips.slice(0, 3)
 
   const handleViewTrip = (trip) => {
     setSelectedTrip(trip)
@@ -17,7 +27,7 @@ const RecentUpcomingTrips = () => {
   }
 
   // Only render if there are trips
-  if (upcomingTrips.length === 0) {
+  if (futureTrips.length === 0) {
     return null
   }
 
