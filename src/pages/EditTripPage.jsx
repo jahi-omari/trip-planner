@@ -162,76 +162,76 @@ const EditTripPage = () => {
   }
 
   return (
-    <section className="bg-indigo-50">
-      <div className="container m-auto max-w-2xl py-24">
-        <div className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border-3 m-4 md:m-0">
+    <section className="bg-gray-50 min-h-screen py-6 sm:py-12 px-4">
+      <div className="container m-auto max-w-2xl py-12 sm:py-24">
+        <div className="bg-white px-6 sm:px-8 py-8 sm:py-10 mb-4 border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] rounded-lg m-4 md:m-0">
           <form onSubmit={handleSubmit}>
-            <h2 className="text-3xl text-center font-semibold mb-6">Edit Trip</h2>
+            <h2 className="text-3xl sm:text-4xl text-center font-black uppercase mb-6 sm:mb-8">Edit Trip</h2>
 
-            <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2">Trip Name</label>
+            <div className="mb-4 sm:mb-6">
+              <label className="block text-gray-900 font-black uppercase mb-2 sm:mb-3 text-xs sm:text-sm">Trip Name</label>
               <input
                 type="text"
                 id="tripName"
                 name="tripName"
                 value={tripName}
                 onChange={e => setTripName(e.target.value)}
-                className="border rounded w-full py-2 px-3 mb-2"
+                className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
                 placeholder="eg. Family Holiday"
                 required
               />
             </div>
 
-            <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2">Trip Location</label>
+            <div className="mb-4 sm:mb-6">
+              <label className="block text-gray-900 font-black uppercase mb-2 sm:mb-3 text-xs sm:text-sm">Trip Location</label>
               <input
                 type="text"
                 id="tripLocation"
                 name="tripLocation"
                 value={tripLocation}
                 onChange={e => setTripLocation(e.target.value)}
-                className="border rounded w-full py-2 px-3 mb-2"
+                className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
                 placeholder="eg. Hagerstown, Maryland"
                 required
               />
             </div>
 
-            <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2">Start Date</label>
+            <div className="mb-4 sm:mb-6">
+              <label className="block text-gray-900 font-black uppercase mb-2 sm:mb-3 text-xs sm:text-sm">Start Date</label>
               <input
                 type="date"
                 id="startDate"
                 name="startDate"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
-                className="border rounded w-full py-2 px-3 mb-2"
+                className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
                 min={new Date().toISOString().split('T')[0]}
                 required
               />
             </div>
 
-            <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2">End Date</label>
+            <div className="mb-4 sm:mb-6">
+              <label className="block text-gray-900 font-black uppercase mb-2 sm:mb-3 text-xs sm:text-sm">End Date</label>
               <input
                 type="date"
                 id="endDate"
                 name="endDate"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
-                className="border rounded w-full py-2 px-3 mb-2"
+                className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
                 min={new Date().toISOString().split('T')[0]}
                 required
               />
             </div>
 
-            <div className="mb-4">
-              <label htmlFor="description" className="block text-gray-700 font-bold mb-2">Description</label>
+            <div className="mb-6 sm:mb-8">
+              <label htmlFor="description" className="block text-gray-900 font-black uppercase mb-2 sm:mb-3 text-xs sm:text-sm">Description</label>
               <textarea
                 id="description"
                 name="description"
                 value={description}
                 onChange={e => setDescription(e.target.value)}
-                className="border rounded w-full py-2 px-3"
+                className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
                 rows="4"
                 placeholder="Add daily activities etc."
               ></textarea>
@@ -239,298 +239,298 @@ const EditTripPage = () => {
 
             {/* --- Flights Section --- */}
             {flights.length > 0 && (
-              <div className="mb-8 p-4 bg-indigo-100 rounded-md border border-indigo-300">
-                <h3 className="text-lg font-semibold mb-3">Edit Flight Details</h3>
-                <div className="mb-4">
-                  <label className="block text-gray-700 font-bold mb-2">Total Cost</label>
+              <div className="mb-6 sm:mb-8 p-4 sm:p-6 bg-blue-100 rounded-lg border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                <h3 className="text-lg sm:text-xl font-black uppercase mb-4">✈️ Edit Flight Details</h3>
+                <div className="mb-4 sm:mb-6">
+                  <label className="block text-gray-900 font-black uppercase mb-2 sm:mb-3 text-xs sm:text-sm">Total Cost</label>
                   <input
                     type="text"
                     value={flightTotalCost}
                     onChange={e => { const val = e.target.value; if (/^[0-9.]*$/.test(val)) setFlightTotalCost(val) }}
-                    className="border rounded w-full py-2 px-3 mb-2"
+                    className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
                     placeholder="eg. 299.99"
                   />
                 </div>
                 {flights.map((flight, idx) => (
-                  <div key={flight.id} className="mb-6 p-4 border rounded-md bg-white">
-                    <div className="flex items-center justify-between mb-3">
+                  <div key={flight.id} className="mb-4 sm:mb-6 p-4 sm:p-6 border-4 border-black rounded-lg bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                    <div className="flex items-center justify-between mb-3 sm:mb-4">
                       <div className="flex items-center gap-2">
-                        <h3 className="font-semibold">{flight.customName || `Flight ${flight.id}`}</h3>
+                        <h3 className="font-black uppercase text-sm sm:text-base">{flight.customName || `Flight ${flight.id}`}</h3>
                       </div>
                       {flights.length > 1 && (
-                        <button type="button" onClick={() => handleRemoveFlight(flight.id)} className="text-sm text-red-600 hover:underline">Remove</button>
+                        <button type="button" onClick={() => handleRemoveFlight(flight.id)} className="text-xs sm:text-sm text-red-600 hover:text-red-800 font-bold uppercase border-2 border-red-600 px-2 py-1 rounded hover:bg-red-50">Remove</button>
                       )}
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">Departure Date</label>
+                        <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Departure Date</label>
                         <input
                           type="date"
                           value={flight.departure}
                           onChange={(e) => handleFlightChange(flight.id, 'departure', e.target.value)}
-                          className="border rounded w-full py-2 px-3"
+                          className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
                           min={new Date().toISOString().split('T')[0]}
                           required
                         />
                       </div>
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">Airline</label>
-                        <input type="text" value={flight.airline} onChange={e => handleFlightChange(flight.id, 'airline', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Airline name" />
+                        <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Airline</label>
+                        <input type="text" value={flight.airline} onChange={e => handleFlightChange(flight.id, 'airline', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Airline name" />
                       </div>
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">Flight Number</label>
-                        <input type="text" value={flight.flightNumber} onChange={e => handleFlightChange(flight.id, 'flightNumber', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="e.g. BA123" />
+                        <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Flight Number</label>
+                        <input type="text" value={flight.flightNumber} onChange={e => handleFlightChange(flight.id, 'flightNumber', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="e.g. BA123" />
                       </div>
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">Seats</label>
-                        <input type="text" value={flight.seats} onChange={e => handleFlightChange(flight.id, 'seats', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Seats" />
+                        <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Seats</label>
+                        <input type="text" value={flight.seats} onChange={e => handleFlightChange(flight.id, 'seats', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Seats" />
                       </div>
                     </div>
                   </div>
                 ))}
-                <div className="flex justify-end mt-3">
-                  <button type="button" onClick={handleAddFlight} className="text-sm text-indigo-600 hover:underline">Add another flight</button>
+                <div className="flex justify-end mt-3 sm:mt-4">
+                  <button type="button" onClick={handleAddFlight} className="text-xs sm:text-sm text-indigo-900 hover:text-indigo-700 font-bold uppercase border-2 border-indigo-900 px-3 py-1.5 rounded hover:bg-indigo-50">Add another flight</button>
                 </div>
               </div>
             )}
 
             {/* --- Car Rental Section --- */}
             {carRental && (
-              <div className="mb-8 p-4 bg-green-100 rounded-md border border-green-300">
-                <h3 className="text-lg font-semibold mb-3">Edit Car Rental Details</h3>
-                <div className="mb-4">
-                  <label className="block text-gray-700 font-bold mb-2">Rental Agency</label>
-                  <input type="text" name="rentalAgency" value={carRental.rentalAgency} onChange={handleCarRentalChange} className="border rounded w-full py-2 px-3" placeholder="Rental Agency" />
+              <div className="mb-6 sm:mb-8 p-4 sm:p-6 bg-green-100 rounded-lg border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                <h3 className="text-lg sm:text-xl font-black uppercase mb-4">🚗 Edit Car Rental Details</h3>
+                <div className="mb-4 sm:mb-6">
+                  <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Rental Agency</label>
+                  <input type="text" name="rentalAgency" value={carRental.rentalAgency} onChange={handleCarRentalChange} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Rental Agency" />
                 </div>
-                <div className="mb-4 flex gap-4">
+                <div className="mb-4 sm:mb-6 flex gap-4">
                   <div className="flex-1">
-                    <label className="block text-gray-700 font-bold mb-2">Pickup Date</label>
-                    <input type="date" name="pickupDate" value={carRental.pickupDate} onChange={handleCarRentalChange} className="border rounded w-full py-2 px-3" min={new Date().toISOString().split('T')[0]} required />
+                    <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Pickup Date</label>
+                    <input type="date" name="pickupDate" value={carRental.pickupDate} onChange={handleCarRentalChange} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" min={new Date().toISOString().split('T')[0]} required />
                   </div>
                   <div className="flex-1">
-                    <label className="block text-gray-700 font-bold mb-2">Pickup Time</label>
-                    <input type="time" name="pickupTime" value={carRental.pickupTime} onChange={handleCarRentalChange} className="border rounded w-full py-2 px-3" />
+                    <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Pickup Time</label>
+                    <input type="time" name="pickupTime" value={carRental.pickupTime} onChange={handleCarRentalChange} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" />
                   </div>
                 </div>
-                <div className="mb-6 flex gap-4">
+                <div className="mb-4 sm:mb-6 flex gap-4">
                   <div className="flex-1">
-                    <label className="block text-gray-700 font-bold mb-2">Dropoff Date</label>
-                    <input type="date" name="dropoffDate" value={carRental.dropoffDate} onChange={handleCarRentalChange} className="border rounded w-full py-2 px-3" min={new Date().toISOString().split('T')[0]} required />
+                    <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Dropoff Date</label>
+                    <input type="date" name="dropoffDate" value={carRental.dropoffDate} onChange={handleCarRentalChange} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" min={new Date().toISOString().split('T')[0]} required />
                   </div>
                   <div className="flex-1">
-                    <label className="block text-gray-700 font-bold mb-2">Dropoff Time</label>
-                    <input type="time" name="dropoffTime" value={carRental.dropoffTime} onChange={handleCarRentalChange} className="border rounded w-full py-2 px-3" />
+                    <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Dropoff Time</label>
+                    <input type="time" name="dropoffTime" value={carRental.dropoffTime} onChange={handleCarRentalChange} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" />
                   </div>
                 </div>
-                <div className="mb-4">
-                  <label className="block text-gray-700 font-bold mb-2">Website</label>
-                  <input type="text" name="website" value={carRental.website} onChange={handleCarRentalChange} className="border rounded w-full py-2 px-3" placeholder="Website" />
+                <div className="mb-4 sm:mb-6">
+                  <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Website</label>
+                  <input type="text" name="website" value={carRental.website} onChange={handleCarRentalChange} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Website" />
                 </div>
-                <div className="mb-4">
-                  <label className="block text-gray-700 font-bold mb-2">Email</label>
-                  <input type="email" name="email" value={carRental.email} onChange={handleCarRentalChange} className="border rounded w-full py-2 px-3" placeholder="Email" />
+                <div className="mb-4 sm:mb-6">
+                  <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Email</label>
+                  <input type="email" name="email" value={carRental.email} onChange={handleCarRentalChange} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Email" />
                 </div>
-                <div className="mb-4">
-                  <label className="block text-gray-700 font-bold mb-2">Confirmation Number</label>
-                  <input type="text" name="confirmationNumber" value={carRental.confirmationNumber} onChange={handleCarRentalChange} className="border rounded w-full py-2 px-3" placeholder="Confirmation number" />
+                <div className="mb-4 sm:mb-6">
+                  <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Confirmation Number</label>
+                  <input type="text" name="confirmationNumber" value={carRental.confirmationNumber} onChange={handleCarRentalChange} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Confirmation number" />
                 </div>
-                <div className="mb-6">
-                  <label className="block text-gray-700 font-bold mb-2">Total Cost</label>
+                <div className="mb-6 sm:mb-8">
+                  <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Total Cost</label>
                   <input type="text" name="totalCost" value={carRental.totalCost} onChange={e => {
                     const val = e.target.value
                     if (/^[0-9.]*$/.test(val)) handleCarRentalChange(e)
-                  }} className="border rounded w-full py-2 px-3" placeholder="Total Cost" />
+                  }} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Total Cost" />
                 </div>
                 {/* Pickup Location */}
-                <h3 className="text-md font-semibold mt-8 mb-4">Pickup Location</h3>
-                <div className="mb-4">
-                  <label className="block text-gray-700 font-bold mb-2">Pickup Location</label>
-                  <input type="text" value={carRental.pickupLocation?.location || ''} onChange={e => handleCarRentalNestedChange('pickupLocation', 'location', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Pickup location" />
+                <h3 className="text-base sm:text-lg font-black uppercase mt-8 mb-4">Pickup Location</h3>
+                <div className="mb-4 sm:mb-6">
+                  <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Pickup Location</label>
+                  <input type="text" value={carRental.pickupLocation?.location || ''} onChange={e => handleCarRentalNestedChange('pickupLocation', 'location', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Pickup location" />
                 </div>
-                <div className="mb-4">
-                  <label className="block text-gray-700 font-bold mb-2">Address</label>
-                  <input type="text" value={carRental.pickupLocation?.address || ''} onChange={e => handleCarRentalNestedChange('pickupLocation', 'address', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Address" />
+                <div className="mb-4 sm:mb-6">
+                  <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Address</label>
+                  <input type="text" value={carRental.pickupLocation?.address || ''} onChange={e => handleCarRentalNestedChange('pickupLocation', 'address', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Address" />
                 </div>
-                <div className="mb-6">
-                  <label className="block text-gray-700 font-bold mb-2">Phone</label>
-                  <input type="text" value={carRental.pickupLocation?.phone || ''} onChange={e => handleCarRentalNestedChange('pickupLocation', 'phone', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Phone" />
+                <div className="mb-6 sm:mb-8">
+                  <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Phone</label>
+                  <input type="text" value={carRental.pickupLocation?.phone || ''} onChange={e => handleCarRentalNestedChange('pickupLocation', 'phone', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Phone" />
                 </div>
                 {/* Dropoff Location */}
-                <h3 className="text-md font-semibold mt-8 mb-4">Dropoff Location</h3>
-                <div className="mb-4">
-                  <label className="block text-gray-700 font-bold mb-2">Dropoff Location</label>
-                  <input type="text" value={carRental.dropoffLocation?.location || ''} onChange={e => handleCarRentalNestedChange('dropoffLocation', 'location', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Dropoff location" />
+                <h3 className="text-base sm:text-lg font-black uppercase mt-8 mb-4">Dropoff Location</h3>
+                <div className="mb-4 sm:mb-6">
+                  <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Dropoff Location</label>
+                  <input type="text" value={carRental.dropoffLocation?.location || ''} onChange={e => handleCarRentalNestedChange('dropoffLocation', 'location', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Dropoff location" />
                 </div>
-                <div className="mb-4">
-                  <label className="block text-gray-700 font-bold mb-2">Address</label>
-                  <input type="text" value={carRental.dropoffLocation?.address || ''} onChange={e => handleCarRentalNestedChange('dropoffLocation', 'address', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Address" />
+                <div className="mb-4 sm:mb-6">
+                  <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Address</label>
+                  <input type="text" value={carRental.dropoffLocation?.address || ''} onChange={e => handleCarRentalNestedChange('dropoffLocation', 'address', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Address" />
                 </div>
-                <div className="mb-6">
-                  <label className="block text-gray-700 font-bold mb-2">Phone</label>
-                  <input type="text" value={carRental.dropoffLocation?.phone || ''} onChange={e => handleCarRentalNestedChange('dropoffLocation', 'phone', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Phone" />
+                <div className="mb-6 sm:mb-8">
+                  <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Phone</label>
+                  <input type="text" value={carRental.dropoffLocation?.phone || ''} onChange={e => handleCarRentalNestedChange('dropoffLocation', 'phone', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Phone" />
                 </div>
                 {/* Rental Info */}
-                <h3 className="text-md font-semibold mt-8 mb-4">Rental Information</h3>
-                <div className="mb-4">
-                  <label className="block text-gray-700 font-bold mb-2">Car Type</label>
-                  <input type="text" value={carRental.rentalInfo?.carType || ''} onChange={e => handleCarRentalNestedChange('rentalInfo', 'carType', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Car type" />
+                <h3 className="text-base sm:text-lg font-black uppercase mt-8 mb-4">Rental Information</h3>
+                <div className="mb-4 sm:mb-6">
+                  <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Car Type</label>
+                  <input type="text" value={carRental.rentalInfo?.carType || ''} onChange={e => handleCarRentalNestedChange('rentalInfo', 'carType', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Car type" />
                 </div>
-                <div className="mb-4">
-                  <label className="block text-gray-700 font-bold mb-2">Mileage Charges</label>
+                <div className="mb-4 sm:mb-6">
+                  <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Mileage Charges</label>
                   <input type="text" value={carRental.rentalInfo?.mileageCharges || ''} onChange={e => {
                     const val = e.target.value
                     if (/^[0-9.]*$/.test(val)) handleCarRentalNestedChange('rentalInfo', 'mileageCharges', val)
-                  }} className="border rounded w-full py-2 px-3" placeholder="Mileage charges" />
+                  }} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Mileage charges" />
                 </div>
-                <div className="mb-6">
-                  <label className="block text-gray-700 font-bold mb-2">Car Details</label>
-                  <input type="text" value={carRental.rentalInfo?.carDetails || ''} onChange={e => handleCarRentalNestedChange('rentalInfo', 'carDetails', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Car details" />
+                <div className="mb-6 sm:mb-8">
+                  <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Car Details</label>
+                  <input type="text" value={carRental.rentalInfo?.carDetails || ''} onChange={e => handleCarRentalNestedChange('rentalInfo', 'carDetails', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Car details" />
                 </div>
               </div>
             )}
 
             {/* --- Activities Section --- */}
             {activities.length > 0 && (
-              <div className="mb-8 p-4 bg-yellow-100 rounded-md border border-yellow-300">
-                <h3 className="text-lg font-semibold mb-3">Edit Activity Details</h3>
+              <div className="mb-6 sm:mb-8 p-4 sm:p-6 bg-yellow-100 rounded-lg border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                <h3 className="text-lg sm:text-xl font-black uppercase mb-4">🎭 Edit Activity Details</h3>
                 {activities.map((activity, idx) => (
-                  <div key={activity.id} className="mb-6 p-4 border rounded-md bg-white">
-                    <div className="flex items-center justify-between mb-3">
+                  <div key={activity.id} className="mb-4 sm:mb-6 p-4 sm:p-6 border-4 border-black rounded-lg bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                    <div className="flex items-center justify-between mb-3 sm:mb-4">
                       <div className="flex items-center gap-2">
-                        <h3 className="font-semibold">{activity.activityName || `Activity ${activity.id}`}</h3>
+                        <h3 className="font-black uppercase text-sm sm:text-base">{activity.activityName || `Activity ${activity.id}`}</h3>
                       </div>
                       {activities.length > 1 && (
-                        <button type="button" onClick={() => handleRemoveActivity(activity.id)} className="text-sm text-red-600 hover:underline">Remove</button>
+                        <button type="button" onClick={() => handleRemoveActivity(activity.id)} className="text-xs sm:text-sm text-red-600 hover:text-red-800 font-bold uppercase border-2 border-red-600 px-2 py-1 rounded hover:bg-red-50">Remove</button>
                       )}
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">Activity Name</label>
-                        <input type="text" value={activity.activityName} onChange={e => handleActivityChange(activity.id, 'activityName', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Activity Name" />
+                        <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Activity Name</label>
+                        <input type="text" value={activity.activityName} onChange={e => handleActivityChange(activity.id, 'activityName', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Activity Name" />
                       </div>
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">Venue</label>
-                        <input type="text" value={activity.venue} onChange={e => handleActivityChange(activity.id, 'venue', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Venue" />
+                        <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Venue</label>
+                        <input type="text" value={activity.venue} onChange={e => handleActivityChange(activity.id, 'venue', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Venue" />
                       </div>
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">Start Date</label>
-                        <input type="date" value={activity.startDate} onChange={e => handleActivityChange(activity.id, 'startDate', e.target.value)} className="border rounded w-full py-2 px-3" />
+                        <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Start Date</label>
+                        <input type="date" value={activity.startDate} onChange={e => handleActivityChange(activity.id, 'startDate', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" />
                       </div>
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">Start Time</label>
-                        <input type="time" value={activity.startTime} onChange={e => handleActivityChange(activity.id, 'startTime', e.target.value)} className="border rounded w-full py-2 px-3" />
+                        <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Start Time</label>
+                        <input type="time" value={activity.startTime} onChange={e => handleActivityChange(activity.id, 'startTime', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" />
                       </div>
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">End Date</label>
-                        <input type="date" value={activity.endDate} onChange={e => handleActivityChange(activity.id, 'endDate', e.target.value)} className="border rounded w-full py-2 px-3" />
+                        <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">End Date</label>
+                        <input type="date" value={activity.endDate} onChange={e => handleActivityChange(activity.id, 'endDate', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" />
                       </div>
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">End Time</label>
-                        <input type="time" value={activity.endTime} onChange={e => handleActivityChange(activity.id, 'endTime', e.target.value)} className="border rounded w-full py-2 px-3" />
+                        <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">End Time</label>
+                        <input type="time" value={activity.endTime} onChange={e => handleActivityChange(activity.id, 'endTime', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" />
                       </div>
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">Address</label>
-                        <input type="text" value={activity.address} onChange={e => handleActivityChange(activity.id, 'address', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Address" />
+                        <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Address</label>
+                        <input type="text" value={activity.address} onChange={e => handleActivityChange(activity.id, 'address', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Address" />
                       </div>
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">Phone</label>
-                        <input type="text" value={activity.phone} onChange={e => handleActivityChange(activity.id, 'phone', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Phone" />
+                        <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Phone</label>
+                        <input type="text" value={activity.phone} onChange={e => handleActivityChange(activity.id, 'phone', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Phone" />
                       </div>
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">Website</label>
-                        <input type="text" value={activity.website} onChange={e => handleActivityChange(activity.id, 'website', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Website" />
+                        <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Website</label>
+                        <input type="text" value={activity.website} onChange={e => handleActivityChange(activity.id, 'website', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Website" />
                       </div>
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">Email</label>
-                        <input type="email" value={activity.email} onChange={e => handleActivityChange(activity.id, 'email', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Email" />
+                        <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Email</label>
+                        <input type="email" value={activity.email} onChange={e => handleActivityChange(activity.id, 'email', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Email" />
                       </div>
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">Total Cost</label>
-                        <input type="text" value={activity.totalCost} onChange={e => { const val = e.target.value; if (/^[0-9.]*$/.test(val)) handleActivityChange(activity.id, 'totalCost', val) }} className="border rounded w-full py-2 px-3" placeholder="Total Cost" />
+                        <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Total Cost</label>
+                        <input type="text" value={activity.totalCost} onChange={e => { const val = e.target.value; if (/^[0-9.]*$/.test(val)) handleActivityChange(activity.id, 'totalCost', val) }} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Total Cost" />
                       </div>
                     </div>
                   </div>
                 ))}
-                <div className="flex justify-end mt-3">
-                  <button type="button" onClick={handleAddActivity} className="text-sm text-yellow-700 hover:underline">Add another activity</button>
+                <div className="flex justify-end mt-3 sm:mt-4">
+                  <button type="button" onClick={handleAddActivity} className="text-xs sm:text-sm text-yellow-700 hover:text-yellow-900 font-bold uppercase border-2 border-yellow-700 px-3 py-1.5 rounded hover:bg-yellow-50">Add another activity</button>
                 </div>
               </div>
             )}
 
             {/* --- Lodging Section --- */}
             {lodgings.length > 0 && (
-              <div className="mb-8 p-4 bg-purple-100 rounded-md border border-purple-300">
-                <h3 className="text-lg font-semibold mb-3">Edit Lodging Details</h3>
+              <div className="mb-6 sm:mb-8 p-4 sm:p-6 bg-purple-100 rounded-lg border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                <h3 className="text-lg sm:text-xl font-black uppercase mb-4">🏨 Edit Lodging Details</h3>
                 {lodgings.map((lodging, idx) => (
-                  <div key={lodging.id} className="mb-6 p-4 border rounded-md bg-white">
-                    <div className="flex items-center justify-between mb-3">
+                  <div key={lodging.id} className="mb-4 sm:mb-6 p-4 sm:p-6 border-4 border-black rounded-lg bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                    <div className="flex items-center justify-between mb-3 sm:mb-4">
                       <div className="flex items-center gap-2">
-                        <h3 className="font-semibold">{lodging.lodgingName || `Lodging ${lodging.id}`}</h3>
+                        <h3 className="font-black uppercase text-sm sm:text-base">{lodging.lodgingName || `Lodging ${lodging.id}`}</h3>
                       </div>
                       {lodgings.length > 1 && (
-                        <button type="button" onClick={() => handleRemoveLodging(lodging.id)} className="text-sm text-red-600 hover:underline">Remove</button>
+                        <button type="button" onClick={() => handleRemoveLodging(lodging.id)} className="text-xs sm:text-sm text-red-600 hover:text-red-800 font-bold uppercase border-2 border-red-600 px-2 py-1 rounded hover:bg-red-50">Remove</button>
                       )}
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">Lodging Name</label>
-                        <input type="text" value={lodging.lodgingName} onChange={e => handleLodgingChange(lodging.id, 'lodgingName', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Lodging name" />
+                        <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Lodging Name</label>
+                        <input type="text" value={lodging.lodgingName} onChange={e => handleLodgingChange(lodging.id, 'lodgingName', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Lodging name" />
                       </div>
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">Venue</label>
-                        <input type="text" value={lodging.venue} onChange={e => handleLodgingChange(lodging.id, 'venue', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Venue" />
+                        <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Venue</label>
+                        <input type="text" value={lodging.venue} onChange={e => handleLodgingChange(lodging.id, 'venue', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Venue" />
                       </div>
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">Start Date</label>
-                        <input type="date" value={lodging.startDate} onChange={e => handleLodgingChange(lodging.id, 'startDate', e.target.value)} className="border rounded w-full py-2 px-3" />
+                        <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Start Date</label>
+                        <input type="date" value={lodging.startDate} onChange={e => handleLodgingChange(lodging.id, 'startDate', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" />
                       </div>
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">Start Time</label>
-                        <input type="time" value={lodging.startTime} onChange={e => handleLodgingChange(lodging.id, 'startTime', e.target.value)} className="border rounded w-full py-2 px-3" />
+                        <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Start Time</label>
+                        <input type="time" value={lodging.startTime} onChange={e => handleLodgingChange(lodging.id, 'startTime', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" />
                       </div>
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">End Date</label>
-                        <input type="date" value={lodging.endDate} onChange={e => handleLodgingChange(lodging.id, 'endDate', e.target.value)} className="border rounded w-full py-2 px-3" />
+                        <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">End Date</label>
+                        <input type="date" value={lodging.endDate} onChange={e => handleLodgingChange(lodging.id, 'endDate', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" />
                       </div>
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">End Time</label>
-                        <input type="time" value={lodging.endTime} onChange={e => handleLodgingChange(lodging.id, 'endTime', e.target.value)} className="border rounded w-full py-2 px-3" />
+                        <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">End Time</label>
+                        <input type="time" value={lodging.endTime} onChange={e => handleLodgingChange(lodging.id, 'endTime', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" />
                       </div>
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">Address</label>
-                        <input type="text" value={lodging.address} onChange={e => handleLodgingChange(lodging.id, 'address', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Address" />
+                        <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Address</label>
+                        <input type="text" value={lodging.address} onChange={e => handleLodgingChange(lodging.id, 'address', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Address" />
                       </div>
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">Phone</label>
-                        <input type="text" value={lodging.phone} onChange={e => handleLodgingChange(lodging.id, 'phone', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Phone" />
+                        <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Phone</label>
+                        <input type="text" value={lodging.phone} onChange={e => handleLodgingChange(lodging.id, 'phone', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Phone" />
                       </div>
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">Website</label>
-                        <input type="text" value={lodging.website} onChange={e => handleLodgingChange(lodging.id, 'website', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Website" />
+                        <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Website</label>
+                        <input type="text" value={lodging.website} onChange={e => handleLodgingChange(lodging.id, 'website', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Website" />
                       </div>
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">Email</label>
-                        <input type="email" value={lodging.email} onChange={e => handleLodgingChange(lodging.id, 'email', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Email" />
+                        <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Email</label>
+                        <input type="email" value={lodging.email} onChange={e => handleLodgingChange(lodging.id, 'email', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Email" />
                       </div>
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">Confirmation Number</label>
-                        <input type="text" value={lodging.confirmationNumber} onChange={e => handleLodgingChange(lodging.id, 'confirmationNumber', e.target.value)} className="border rounded w-full py-2 px-3" placeholder="Confirmation number" />
+                        <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Confirmation Number</label>
+                        <input type="text" value={lodging.confirmationNumber} onChange={e => handleLodgingChange(lodging.id, 'confirmationNumber', e.target.value)} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Confirmation number" />
                       </div>
                       <div>
-                        <label className="block text-gray-700 font-bold mb-2">Total Cost</label>
-                        <input type="text" value={lodging.totalCost} onChange={e => { const val = e.target.value; if (/^[0-9.]*$/.test(val)) handleLodgingChange(lodging.id, 'totalCost', val) }} className="border rounded w-full py-2 px-3" placeholder="Total Cost" />
+                        <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Total Cost</label>
+                        <input type="text" value={lodging.totalCost} onChange={e => { const val = e.target.value; if (/^[0-9.]*$/.test(val)) handleLodgingChange(lodging.id, 'totalCost', val) }} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Total Cost" />
                       </div>
                     </div>
                   </div>
                 ))}
-                <div className="flex justify-end mt-3">
-                  <button type="button" onClick={handleAddLodging} className="text-sm text-purple-700 hover:underline">Add another lodging</button>
+                <div className="flex justify-end mt-3 sm:mt-4">
+                  <button type="button" onClick={handleAddLodging} className="text-xs sm:text-sm text-purple-700 hover:text-purple-900 font-bold uppercase border-2 border-purple-700 px-3 py-1.5 rounded hover:bg-purple-50">Add another lodging</button>
                 </div>
               </div>
             )}
             {!lodgings.length && (
               <div className="mb-6">
-                <button type="button" onClick={handleAddLodging} className="text-sm text-purple-700 hover:underline">Add Lodging</button>
+                <button type="button" onClick={handleAddLodging} className="text-xs sm:text-sm text-purple-700 hover:text-purple-900 font-bold uppercase border-2 border-purple-700 px-3 py-1.5 rounded hover:bg-purple-50">Add Lodging</button>
               </div>
             )}
 
