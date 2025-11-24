@@ -145,6 +145,108 @@ export const deleteTrip = async (tripId) => {
 };
 
 // ============================================================================
+// ITINERARY ROUTES
+// ============================================================================
+
+/**
+ * GET /api/trips/:tripId/itinerary
+ * List itinerary items for a trip
+ * Allowed roles: any member (owner, co_owner, editor, viewer)
+ */
+export const getItineraryItems = async (tripId) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/trips/${tripId}/itinerary`, {
+      method: 'GET',
+      headers: getHeaders(),
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}));
+      throw new Error(error.message || 'Failed to fetch itinerary items');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching itinerary items:', error);
+    throw error;
+  }
+};
+
+/**
+ * POST /api/trips/:tripId/itinerary
+ * Create an itinerary item for a trip
+ * Allowed roles: owner, co_owner, editor
+ */
+export const createItineraryItem = async (tripId, itemData) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/trips/${tripId}/itinerary`, {
+      method: 'POST',
+      headers: getHeaders(),
+      body: JSON.stringify(itemData),
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}));
+      throw new Error(error.message || 'Failed to create itinerary item');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error creating itinerary item:', error);
+    throw error;
+  }
+};
+
+/**
+ * PUT /api/trips/:tripId/itinerary/:itemId
+ * Update an itinerary item
+ * Allowed roles: owner, co_owner, editor
+ */
+export const updateItineraryItem = async (tripId, itemId, itemData) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/trips/${tripId}/itinerary/${itemId}`, {
+      method: 'PUT',
+      headers: getHeaders(),
+      body: JSON.stringify(itemData),
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}));
+      throw new Error(error.message || 'Failed to update itinerary item');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error updating itinerary item:', error);
+    throw error;
+  }
+};
+
+/**
+ * DELETE /api/trips/:tripId/itinerary/:itemId
+ * Delete an itinerary item
+ * Allowed roles: owner, co_owner, editor
+ */
+export const deleteItineraryItem = async (tripId, itemId) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/trips/${tripId}/itinerary/${itemId}`, {
+      method: 'DELETE',
+      headers: getHeaders(),
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}));
+      throw new Error(error.message || 'Failed to delete itinerary item');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error deleting itinerary item:', error);
+    throw error;
+  }
+};
+
+// ============================================================================
 // AUTH ROUTES
 // ============================================================================
 

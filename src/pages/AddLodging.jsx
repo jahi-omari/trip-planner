@@ -56,93 +56,93 @@ const AddLodging = () => {
   }
 
   return (
-    <section className="bg-indigo-50 min-h-screen flex items-center justify-center">
-      <div className="container m-auto max-w-2xl py-24">
-        <div className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border-3 m-4 md:m-0">
+    <section className="bg-gray-50 min-h-screen py-6 sm:py-12 px-4">
+      <div className="container m-auto max-w-2xl py-12 sm:py-24">
+        <div className="bg-white px-6 sm:px-8 py-8 sm:py-10 mb-4 border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] rounded-lg m-4 md:m-0">
           <form onSubmit={handleSubmit}>
-            <h2 className="text-3xl text-center font-semibold mb-6">Add Lodging</h2>
+            <h2 className="text-3xl sm:text-4xl text-center font-black uppercase mb-6 sm:mb-8">Add Lodging</h2>
 
             {/* Lodging Name */}
-            <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2">Lodging Name</label>
-              <input type="text" name="lodgingName" value={form.lodgingName} onChange={handleChange} className="border rounded w-full py-2 px-3" placeholder="Lodging Name" />
+            <div className="mb-4 sm:mb-6">
+              <label className="block text-gray-900 font-black uppercase mb-2 sm:mb-3 text-xs sm:text-sm">Lodging Name</label>
+              <input type="text" name="lodgingName" value={form.lodgingName} onChange={handleChange} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Lodging Name" />
             </div>
 
             {/* Start Date & Time */}
-            <div className="mb-4 flex gap-4">
+            <div className="mb-4 sm:mb-6 flex gap-4">
               <div className="flex-1">
-                <label className="block text-gray-700 font-bold mb-2">Start Date</label>
-                <input type="date" name="startDate" value={form.startDate} onChange={handleChange} className="border rounded w-full py-2 px-3" min={new Date().toISOString().split('T')[0]} required />
+                <label className="block text-gray-900 font-black uppercase mb-2 sm:mb-3 text-xs sm:text-sm">Start Date</label>
+                <input type="date" name="startDate" value={form.startDate} onChange={handleChange} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" min={new Date().toISOString().split('T')[0]} required />
               </div>
               <div className="flex-1">
-                <label className="block text-gray-700 font-bold mb-2">Start Time</label>
-                <input type="time" name="startTime" value={form.startTime} onChange={handleChange} className="border rounded w-full py-2 px-3" />
+                <label className="block text-gray-900 font-black uppercase mb-2 sm:mb-3 text-xs sm:text-sm">Start Time</label>
+                <input type="time" name="startTime" value={form.startTime} onChange={handleChange} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" />
               </div>
             </div>
 
             {/* End Date & Time */}
-            <div className="mb-4 flex gap-4">
+            <div className="mb-4 sm:mb-6 flex gap-4">
               <div className="flex-1">
-                <label className="block text-gray-700 font-bold mb-2">End Date</label>
-                <input type="date" name="endDate" value={form.endDate} onChange={handleChange} className="border rounded w-full py-2 px-3" min={new Date().toISOString().split('T')[0]} required />
+                <label className="block text-gray-900 font-black uppercase mb-2 sm:mb-3 text-xs sm:text-sm">End Date</label>
+                <input type="date" name="endDate" value={form.endDate} onChange={handleChange} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" min={new Date().toISOString().split('T')[0]} required />
               </div>
               <div className="flex-1">
-                <label className="block text-gray-700 font-bold mb-2">End Time</label>
-                <input type="time" name="endTime" value={form.endTime} onChange={handleChange} className="border rounded w-full py-2 px-3" />
+                <label className="block text-gray-900 font-black uppercase mb-2 sm:mb-3 text-xs sm:text-sm">End Time</label>
+                <input type="time" name="endTime" value={form.endTime} onChange={handleChange} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" />
               </div>
             </div>
 
             {/* Venue */}
-            <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2">Venue</label>
-              <input type="text" name="venue" value={form.venue} onChange={handleChange} className="border rounded w-full py-2 px-3" placeholder="Venue" />
+            <div className="mb-4 sm:mb-6">
+              <label className="block text-gray-900 font-black uppercase mb-2 sm:mb-3 text-xs sm:text-sm">Venue</label>
+              <input type="text" name="venue" value={form.venue} onChange={handleChange} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Venue" />
             </div>
 
             {/* Address */}
-            <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2">Address</label>
-              <input type="text" name="address" value={form.address} onChange={handleChange} className="border rounded w-full py-2 px-3" placeholder="Address" />
+            <div className="mb-4 sm:mb-6">
+              <label className="block text-gray-900 font-black uppercase mb-2 sm:mb-3 text-xs sm:text-sm">Address</label>
+              <input type="text" name="address" value={form.address} onChange={handleChange} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Address" />
             </div>
 
             {/* Phone Number */}
-            <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2">Phone Number</label>
-              <input type="text" name="phone" value={form.phone} onChange={handleChange} className="border rounded w-full py-2 px-3" placeholder="Phone number" />
+            <div className="mb-4 sm:mb-6">
+              <label className="block text-gray-900 font-black uppercase mb-2 sm:mb-3 text-xs sm:text-sm">Phone Number</label>
+              <input type="text" name="phone" value={form.phone} onChange={handleChange} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Phone number" />
             </div>
 
             {/* Website */}
-            <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2">Website</label>
-              <input type="text" name="website" value={form.website} onChange={handleChange} className="border rounded w-full py-2 px-3" placeholder="Website" />
+            <div className="mb-4 sm:mb-6">
+              <label className="block text-gray-900 font-black uppercase mb-2 sm:mb-3 text-xs sm:text-sm">Website</label>
+              <input type="text" name="website" value={form.website} onChange={handleChange} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Website" />
             </div>
 
             {/* Email */}
-            <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2">Email</label>
-              <input type="email" name="email" value={form.email} onChange={handleChange} className="border rounded w-full py-2 px-3" placeholder="Email" />
+            <div className="mb-4 sm:mb-6">
+              <label className="block text-gray-900 font-black uppercase mb-2 sm:mb-3 text-xs sm:text-sm">Email</label>
+              <input type="email" name="email" value={form.email} onChange={handleChange} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Email" />
             </div>
 
             {/* Confirmation Number */}
-            <div className="mb-6">
-              <label className="block text-gray-700 font-bold mb-2">Confirmation Number</label>
-              <input type="text" name="confirmationNumber" value={form.confirmationNumber} onChange={handleChange} className="border rounded w-full py-2 px-3" placeholder="Confirmation number" />
+            <div className="mb-4 sm:mb-6">
+              <label className="block text-gray-900 font-black uppercase mb-2 sm:mb-3 text-xs sm:text-sm">Confirmation Number</label>
+              <input type="text" name="confirmationNumber" value={form.confirmationNumber} onChange={handleChange} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Confirmation number" />
             </div>
 
             {/* Total Cost */}
-            <div className="mb-6">
-              <label className="block text-gray-700 font-bold mb-2">Total Cost</label>
+            <div className="mb-6 sm:mb-8">
+              <label className="block text-gray-900 font-black uppercase mb-2 sm:mb-3 text-xs sm:text-sm">Total Cost</label>
               <input
                 type="text"
                 name="totalCost"
                 value={form.totalCost}
                 onChange={handleChange}
-                className="border rounded w-full py-2 px-3"
+                className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
                 placeholder="Total Cost"
               />
             </div>
 
             <div>
-              <button className="bg-indigo-900 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg w-full" type="submit">Save Lodging</button>
+              <button className="bg-indigo-900 hover:bg-indigo-700 text-white font-black uppercase py-4 px-6 border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all w-full rounded" type="submit">Save Lodging</button>
             </div>
           </form>
         </div>

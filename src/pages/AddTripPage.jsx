@@ -195,67 +195,67 @@ const AddTripPage = () => {
 
             {/* Display Flights if they exist */}
             {flightData.flights.length > 0 && (
-              <div className="mb-6 p-4 bg-indigo-100 rounded-md border border-indigo-300">
-                <h3 className="text-lg font-semibold mb-3">Flight Details</h3>
+              <div className="mb-6 p-4 sm:p-6 bg-blue-100 rounded-lg border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                <h3 className="text-lg sm:text-xl font-black uppercase mb-4">✈️ Flight Details</h3>
                 {flightData.flights.map((flight) => (
-                  <div key={flight.id} className="mb-3 p-3 bg-white rounded border">
-                    <p className="font-semibold">{flight.customName || `Flight ${flight.id}`}</p>
-                    <p className="text-sm text-gray-700">Departure: {flight.departure}</p>
-                    <p className="text-sm text-gray-700">Airline: {flight.airline}</p>
-                    <p className="text-sm text-gray-700">Flight Number: {flight.flightNumber}</p>
-                    <p className="text-sm text-gray-700">Seats: {flight.seats}</p>
+                  <div key={flight.id} className="mb-3 p-3 sm:p-4 bg-white rounded border-4 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                    <p className="font-black uppercase text-sm sm:text-base mb-2">{flight.customName || `Flight ${flight.id}`}</p>
+                    <p className="text-xs sm:text-sm text-gray-900 font-bold">Departure: {flight.departure}</p>
+                    <p className="text-xs sm:text-sm text-gray-900 font-bold">Airline: {flight.airline}</p>
+                    <p className="text-xs sm:text-sm text-gray-900 font-bold">Flight Number: {flight.flightNumber}</p>
+                    <p className="text-xs sm:text-sm text-gray-900 font-bold">Seats: {flight.seats}</p>
                   </div>
                 ))}
-                <div className="border-t pt-3 mt-3">
-                  <p className="font-semibold">Total Cost: ${flightData.totalCost || '0.00'}</p>
+                <div className="border-t-4 border-black pt-3 mt-3">
+                  <p className="font-black uppercase text-sm sm:text-base">Total Cost: ${flightData.totalCost || '0.00'}</p>
                 </div>
               </div>
             )}
 
             {/* Display Car Rental if it exists */}
             {carRentalData.rentalAgency && (
-              <div className="mb-6 p-4 bg-green-100 rounded-md border border-green-300">
-                <h3 className="text-lg font-semibold mb-3">Car Rental Details</h3>
+              <div className="mb-6 p-4 sm:p-6 bg-green-100 rounded-lg border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                <h3 className="text-lg sm:text-xl font-black uppercase mb-4">🚗 Car Rental Details</h3>
                 
-                <div className="mb-3 p-3 bg-white rounded border">
-                  <p className="font-semibold text-base mb-2">Rental Information</p>
-                  <p className="text-sm text-gray-700">Agency: {carRentalData.rentalAgency}</p>
-                  <p className="text-sm text-gray-700">Pickup: {carRentalData.pickupDate} at {carRentalData.pickupTime}</p>
-                  <p className="text-sm text-gray-700">Dropoff: {carRentalData.dropoffDate} at {carRentalData.dropoffTime}</p>
-                  <p className="text-sm text-gray-700">Confirmation: {carRentalData.confirmationNumber}</p>
-                  {carRentalData.website && <p className="text-sm text-gray-700">Website: {carRentalData.website}</p>}
-                  {carRentalData.email && <p className="text-sm text-gray-700">Email: {carRentalData.email}</p>}
+                <div className="mb-3 p-3 sm:p-4 bg-white rounded border-4 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                  <p className="font-black uppercase text-sm sm:text-base mb-2">Rental Information</p>
+                  <p className="text-xs sm:text-sm text-gray-900 font-bold">Agency: {carRentalData.rentalAgency}</p>
+                  <p className="text-xs sm:text-sm text-gray-900 font-bold">Pickup: {carRentalData.pickupDate} at {carRentalData.pickupTime}</p>
+                  <p className="text-xs sm:text-sm text-gray-900 font-bold">Dropoff: {carRentalData.dropoffDate} at {carRentalData.dropoffTime}</p>
+                  <p className="text-xs sm:text-sm text-gray-900 font-bold">Confirmation: {carRentalData.confirmationNumber}</p>
+                  {carRentalData.website && <p className="text-xs sm:text-sm text-gray-900 font-bold">Website: {carRentalData.website}</p>}
+                  {carRentalData.email && <p className="text-xs sm:text-sm text-gray-900 font-bold">Email: {carRentalData.email}</p>}
                 </div>
 
                 {(carRentalData.pickupLocation.location || carRentalData.pickupLocation.address) && (
-                  <div className="mb-3 p-3 bg-white rounded border">
-                    <p className="font-semibold text-sm mb-2">Pickup Location</p>
-                    {carRentalData.pickupLocation.location && <p className="text-sm text-gray-700">Location: {carRentalData.pickupLocation.location}</p>}
-                    {carRentalData.pickupLocation.address && <p className="text-sm text-gray-700">Address: {carRentalData.pickupLocation.address}</p>}
-                    {carRentalData.pickupLocation.phone && <p className="text-sm text-gray-700">Phone: {carRentalData.pickupLocation.phone}</p>}
+                  <div className="mb-3 p-3 sm:p-4 bg-white rounded border-4 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                    <p className="font-black uppercase text-xs sm:text-sm mb-2">Pickup Location</p>
+                    {carRentalData.pickupLocation.location && <p className="text-xs sm:text-sm text-gray-900 font-bold">Location: {carRentalData.pickupLocation.location}</p>}
+                    {carRentalData.pickupLocation.address && <p className="text-xs sm:text-sm text-gray-900 font-bold">Address: {carRentalData.pickupLocation.address}</p>}
+                    {carRentalData.pickupLocation.phone && <p className="text-xs sm:text-sm text-gray-900 font-bold">Phone: {carRentalData.pickupLocation.phone}</p>}
                   </div>
                 )}
 
                 {(carRentalData.dropoffLocation.location || carRentalData.dropoffLocation.address) && (
-                  <div className="mb-3 p-3 bg-white rounded border">
-                    <p className="font-semibold text-sm mb-2">Dropoff Location</p>
-                    {carRentalData.dropoffLocation.location && <p className="text-sm text-gray-700">Location: {carRentalData.dropoffLocation.location}</p>}
-                    {carRentalData.dropoffLocation.address && <p className="text-sm text-gray-700">Address: {carRentalData.dropoffLocation.address}</p>}
-                    {carRentalData.dropoffLocation.phone && <p className="text-sm text-gray-700">Phone: {carRentalData.dropoffLocation.phone}</p>}
+                  <div className="mb-3 p-3 sm:p-4 bg-white rounded border-4 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                    <p className="font-black uppercase text-xs sm:text-sm mb-2">Dropoff Location</p>
+                    {carRentalData.dropoffLocation.location && <p className="text-xs sm:text-sm text-gray-900 font-bold">Location: {carRentalData.dropoffLocation.location}</p>}
+                    {carRentalData.dropoffLocation.address && <p className="text-xs sm:text-sm text-gray-900 font-bold">Address: {carRentalData.dropoffLocation.address}</p>}
+                    {carRentalData.dropoffLocation.phone && <p className="text-xs sm:text-sm text-gray-900 font-bold">Phone: {carRentalData.dropoffLocation.phone}</p>}
                   </div>
                 )}
 
                 {(carRentalData.rentalInfo.carType || carRentalData.rentalInfo.mileageCharges) && (
-                  <div className="mb-3 p-3 bg-white rounded border">
-                    <p className="font-semibold text-sm mb-2">Vehicle Information</p>
-                    {carRentalData.rentalInfo.carType && <p className="text-sm text-gray-700">Car Type: {carRentalData.rentalInfo.carType}</p>}
-                    {carRentalData.rentalInfo.mileageCharges && <p className="text-sm text-gray-700">Mileage Charges: ${carRentalData.rentalInfo.mileageCharges}</p>}
-                    {carRentalData.rentalInfo.carDetails && <p className="text-sm text-gray-700">Details: {carRentalData.rentalInfo.carDetails}</p>}
+                  <div className="mb-3 p-3 sm:p-4 bg-white rounded border-4 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                    <p className="font-black uppercase text-xs sm:text-sm mb-2">Vehicle Information</p>
+                    {carRentalData.rentalInfo.carType && <p className="text-xs sm:text-sm text-gray-900 font-bold">Car Type: {carRentalData.rentalInfo.carType}</p>}
+                    {carRentalData.rentalInfo.mileageCharges && <p className="text-xs sm:text-sm text-gray-900 font-bold">Mileage Charges: ${carRentalData.rentalInfo.mileageCharges}</p>}
+                    {carRentalData.rentalInfo.carDetails && <p className="text-xs sm:text-sm text-gray-900 font-bold">Details: {carRentalData.rentalInfo.carDetails}</p>}
                   </div>
                 )}
 
-                <div className="border-t pt-3 mt-3">
-                  <p className="font-semibold">Total Cost: ${carRentalData.totalCost || '0.00'}</p>
+                <div className="border-t-4 border-black pt-3 mt-3">
+                  <p className="font-black uppercase text-sm sm:text-base">Total Cost: ${carRentalData.totalCost || '0.00'}</p>
                 </div>
               </div>
             )}
@@ -263,19 +263,19 @@ const AddTripPage = () => {
 
             {/* Display Activities if they exist */}
             {activityData.length > 0 && (
-              <div className="mb-6 p-4 bg-yellow-100 rounded-md border border-yellow-300">
-                <h3 className="text-lg font-semibold mb-3">Activity Details</h3>
+              <div className="mb-6 p-4 sm:p-6 bg-yellow-100 rounded-lg border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                <h3 className="text-lg sm:text-xl font-black uppercase mb-4">🎭 Activity Details</h3>
                 {activityData.map((activity) => (
-                  <div key={activity.id} className="mb-3 p-3 bg-white rounded border">
-                    <p className="font-semibold">{activity.activityName}</p>
-                    <p className="text-sm text-gray-700">Start: {activity.startDate} {activity.startTime}</p>
-                    <p className="text-sm text-gray-700">End: {activity.endDate} {activity.endTime}</p>
-                    <p className="text-sm text-gray-700">Venue: {activity.venue}</p>
-                    <p className="text-sm text-gray-700">Address: {activity.address}</p>
-                    <p className="text-sm text-gray-700">Phone: {activity.phone}</p>
-                    <p className="text-sm text-gray-700">Website: {activity.website}</p>
-                    <p className="text-sm text-gray-700">Email: {activity.email}</p>
-                    <p className="text-sm text-gray-700">Total Cost: ${activity.totalCost}</p>
+                  <div key={activity.id} className="mb-3 p-3 sm:p-4 bg-white rounded border-4 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                    <p className="font-black uppercase text-sm sm:text-base mb-2">{activity.activityName}</p>
+                    <p className="text-xs sm:text-sm text-gray-900 font-bold">Start: {activity.startDate} {activity.startTime}</p>
+                    <p className="text-xs sm:text-sm text-gray-900 font-bold">End: {activity.endDate} {activity.endTime}</p>
+                    <p className="text-xs sm:text-sm text-gray-900 font-bold">Venue: {activity.venue}</p>
+                    <p className="text-xs sm:text-sm text-gray-900 font-bold">Address: {activity.address}</p>
+                    <p className="text-xs sm:text-sm text-gray-900 font-bold">Phone: {activity.phone}</p>
+                    <p className="text-xs sm:text-sm text-gray-900 font-bold">Website: {activity.website}</p>
+                    <p className="text-xs sm:text-sm text-gray-900 font-bold">Email: {activity.email}</p>
+                    <p className="text-xs sm:text-sm text-gray-900 font-bold">Total Cost: ${activity.totalCost}</p>
                   </div>
                 ))}
               </div>
@@ -283,20 +283,20 @@ const AddTripPage = () => {
 
             {/* Display Lodging if it exists */}
             {lodgingData.length > 0 && (
-              <div className="mb-6 p-4 bg-purple-100 rounded-md border border-purple-300">
-                <h3 className="text-lg font-semibold mb-3">Lodging Details</h3>
+              <div className="mb-6 p-4 sm:p-6 bg-purple-100 rounded-lg border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                <h3 className="text-lg sm:text-xl font-black uppercase mb-4">🏨 Lodging Details</h3>
                 {lodgingData.map((lodging) => (
-                  <div key={lodging.id} className="mb-3 p-3 bg-white rounded border">
-                    <p className="font-semibold">{lodging.lodgingName}</p>
-                    <p className="text-sm text-gray-700">Start: {lodging.startDate} {lodging.startTime}</p>
-                    <p className="text-sm text-gray-700">End: {lodging.endDate} {lodging.endTime}</p>
-                    <p className="text-sm text-gray-700">Venue: {lodging.venue}</p>
-                    <p className="text-sm text-gray-700">Address: {lodging.address}</p>
-                    <p className="text-sm text-gray-700">Phone: {lodging.phone}</p>
-                    <p className="text-sm text-gray-700">Website: {lodging.website}</p>
-                    <p className="text-sm text-gray-700">Email: {lodging.email}</p>
-                    <p className="text-sm text-gray-700">Confirmation: {lodging.confirmationNumber}</p>
-                    <p className="text-sm text-gray-700">Total Cost: ${lodging.totalCost}</p>
+                  <div key={lodging.id} className="mb-3 p-3 sm:p-4 bg-white rounded border-4 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+                    <p className="font-black uppercase text-sm sm:text-base mb-2">{lodging.lodgingName}</p>
+                    <p className="text-xs sm:text-sm text-gray-900 font-bold">Start: {lodging.startDate} {lodging.startTime}</p>
+                    <p className="text-xs sm:text-sm text-gray-900 font-bold">End: {lodging.endDate} {lodging.endTime}</p>
+                    <p className="text-xs sm:text-sm text-gray-900 font-bold">Venue: {lodging.venue}</p>
+                    <p className="text-xs sm:text-sm text-gray-900 font-bold">Address: {lodging.address}</p>
+                    <p className="text-xs sm:text-sm text-gray-900 font-bold">Phone: {lodging.phone}</p>
+                    <p className="text-xs sm:text-sm text-gray-900 font-bold">Website: {lodging.website}</p>
+                    <p className="text-xs sm:text-sm text-gray-900 font-bold">Email: {lodging.email}</p>
+                    <p className="text-xs sm:text-sm text-gray-900 font-bold">Confirmation: {lodging.confirmationNumber}</p>
+                    <p className="text-xs sm:text-sm text-gray-900 font-bold">Total Cost: ${lodging.totalCost}</p>
                   </div>
                 ))}
               </div>
