@@ -302,22 +302,22 @@ const EditTripPage = () => {
                   <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Rental Agency</label>
                   <input type="text" name="rentalAgency" value={carRental.rentalAgency} onChange={handleCarRentalChange} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" placeholder="Rental Agency" />
                 </div>
-                <div className="mb-4 sm:mb-6 flex gap-4">
-                  <div className="flex-1">
+                <div className="mb-4 sm:mb-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
                     <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Pickup Date</label>
                     <input type="date" name="pickupDate" value={carRental.pickupDate} onChange={handleCarRentalChange} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" min={new Date().toISOString().split('T')[0]} required />
                   </div>
-                  <div className="flex-1">
+                  <div>
                     <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Pickup Time</label>
                     <input type="time" name="pickupTime" value={carRental.pickupTime} onChange={handleCarRentalChange} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" />
                   </div>
                 </div>
-                <div className="mb-4 sm:mb-6 flex gap-4">
-                  <div className="flex-1">
+                <div className="mb-4 sm:mb-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
                     <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Dropoff Date</label>
                     <input type="date" name="dropoffDate" value={carRental.dropoffDate} onChange={handleCarRentalChange} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" min={new Date().toISOString().split('T')[0]} required />
                   </div>
-                  <div className="flex-1">
+                  <div>
                     <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">Dropoff Time</label>
                     <input type="time" name="dropoffTime" value={carRental.dropoffTime} onChange={handleCarRentalChange} className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" />
                   </div>
@@ -526,11 +526,6 @@ const EditTripPage = () => {
                 <div className="flex justify-end mt-3 sm:mt-4">
                   <button type="button" onClick={handleAddLodging} className="text-xs sm:text-sm text-purple-700 hover:text-purple-900 font-bold uppercase border-2 border-purple-700 px-3 py-1.5 rounded hover:bg-purple-50">Add another lodging</button>
                 </div>
-              </div>
-            )}
-            {!lodgings.length && (
-              <div className="mb-6">
-                <button type="button" onClick={handleAddLodging} className="text-xs sm:text-sm text-purple-700 hover:text-purple-900 font-bold uppercase border-2 border-purple-700 px-3 py-1.5 rounded hover:bg-purple-50">Add Lodging</button>
               </div>
             )}
 
