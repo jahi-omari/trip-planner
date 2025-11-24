@@ -103,7 +103,7 @@ const FlightItem = ({ flight, onChange, onRemove, onAdd, canRemove }) => {
 const AddFlight = () => {
   const navigate = useNavigate()
   const _ctx = useContext(TripContext) || {}
-  const { setFlightData, flightData, selectedTrip } = _ctx
+  const { setFlightData, flightData = { flights: [], totalCost: '' }, selectedTrip } = _ctx
 
   // keep the per-page start/end states if you need them for the overall flight booking
   const [startDate, setStartDate] = useState('')

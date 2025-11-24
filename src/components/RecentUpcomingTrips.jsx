@@ -5,7 +5,7 @@ import { TripContext } from '../context/TripContext'
 
 const RecentUpcomingTrips = () => {
   const _ctx = useContext(TripContext) || {}
-  const { upcomingTrips, setSelectedTrip } = _ctx
+  const { upcomingTrips = [], setSelectedTrip } = _ctx
   const navigate = useNavigate()
 
   // Filter out past trips (only show upcoming/future trips)

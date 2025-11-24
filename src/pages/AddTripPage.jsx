@@ -13,7 +13,17 @@ const AddTripPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState('')
   const _ctx = useContext(TripContext) || {}
-  const { flightData, carRentalData, activityData, lodgingData, addTrip, clearFlightData, clearCarRentalData, setActivityData, setLodgingData } = _ctx
+  const { 
+    flightData = { flights: [], totalCost: '' }, 
+    carRentalData = {}, 
+    activityData = [], 
+    lodgingData = [], 
+    addTrip, 
+    clearFlightData, 
+    clearCarRentalData, 
+    setActivityData, 
+    setLodgingData 
+  } = _ctx
 
   // Convert mm/dd/yyyy to yyyy-mm-dd
   const formatDateToInput = (dateStr) => {

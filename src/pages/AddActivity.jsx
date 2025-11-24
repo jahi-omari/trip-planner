@@ -5,7 +5,7 @@ import { TripContext } from '../context/TripContext'
 const AddActivity = () => {
   const navigate = useNavigate()
   const _ctx = useContext(TripContext) || {}
-  const { activityData, setActivityData, selectedTrip } = _ctx
+  const { activityData = [], setActivityData, selectedTrip } = _ctx
 
   const [form, setForm] = useState({
     activityName: '',

@@ -7,7 +7,7 @@ import { TripContext } from '../context/TripContext'
 
 const ManageSharingPage = () => {
   const { tripId } = useParams()
-  const { upcomingTrips } = useContext(TripContext) || {}
+  const { upcomingTrips = [] } = useContext(TripContext) || {}
   const trip = upcomingTrips?.find(t => String(t.id) === String(tripId))
   // Placeholder for creator (no auth yet)
   const creator = {

@@ -5,7 +5,7 @@ import { TripContext } from '../context/TripContext'
 const AddCarRental = () => {
   const navigate = useNavigate()
   const _ctx = useContext(TripContext) || {}
-  const { setCarRentalData, carRentalData, selectedTrip } = _ctx
+  const { setCarRentalData, carRentalData = {}, selectedTrip } = _ctx
 
   const [formData, setFormData] = useState(() => {
     // Initialize with context data if available (for edit mode)

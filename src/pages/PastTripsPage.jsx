@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { TripContext } from '../context/TripContext'
 
 const PastTripsPage = () => {
-  const { upcomingTrips, setSelectedTrip } = useContext(TripContext)
+  const { upcomingTrips = [], setSelectedTrip } = useContext(TripContext)
   const navigate = useNavigate()
 
   // Filter for past trips (end date is before today)

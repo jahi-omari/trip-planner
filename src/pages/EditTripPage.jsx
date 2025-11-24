@@ -8,7 +8,7 @@ import { TripContext } from '../context/TripContext'
 const EditTripPage = () => {
   const navigate = useNavigate()
   const _ctx = useContext(TripContext) || {}
-  const { selectedTrip, setSelectedTrip, updateTrip, setFlightData, setCarRentalData, setActivityData, setLodgingData, flightData, carRentalData, activityData, lodgingData } = _ctx
+  const { selectedTrip, setSelectedTrip, updateTrip, setFlightData, setCarRentalData, setActivityData, setLodgingData, flightData = { flights: [], totalCost: '' }, carRentalData = {}, activityData = [], lodgingData = [] } = _ctx
 
 
   // Trip main fields
