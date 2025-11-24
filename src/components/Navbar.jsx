@@ -33,11 +33,11 @@ const Navbar = () => {
   
   // Adds black background to button when a navbar button is selected 
   const linkClass = ({isActive}) => 
-                    isActive ? 'text-white bg-black hover:bg-gray-900 hover:text-white rounded-md px-3 py-2' 
-                  : 'text-white hover:bg-gray-900 hover:text-white rounded-md px-3 py-2'
+                    isActive ? 'text-white bg-black border-4 border-black font-black uppercase rounded-md px-3 py-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all' 
+                  : 'text-white font-bold uppercase rounded-md px-3 py-2 hover:bg-black transition-all'
   
   return (
-    <nav className="bg-indigo-900 border-black-100">
+    <nav className="bg-indigo-900 border-b-4 border-black shadow-[0px_6px_0px_0px_rgba(0,0,0,1)]">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between">
           <div
@@ -50,7 +50,7 @@ const Navbar = () => {
                 src={logo}
                 alt="SmartTrip Planner"
               />
-              <span className="hidden md:block text-white text-2xl font-bold ml-2"
+              <span className="hidden md:block text-white text-2xl font-black uppercase ml-2"
                 >SmarTrip Planner</span
               >
             </NavLink>
