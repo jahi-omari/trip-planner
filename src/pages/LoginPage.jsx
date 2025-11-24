@@ -29,7 +29,10 @@ const LoginPage = () => {
       }
 
       const data = await res.json().catch(() => ({}));
-      // Optionally store token: localStorage.setItem('token', data.token)
+      // Store the JWT token in localStorage
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+      }
       setLoading(false);
       // navigate to homepage or upcoming trips
       navigate('/homepage');
@@ -46,7 +49,7 @@ const LoginPage = () => {
         <div
           className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border-3 m-4 md:m-0"
         >
-          <form>
+          <form onSubmit={handleSubmit}>
             <h2 className="text-3xl text-center font-semibold mb-6">Login</h2>
 
             <div className="mb-4">

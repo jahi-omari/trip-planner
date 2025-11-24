@@ -10,6 +10,8 @@ const AddTripPage = () => {
   const [tripName, setTripName] = useState('')
   const [tripLocation, setTripLocation] = useState('')
   const [description, setDescription] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
   const _ctx = useContext(TripContext) || {}
   const { flightData, carRentalData, activityData, lodgingData, addTrip, clearFlightData, clearCarRentalData, setActivityData, setLodgingData } = _ctx
 
@@ -30,11 +32,12 @@ const AddTripPage = () => {
     setEndDate(e.target.value)
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitError('')
     
     // Create trip object with all data
-
     const tripData = {
       tripName,
       tripLocation,
@@ -47,25 +50,31 @@ const AddTripPage = () => {
       lodgingData
     }
 
-    // Save trip to context
-    addTrip(tripData)
+    try {
+      // Save trip to context (which now calls the backend)
+      await addTrip(tripData)
 
+      // Clear flight, car rental, activity, and lodging data
+      clearFlightData()
+      clearCarRentalData()
+      setActivityData([])
+      setLodgingData([])
 
-    // Clear flight, car rental, activity, and lodging data
-    clearFlightData()
-    clearCarRentalData()
-    setActivityData([])
-    setLodgingData([])
+      // Reset form
+      setTripName('')
+      setTripLocation('')
+      setStartDate('')
+      setEndDate('')
+      setDescription('')
 
-    // Reset form
-    setTripName('')
-    setTripLocation('')
-    setStartDate('')
-    setEndDate('')
-    setDescription('')
-
-    // Redirect to upcoming trips page
-    navigate('/upcoming-trips-page')
+      // Redirect to upcoming trips page
+      navigate('/upcoming-trips-page')
+    } catch (err) {
+      setSubmitError('Failed to save trip. Please try again.')
+      console.error('Error saving trip:', err)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
   return (
     <>
@@ -298,12 +307,19 @@ const AddTripPage = () => {
               </Link>
             </div>
 
+            {submitError && (
+              <div className="mb-4 p-4 bg-red-100 border-4 border-red-500 rounded text-red-700 font-bold">
+                {submitError}
+              </div>
+            )}
+
             <div>
               <button
-                className="bg-indigo-900 hover:bg-indigo-700 text-white font-black uppercase py-4 px-6 border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all w-full rounded"
+                className="bg-indigo-900 hover:bg-indigo-700 text-white font-black uppercase py-4 px-6 border-4 border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all w-full rounded disabled:opacity-50 disabled:cursor-not-allowed"
                 type="submit"
+                disabled={isSubmitting}
               >
-                Save Trip
+                {isSubmitting ? 'Saving Trip...' : 'Save Trip'}
               </button>
             </div>
           </form>
