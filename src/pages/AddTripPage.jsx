@@ -162,7 +162,7 @@ const AddTripPage = () => {
                 name="endDate"
                 value={endDate}
                 onChange={handleEndDateChange}
-                min={new Date().toISOString().split('T')[0]}
+                min={startDate || new Date().toISOString().split('T')[0]}
                 required
                 onBlur={(e) => {
                   const textValue = e.target.value
