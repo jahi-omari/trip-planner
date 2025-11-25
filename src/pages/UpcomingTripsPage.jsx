@@ -1,12 +1,15 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { Outlet, Link, useNavigate } from 'react-router-dom'
-import { FaLink } from 'react-icons/fa'
+import { FaLink, FaUser } from 'react-icons/fa'
 import { TripContext } from '../context/TripContext'
+import { getTripMembers, getCurrentUser } from '../utils/api'
 
 const UpcomingTripsPage = () => {
   const _ctx = useContext(TripContext) || {}
   const { upcomingTrips = [], setSelectedTrip } = _ctx
   const navigate = useNavigate()
+  const [tripMembers, setTripMembers] = useState({})
+  const [currentUser, setCurrentUser] = useState(null)
 
   // Filter out past trips (only show upcoming/future trips)
   const today = new Date()
@@ -18,9 +21,73 @@ const UpcomingTripsPage = () => {
     return endDate >= today
   })
 
+  useEffect(() => {
+    loadCurrentUser()
+  }, [])
+
+  useEffect(() => {
+    if (futureTrips.length > 0) {
+      loadTripMembers()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [futureTrips.length])
+
+  const loadCurrentUser = async () => {
+    try {
+      const user = await getCurrentUser()
+      setCurrentUser(user)
+    } catch (err) {
+      console.error('Error loading current user:', err)
+    }
+  }
+
+  const loadTripMembers = async () => {
+    const membersData = {}
+    for (const trip of futureTrips) {
+      try {
+        const members = await getTripMembers(trip.id)
+        membersData[trip.id] = members || []
+      } catch (err) {
+        console.error(`Error loading members for trip ${trip.id}:`, err)
+        membersData[trip.id] = []
+      }
+    }
+    setTripMembers(membersData)
+  }
+
   const handleViewTrip = (trip) => {
     setSelectedTrip(trip)
     navigate('/upcoming-trips-page/trip-details')
+  }
+
+  const getRoleBadgeColor = (role) => {
+    switch (role) {
+      case 'owner':
+        return 'bg-yellow-400 text-black border-2 border-black'
+      case 'co_owner':
+        return 'bg-orange-400 text-black border-2 border-black'
+      case 'editor':
+        return 'bg-blue-400 text-white border-2 border-black'
+      case 'viewer':
+        return 'bg-blue-300 text-black border-2 border-black'
+      default:
+        return 'bg-gray-400 text-black border-2 border-black'
+    }
+  }
+
+  const getRoleLabel = (role) => {
+    switch (role) {
+      case 'owner':
+        return 'Creator'
+      case 'co_owner':
+        return 'Co-Owner'
+      case 'editor':
+        return 'Editor'
+      case 'viewer':
+        return 'Member'
+      default:
+        return role
+    }
   }
 
   return (
@@ -91,6 +158,33 @@ const UpcomingTripsPage = () => {
                         {trip.activityData.map((activity) => (
                           <p key={activity.id} className="text-sm font-bold text-gray-800 mb-1">{activity.activityName} - {activity.venue}</p>
                         ))}
+                      </div>
+                    )}
+
+                    {/* Show trip members if available */}
+                    {tripMembers[trip.id] && tripMembers[trip.id].length > 0 && (
+                      <div className="mb-4 p-3 bg-gray-100 border-3 border-black rounded">
+                        <p className="text-xs font-black uppercase mb-2 flex items-center gap-2">
+                          <FaUser /> Trip Members ({tripMembers[trip.id].length})
+                        </p>
+                        <div className="space-y-2">
+                          {tripMembers[trip.id].slice(0, 3).map((member) => (
+                            <div key={member.id} className="flex items-center justify-between text-xs sm:text-sm">
+                              <div className="flex-1">
+                                <p className="font-black">{member.first_name} {member.last_name}</p>
+                                <p className="text-xs text-gray-600 font-bold">{member.email}</p>
+                              </div>
+                              <span className={`px-2 py-1 rounded font-black uppercase text-xs ${getRoleBadgeColor(member.role)}`}>
+                                {getRoleLabel(member.role)}
+                              </span>
+                            </div>
+                          ))}
+                          {tripMembers[trip.id].length > 3 && (
+                            <p className="text-xs font-bold text-gray-600 mt-2">
+                              +{tripMembers[trip.id].length - 3} more
+                            </p>
+                          )}
+                        </div>
                       </div>
                     )}
 

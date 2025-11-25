@@ -247,6 +247,110 @@ export const deleteItineraryItem = async (tripId, itemId) => {
 };
 
 // ============================================================================
+// TRIP MEMBER ROUTES
+// ============================================================================
+
+/**
+ * GET /api/trips/:tripId/members
+ * List members for a trip
+ * Allowed roles: owner, co_owner
+ */
+export const getTripMembers = async (tripId) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/trips/${tripId}/members`, {
+      method: 'GET',
+      headers: getHeaders(),
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}));
+      throw new Error(error.message || 'Failed to fetch trip members');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching trip members:', error);
+    throw error;
+  }
+};
+
+/**
+ * POST /api/trips/:tripId/members
+ * Add (or update) a trip member by email + role
+ * Allowed roles: owner, co_owner
+ */
+export const addTripMember = async (tripId, memberData) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/trips/${tripId}/members`, {
+      method: 'POST',
+      headers: getHeaders(),
+      body: JSON.stringify(memberData),
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}));
+      throw new Error(error.message || 'Failed to add trip member');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error adding trip member:', error);
+    throw error;
+  }
+};
+
+/**
+ * DELETE /api/trips/:tripId/members/:memberId
+ * Remove a member from a trip
+ * Allowed roles: owner, co-owner
+ */
+export const removeTripMember = async (tripId, memberId) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/trips/${tripId}/members/${memberId}`, {
+      method: 'DELETE',
+      headers: getHeaders(),
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}));
+      throw new Error(error.message || 'Failed to remove trip member');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error removing trip member:', error);
+    throw error;
+  }
+};
+
+// ============================================================================
+// USER ROUTES
+// ============================================================================
+
+/**
+ * GET /api/users
+ * Get all registered users (for member selection)
+ */
+export const getAllUsers = async () => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/users`, {
+      method: 'GET',
+      headers: getHeaders(),
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}));
+      throw new Error(error.message || 'Failed to fetch users');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    throw error;
+  }
+};
+
+// ============================================================================
 // AUTH ROUTES
 // ============================================================================
 
