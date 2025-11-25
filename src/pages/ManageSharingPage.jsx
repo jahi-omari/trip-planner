@@ -314,27 +314,27 @@ const ManageSharingPage = () => {
                 {members.map(member => (
                   <div
                     key={member.id}
-                    className="p-4 bg-white border-4 border-black rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] flex items-center justify-between"
+                    className="p-4 bg-white border-4 border-black rounded-lg shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] flex items-center justify-between gap-2"
                   >
-                    <div className="flex items-center gap-3 flex-1">
-                      <FaUser className="text-xl text-gray-700" />
-                      <div className="flex-1">
-                        <p className="font-black text-sm sm:text-base">
+                    <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
+                      <FaUser className="text-lg sm:text-xl text-gray-700 flex-shrink-0" />
+                      <div className="flex-1 min-w-0">
+                        <p className="font-black text-sm sm:text-base truncate">
                           {member.first_name} {member.last_name}
                           {currentUser && member.user_id === currentUser.id && (
                             <span className="ml-2 text-xs font-bold text-gray-600">(You)</span>
                           )}
                         </p>
-                        <p className="text-xs sm:text-sm text-gray-600 font-bold">{member.email}</p>
+                        <p className="text-xs sm:text-sm text-gray-600 font-bold truncate">{member.email}</p>
                       </div>
-                      <span className={`px-3 py-1 rounded font-black uppercase text-xs sm:text-sm ${getRoleBadgeColor(member.role)}`}>
+                      <span className={`px-2 sm:px-3 py-1 rounded font-black uppercase text-xs ${getRoleBadgeColor(member.role)} flex-shrink-0`}>
                         {getRoleLabel(member.role)}
                       </span>
                     </div>
                     {member.role !== 'owner' && (
                       <button
                         onClick={() => handleRemoveMember(member.id, member.role)}
-                        className="ml-3 bg-red-600 text-white font-bold px-3 py-2 rounded border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 transition-all"
+                        className="bg-red-600 text-white font-bold px-2 py-2 sm:px-3 sm:py-2 rounded border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 transition-all flex-shrink-0"
                         title="Remove member"
                       >
                         <FaTimes className="text-sm" />
