@@ -44,21 +44,21 @@ const LoginPage = () => {
 
   return (
     <>
-    <section className="bg-white min-h-screen flex items-center justify-center">
-      <div className="container m-auto max-w-xl">
+    <section className="bg-gray-50 min-h-screen flex items-center justify-center py-8 px-4">
+      <div className="container m-auto max-w-xl w-full">
         <div
-          className="bg-white px-6 py-8 mb-4 shadow-md rounded-md border-3 m-4 md:m-0"
+          className="bg-white px-6 sm:px-8 py-8 border-4 border-black rounded-lg shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] m-4 md:m-0"
         >
           <form onSubmit={handleSubmit}>
-            <h2 className="text-3xl text-center font-semibold mb-6">Login</h2>
+            <h2 className="text-3xl sm:text-4xl text-center font-black uppercase mb-8">Login</h2>
 
-            <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2">Email</label>
+            <div className="mb-6">
+              <label className="block text-gray-900 font-black uppercase mb-2 text-sm">Email</label>
               <input
                 type="email"
                 id="email"
                 name="email"
-                className="border rounded w-full py-2 px-3 mb-2"
+                className="border-4 border-black rounded w-full py-3 px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
                 placeholder="eg. name@domain.com"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
@@ -66,30 +66,28 @@ const LoginPage = () => {
               />
             </div>
 
-            <div className="mb-4">
-              <label className="block text-gray-700 font-bold mb-2">Password</label>
+            <div className="mb-6">
+              <label className="block text-gray-900 font-black uppercase mb-2 text-sm">Password</label>
               <input
                 type="password"
                 id="password"
                 name="password"
-                className="border rounded w-full py-2 px-3 mb-2"
+                className="border-4 border-black rounded w-full py-3 px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 required
               />
             </div>
 
-            <div className='mb-4'>
-
-            </div>
-
             {error && (
-              <div className="mb-4 text-red-600 font-bold text-center">{error}</div>
+              <div className="mb-6 p-4 bg-red-100 border-4 border-red-600 rounded">
+                <p className="font-bold text-red-900 text-center uppercase text-sm">{error}</p>
+              </div>
             )}
 
-            <div>
+            <div className="mb-4">
               <button
-                className="bg-indigo-900 hover:bg-indigo-600 mt-5 mb-4 text-white font-bold py-2 px-4 rounded-lg w-full focus:outline-none focus:shadow-outline"
+                className="bg-black text-white font-black uppercase py-3 px-6 rounded w-full border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] disabled:hover:translate-x-0 disabled:hover:translate-y-0"
                 type="submit"
                 disabled={!email || !password || loading}
               >
@@ -97,28 +95,28 @@ const LoginPage = () => {
               </button>
             </div>
 
-            <div>
+            <div className="mb-6">
               <Link
                 to="/signup"
-                className="block bg-indigo-900 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg w-full text-center focus:outline-none focus:shadow-outline"
+                className="block bg-white text-black font-black uppercase py-3 px-6 rounded w-full text-center border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all"
                 style={{ textDecoration: 'none' }}
               >
                 Sign Up
               </Link>
             </div>
 
-            <div className='flex flex-row mb-4 mt-4'>
-                <div className='flex-grow border-t border-gray-400 mt-3 mr-3'></div>
-                <p className='text-black'>or sign in with:</p>
-                <div className='flex-grow border-t border-gray-400 mt-3 ml-3'></div>    
+            <div className='flex flex-row items-center mb-6'>
+                <div className='flex-grow border-t-4 border-black'></div>
+                <p className='text-black font-black uppercase text-xs px-4'>or sign in with</p>
+                <div className='flex-grow border-t-4 border-black'></div>    
             </div>
             
            <div>
               <button
-                className="bg-green-400 hover:bg-indigo-600 text-black font-bold py-2 px-4 rounded-lg w-full focus:outline-none focus:shadow-outline"
+                className="bg-green-400 text-black font-black uppercase py-3 px-6 rounded w-full border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all"
                 type="submit"
               >
-                <FaGoogle className="inline text-lg mr-2 mb-1" /> Google
+                <FaGoogle className="inline text-xl mr-2 mb-1" /> Google
               </button>
             </div>
 
