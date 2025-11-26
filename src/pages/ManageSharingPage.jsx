@@ -41,6 +41,7 @@ const ManageSharingPage = () => {
   const [showDropdown, setShowDropdown] = useState(false)
   const [showNotification, setShowNotification] = useState(false)
   const [showRemoveNotification, setShowRemoveNotification] = useState(false)
+  const [currentUserRole, setCurrentUserRole] = useState(null)
 
   useEffect(() => {
     loadData()
@@ -89,6 +90,10 @@ const ManageSharingPage = () => {
       setCurrentUser(mockCurrentUser)
       setMembers(mockMembers)
       setAllUsers(mockUsers)
+      
+      // Set current user's role
+      const userMember = mockMembers.find(m => m.user_id === mockCurrentUser.id)
+      setCurrentUserRole(userMember?.role || null)
     } catch (err) {
       console.error('Error loading data:', err)
       setError(err.message || 'Failed to load data')
@@ -164,6 +169,8 @@ const ManageSharingPage = () => {
     switch (role) {
       case 'owner':
         return 'bg-yellow-400 text-black'
+      case 'co_owner':
+        return 'bg-orange-400 text-black'
       case 'editor':
         return 'bg-green-400 text-black'
       case 'viewer':
@@ -177,6 +184,8 @@ const ManageSharingPage = () => {
     switch (role) {
       case 'owner':
         return 'Creator'
+      case 'co_owner':
+        return 'Co-Creator'
       case 'editor':
         return 'Editor'
       case 'viewer':
@@ -184,6 +193,37 @@ const ManageSharingPage = () => {
       default:
         return role
     }
+  }
+
+  // Permission check: Can current user manage roles?
+  const canManageRoles = () => {
+    return currentUserRole === 'owner' || currentUserRole === 'co_owner'
+  }
+
+  // Permission check: Can current user remove this member?
+  const canRemoveMember = (memberRole) => {
+    if (memberRole === 'owner') return false // Can't remove owner
+    if (currentUserRole === 'owner') return true // Owner can remove anyone except owner
+    if (currentUserRole === 'co_owner' && memberRole !== 'co_owner') return true // Co-owner can remove editors and viewers
+    return false
+  }
+
+  // Get available roles for role selector based on current user's role
+  const getAvailableRoles = () => {
+    if (currentUserRole === 'owner') {
+      return [
+        { value: 'viewer', label: 'Member (Viewer)' },
+        { value: 'editor', label: 'Editor' },
+        { value: 'co_owner', label: 'Co-Creator' }
+      ]
+    }
+    if (currentUserRole === 'co_owner') {
+      return [
+        { value: 'viewer', label: 'Member (Viewer)' },
+        { value: 'editor', label: 'Editor' }
+      ]
+    }
+    return []
   }
 
   if (loading) {
@@ -242,6 +282,7 @@ const ManageSharingPage = () => {
           )}
 
           {/* Add Member Section */}
+          {canManageRoles() && (
           <div className="mb-8">
             <h3 className="text-lg sm:text-xl font-black uppercase mb-4 flex items-center gap-2">
               <FaUserPlus /> Add Member
@@ -284,6 +325,7 @@ const ManageSharingPage = () => {
             </div>
 
             {/* Role Selection */}
+            {canManageRoles() && (
             <div className="mb-4">
               <label className="block text-gray-900 font-black uppercase mb-2 text-xs sm:text-sm">
                 Role
@@ -293,11 +335,14 @@ const ManageSharingPage = () => {
                 onChange={(e) => setSelectedRole(e.target.value)}
                 className="border-4 border-black rounded w-full py-2 sm:py-3 px-3 sm:px-4 font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
               >
-                <option value="viewer">Member (Viewer)</option>
-                <option value="editor">Editor</option>
+                {getAvailableRoles().map(role => (
+                  <option key={role.value} value={role.value}>{role.label}</option>
+                ))}
               </select>
             </div>
+            )}
           </div>
+          )}
 
           {/* Members List */}
           <div>
@@ -331,7 +376,7 @@ const ManageSharingPage = () => {
                         {getRoleLabel(member.role)}
                       </span>
                     </div>
-                    {member.role !== 'owner' && (
+                    {canRemoveMember(member.role) && (
                       <button
                         onClick={() => handleRemoveMember(member.id, member.role)}
                         className="bg-red-600 text-white font-bold px-2 py-2 sm:px-3 sm:py-2 rounded border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5 transition-all flex-shrink-0"

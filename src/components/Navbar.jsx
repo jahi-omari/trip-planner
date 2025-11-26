@@ -1,14 +1,18 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { FaUser, FaSignOutAlt, FaBars, FaTimes } from 'react-icons/fa'
 import logo from '../assets/images/logo.png'
 
 const Navbar = () => {
   const navigate = useNavigate()
+  const location = useLocation()
   const [showProfileDropdown, setShowProfileDropdown] = useState(false)
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const dropdownRef = useRef(null)
   const mobileMenuRef = useRef(null)
+
+  // Check if we're on login or signup page
+  const isAuthPage = location.pathname === '/' || location.pathname === '/signup'
 
   // Placeholder user data (will be replaced with real auth data later)
   const user = {
@@ -76,6 +80,7 @@ const Navbar = () => {
             </NavLink>
 
             {/* Profile Button with Dropdown - Desktop */}
+            {!isAuthPage && (
             <div className="relative ml-4" ref={dropdownRef}>
               <button
                 onClick={() => setShowProfileDropdown(!showProfileDropdown)}
@@ -113,6 +118,7 @@ const Navbar = () => {
                 </div>
               )}
             </div>
+            )}
           </div>
 
           {/* Mobile Hamburger Button */}
@@ -171,6 +177,7 @@ const Navbar = () => {
             </NavLink>
 
             {/* Mobile Profile Section */}
+            {!isAuthPage && (
             <div className="pt-4 border-t-4 border-black space-y-3">
               <div className="px-4 py-2">
                 <p className="font-black text-white uppercase text-sm">Signed in as</p>
@@ -195,6 +202,7 @@ const Navbar = () => {
                 <FaSignOutAlt /> Log Out
               </button>
             </div>
+            )}
           </div>
         </div>
       )}
