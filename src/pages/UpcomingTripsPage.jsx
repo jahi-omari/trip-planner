@@ -2,14 +2,23 @@ import React, { useContext, useState, useEffect } from 'react'
 import { Outlet, Link, useNavigate } from 'react-router-dom'
 import { FaLink, FaUser } from 'react-icons/fa'
 import { TripContext } from '../context/TripContext'
-import { getTripMembers, getCurrentUser } from '../utils/api'
+// COMMENTED OUT: Backend API imports for testing with mock data
+// import { getTripMembers, getCurrentUser } from '../utils/api'
 
 const UpcomingTripsPage = () => {
   const _ctx = useContext(TripContext) || {}
-  const { upcomingTrips = [], setSelectedTrip } = _ctx
+  const { upcomingTrips = [], setSelectedTrip, tripMembers = {}, setTripMembers } = _ctx
   const navigate = useNavigate()
-  const [tripMembers, setTripMembers] = useState({})
   const [currentUser, setCurrentUser] = useState(null)
+
+  // Mock data for testing (same as ManageSharingPage)
+  const mockCurrentUser = { id: 1, first_name: 'Alice', last_name: 'Johnson', email: 'alice.johnson@example.com' }
+  
+  const mockMembers = [
+    { id: 1, user_id: 1, first_name: 'Alice', last_name: 'Johnson', email: 'alice.johnson@example.com', role: 'owner' },
+    { id: 2, user_id: 2, first_name: 'Bob', last_name: 'Smith', email: 'bob.smith@example.com', role: 'editor' },
+    { id: 3, user_id: 3, first_name: 'Charlie', last_name: 'Davis', email: 'charlie.davis@example.com', role: 'viewer' }
+  ]
 
   // Filter out past trips (only show upcoming/future trips)
   const today = new Date()
@@ -23,6 +32,7 @@ const UpcomingTripsPage = () => {
 
   useEffect(() => {
     loadCurrentUser()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
@@ -34,19 +44,32 @@ const UpcomingTripsPage = () => {
 
   const loadCurrentUser = async () => {
     try {
-      const user = await getCurrentUser()
-      setCurrentUser(user)
+      // COMMENTED OUT: Backend API call
+      // const user = await getCurrentUser()
+      // setCurrentUser(user)
+      
+      // Using mock data for testing
+      await new Promise(resolve => setTimeout(resolve, 300)) // Simulate loading
+      setCurrentUser(mockCurrentUser)
     } catch (err) {
       console.error('Error loading current user:', err)
     }
   }
 
   const loadTripMembers = async () => {
-    const membersData = {}
+    const membersData = { ...tripMembers }
     for (const trip of futureTrips) {
+      // Skip if already loaded
+      if (tripMembers[trip.id]) continue
+      
       try {
-        const members = await getTripMembers(trip.id)
-        membersData[trip.id] = members || []
+        // COMMENTED OUT: Backend API call
+        // const members = await getTripMembers(trip.id)
+        // membersData[trip.id] = members || []
+        
+        // Using mock data for testing - only if not already set
+        await new Promise(resolve => setTimeout(resolve, 300)) // Simulate loading
+        membersData[trip.id] = mockMembers
       } catch (err) {
         console.error(`Error loading members for trip ${trip.id}:`, err)
         membersData[trip.id] = []
@@ -67,7 +90,7 @@ const UpcomingTripsPage = () => {
       case 'co_owner':
         return 'bg-orange-400 text-black border-2 border-black'
       case 'editor':
-        return 'bg-blue-400 text-white border-2 border-black'
+        return 'bg-green-400 text-black border-2 border-black'
       case 'viewer':
         return 'bg-blue-300 text-black border-2 border-black'
       default:
@@ -161,32 +184,39 @@ const UpcomingTripsPage = () => {
                       </div>
                     )}
 
-                    {/* Show trip members if available */}
-                    {tripMembers[trip.id] && tripMembers[trip.id].length > 0 && (
-                      <div className="mb-4 p-3 bg-gray-100 border-3 border-black rounded">
-                        <p className="text-xs font-black uppercase mb-2 flex items-center gap-2">
-                          <FaUser /> Trip Members ({tripMembers[trip.id].length})
-                        </p>
+                    {/* Show trip members section - always visible, just above View Trip button */}
+                    <div className="mb-4 p-3 sm:p-4 bg-gray-50 border-4 border-black rounded">
+                      <p className="text-xs sm:text-sm font-black uppercase mb-3 flex items-center gap-2">
+                        <FaUser /> Trip Members {tripMembers[trip.id] && `(${tripMembers[trip.id].length})`}
+                      </p>
+                      {tripMembers[trip.id] && tripMembers[trip.id].length > 0 ? (
                         <div className="space-y-2">
                           {tripMembers[trip.id].slice(0, 3).map((member) => (
-                            <div key={member.id} className="flex items-center justify-between text-xs sm:text-sm">
-                              <div className="flex-1">
-                                <p className="font-black">{member.first_name} {member.last_name}</p>
-                                <p className="text-xs text-gray-600 font-bold">{member.email}</p>
+                            <div key={member.id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 p-2 bg-white border-2 border-black rounded">
+                              <div className="flex-1 min-w-0">
+                                <p className="font-black text-xs sm:text-sm truncate">
+                                  {member.first_name} {member.last_name}
+                                  {currentUser && member.user_id === currentUser.id && (
+                                    <span className="ml-1 text-xs font-bold text-gray-600">(You)</span>
+                                  )}
+                                </p>
+                                <p className="text-xs text-gray-600 font-bold truncate">{member.email}</p>
                               </div>
-                              <span className={`px-2 py-1 rounded font-black uppercase text-xs ${getRoleBadgeColor(member.role)}`}>
+                              <span className={`px-2 py-1 rounded font-black uppercase text-xs ${getRoleBadgeColor(member.role)} flex-shrink-0 self-start sm:self-center`}>
                                 {getRoleLabel(member.role)}
                               </span>
                             </div>
                           ))}
                           {tripMembers[trip.id].length > 3 && (
-                            <p className="text-xs font-bold text-gray-600 mt-2">
-                              +{tripMembers[trip.id].length - 3} more
+                            <p className="text-xs font-bold text-gray-600 mt-2 pl-2">
+                              +{tripMembers[trip.id].length - 3} more member{tripMembers[trip.id].length - 3 > 1 ? 's' : ''}
                             </p>
                           )}
                         </div>
-                      </div>
-                    )}
+                      ) : (
+                        <p className="text-xs sm:text-sm text-gray-600 font-bold">Loading members...</p>
+                      )}
+                    </div>
 
                     {/* View Trip Button */}
                     <button

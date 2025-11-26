@@ -10,7 +10,7 @@ import { TripContext } from '../context/TripContext'
 const ManageSharingPage = () => {
   const { tripId } = useParams()
   const navigate = useNavigate()
-  const { upcomingTrips = [] } = useContext(TripContext) || {}
+  const { upcomingTrips = [], tripMembers, setTripMembers } = useContext(TripContext) || {}
   const trip = upcomingTrips?.find(t => String(t.id) === String(tripId))
   
   // Mock data for testing
@@ -31,7 +31,6 @@ const ManageSharingPage = () => {
   ]
   
   const [currentUser, setCurrentUser] = useState(null)
-  const [members, setMembers] = useState([])
   const [allUsers, setAllUsers] = useState([])
   const [filteredUsers, setFilteredUsers] = useState([])
   const [searchQuery, setSearchQuery] = useState('')
@@ -41,7 +40,11 @@ const ManageSharingPage = () => {
   const [showDropdown, setShowDropdown] = useState(false)
   const [showNotification, setShowNotification] = useState(false)
   const [showRemoveNotification, setShowRemoveNotification] = useState(false)
+  const [showRoleChangeNotification, setShowRoleChangeNotification] = useState(false)
   const [currentUserRole, setCurrentUserRole] = useState(null)
+  
+  // Get members for this trip from context
+  const members = tripMembers?.[tripId] || []
 
   useEffect(() => {
     loadData()
@@ -88,11 +91,17 @@ const ManageSharingPage = () => {
       // Using mock data for testing
       await new Promise(resolve => setTimeout(resolve, 500)) // Simulate loading
       setCurrentUser(mockCurrentUser)
-      setMembers(mockMembers)
+      
+      // Initialize members for this trip in context if not already set
+      if (!tripMembers[tripId]) {
+        setTripMembers({ ...tripMembers, [tripId]: mockMembers })
+      }
+      
       setAllUsers(mockUsers)
       
       // Set current user's role
-      const userMember = mockMembers.find(m => m.user_id === mockCurrentUser.id)
+      const currentMembers = tripMembers[tripId] || mockMembers
+      const userMember = currentMembers.find(m => m.user_id === mockCurrentUser.id)
       setCurrentUserRole(userMember?.role || null)
     } catch (err) {
       console.error('Error loading data:', err)
@@ -123,7 +132,7 @@ const ManageSharingPage = () => {
         email: user.email,
         role: selectedRole
       }
-      setMembers([...members, newMember])
+      setTripMembers({ ...tripMembers, [tripId]: [...members, newMember] })
       
       // Show notification
       setShowNotification(true)
@@ -154,7 +163,7 @@ const ManageSharingPage = () => {
       // setMembers(membersResponse || [])
       
       // Using mock data for testing
-      setMembers(members.filter(m => m.id !== memberId))
+      setTripMembers({ ...tripMembers, [tripId]: members.filter(m => m.id !== memberId) })
       
       // Show notification
       setShowRemoveNotification(true)
@@ -162,6 +171,30 @@ const ManageSharingPage = () => {
     } catch (err) {
       console.error('Error removing member:', err)
       setError(err.message || 'Failed to remove member')
+    }
+  }
+
+  const handleChangeRole = async (memberId, newRole) => {
+    try {
+      setError(null)
+      
+      // COMMENTED OUT: Backend API call
+      // await updateTripMemberRole(tripId, memberId, { role: newRole })
+      // const membersResponse = await getTripMembers(tripId)
+      // setMembers(membersResponse || [])
+      
+      // Using mock data for testing
+      setTripMembers({ 
+        ...tripMembers, 
+        [tripId]: members.map(m => m.id === memberId ? { ...m, role: newRole } : m)
+      })
+      
+      // Show role change notification
+      setShowRoleChangeNotification(true)
+      setTimeout(() => setShowRoleChangeNotification(false), 3000)
+    } catch (err) {
+      console.error('Error changing role:', err)
+      setError(err.message || 'Failed to change role')
     }
   }
 
@@ -208,6 +241,14 @@ const ManageSharingPage = () => {
     return false
   }
 
+  // Permission check: Can current user change this member's role?
+  const canChangeRole = (memberRole) => {
+    if (memberRole === 'owner') return false // Can't change owner's role
+    if (currentUserRole === 'owner') return true // Owner can change anyone's role except owner
+    if (currentUserRole === 'co_owner' && memberRole !== 'co_owner') return true // Co-owner can change editors and viewers
+    return false
+  }
+
   // Get available roles for role selector based on current user's role
   const getAvailableRoles = () => {
     if (currentUserRole === 'owner') {
@@ -224,6 +265,22 @@ const ManageSharingPage = () => {
       ]
     }
     return []
+  }
+
+  // Get available roles for changing a specific member's role
+  const getAvailableRolesForMember = (memberRole) => {
+    const roles = getAvailableRoles()
+    // Add current role if not already in list (for co_owner when current user is co_owner)
+    const hasCurrentRole = roles.some(r => r.value === memberRole)
+    if (!hasCurrentRole && memberRole !== 'owner') {
+      const roleLabels = {
+        co_owner: 'Co-Creator',
+        editor: 'Editor',
+        viewer: 'Member (Viewer)'
+      }
+      return [{ value: memberRole, label: roleLabels[memberRole] || memberRole }, ...roles]
+    }
+    return roles
   }
 
   if (loading) {
@@ -252,6 +309,15 @@ const ManageSharingPage = () => {
         <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 animate-[shakeAndSlide_3s_ease-in-out]">
           <div className="bg-red-500 text-white font-black uppercase px-6 py-4 border-4 border-black rounded shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
             <span className="text-black mr-2">✕</span> Trip Member Removed
+          </div>
+        </div>
+      )}
+
+      {/* Role Change Notification Popup */}
+      {showRoleChangeNotification && (
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 animate-[slideUpFade_3s_ease-in-out] px-4 w-full max-w-md">
+          <div className="bg-yellow-400 text-black font-black uppercase px-4 sm:px-6 py-3 sm:py-4 border-4 border-black rounded shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] text-xs sm:text-base">
+            ✓ Member Role Successfully Changed
           </div>
         </div>
       )}
@@ -372,9 +438,25 @@ const ManageSharingPage = () => {
                         </p>
                         <p className="text-xs sm:text-sm text-gray-600 font-bold truncate">{member.email}</p>
                       </div>
-                      <span className={`px-2 sm:px-3 py-1 rounded font-black uppercase text-xs ${getRoleBadgeColor(member.role)} flex-shrink-0`}>
-                        {getRoleLabel(member.role)}
-                      </span>
+                      
+                      {/* Role Badge or Dropdown */}
+                      {canChangeRole(member.role) ? (
+                        <select
+                          value={member.role}
+                          onChange={(e) => handleChangeRole(member.id, e.target.value)}
+                          className={`px-2 py-1 rounded font-black uppercase text-xs border-2 border-black ${getRoleBadgeColor(member.role)} flex-shrink-0 cursor-pointer hover:opacity-80 transition-opacity`}
+                        >
+                          {getAvailableRolesForMember(member.role).map(role => (
+                            <option key={role.value} value={role.value}>
+                              {getRoleLabel(role.value)}
+                            </option>
+                          ))}
+                        </select>
+                      ) : (
+                        <span className={`px-2 sm:px-3 py-1 rounded font-black uppercase text-xs ${getRoleBadgeColor(member.role)} flex-shrink-0`}>
+                          {getRoleLabel(member.role)}
+                        </span>
+                      )}
                     </div>
                     {canRemoveMember(member.role) && (
                       <button

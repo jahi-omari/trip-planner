@@ -57,6 +57,9 @@ export const TripProvider = ({ children }) => {
   const [selectedTrip, setSelectedTrip] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+  
+  // Trip members state - keyed by tripId
+  const [tripMembers, setTripMembers] = useState({})
 
   // Load trips from backend when component mounts
   useEffect(() => {
@@ -409,7 +412,9 @@ export const TripProvider = ({ children }) => {
       loadItineraryItems,
       addItineraryItem,
       updateSingleItineraryItem,
-      deleteSingleItineraryItem
+      deleteSingleItineraryItem,
+      tripMembers,
+      setTripMembers
     }}>
       {children}
     </TripContext.Provider>
