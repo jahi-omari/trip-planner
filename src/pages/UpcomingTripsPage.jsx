@@ -243,7 +243,13 @@ const UpcomingTripsPage = () => {
         <div className="max-w-4xl mx-auto px-2 sm:px-4">
           <div className="bg-white border-4 border-black rounded-lg shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] sm:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-6 sm:p-8 text-center">
             <p className="text-gray-800 text-lg sm:text-xl font-black uppercase mb-2">No Upcoming Trips Yet</p>
-            <p className="text-gray-600 text-sm sm:text-base font-bold mt-2">Start planning your next adventure!</p>
+            <p className="text-gray-600 text-sm sm:text-base font-bold mt-2 mb-6">Start planning your next adventure!</p>
+            <Link
+              to="/add-trip"
+              className="inline-block bg-black text-white border-4 border-black rounded-lg font-black uppercase py-3 px-6 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all text-base sm:text-lg"
+            >
+              + Add Trip
+            </Link>
           </div>
         </div>
       )}
