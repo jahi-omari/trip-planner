@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* Vertical wind trail animation for scroll effect */
-@keyframes verticalWindTrail {
+/* @keyframes verticalWindTrail {
   0% {
     opacity: 0;
     transform: translateY(0) scaleY(0);
@@ -19,7 +19,7 @@
     opacity: 0;
     transform: translateY(15px) scaleY(0.2) skewX(10deg);
   }
-}
+} */
 
 /* Horizontal shake animation for notifications */
 @keyframes shake {
