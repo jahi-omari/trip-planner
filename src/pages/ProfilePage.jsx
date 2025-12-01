@@ -58,10 +58,34 @@ const ProfilePage = () => {
   //   email: 'john.doe@example.com'
   // }
 
-  const handleDeleteAccount = () => {
-    // TODO: Add actual delete account logic with backend call
-    console.log('Account deleted')
-    navigate('/')
+  const handleDeleteAccount = async () => {
+    try {
+      const token = localStorage.getItem('token')
+      
+      // Fetch pattern similar to login - backend should create this endpoint
+      const res = await fetch('http://localhost:3000/api/users/me', {
+        method: 'DELETE',
+        headers: { 
+          'Authorization': `Bearer ${token}`
+        }
+      })
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        alert(data.message || 'Failed to delete account. Please try again.')
+        return
+      }
+
+      // Clear all user data from localStorage
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
+      
+      // Navigate to login page
+      navigate('/')
+    } catch (err) {
+      console.error('Error deleting account:', err)
+      alert('Network error. Please try again.')
+    }
   }
 
   if (loading) {
