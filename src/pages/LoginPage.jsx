@@ -33,6 +33,11 @@ const LoginPage = () => {
       if (data.token) {
         localStorage.setItem('token', data.token);
       }
+      // Store user data if backend provides it (for Profile page and Navbar)
+      // Backend should return: { token: "...", user: { firstName, lastName, email } }
+      if (data.user) {
+        localStorage.setItem('user', JSON.stringify(data.user));
+      }
       setLoading(false);
       // navigate to homepage or upcoming trips
       navigate('/homepage');

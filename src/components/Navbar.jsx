@@ -14,11 +14,18 @@ const Navbar = () => {
   // Check if we're on login or signup page
   const isAuthPage = location.pathname === '/' || location.pathname === '/signup'
 
-  // Placeholder user data (will be replaced with real auth data later)
-  const user = {
-    firstName: 'John',
-    lastName: 'Doe'
-  }
+  // Get user data from localStorage (set by LoginPage or ProfilePage)
+  // eslint-disable-next-line no-unused-vars
+  const [user, setUser] = useState(() => {
+    const stored = localStorage.getItem('user')
+    return stored ? JSON.parse(stored) : { firstName: 'User', lastName: '' }
+  })
+
+  // COMMENTED OUT: Hardcoded placeholder data
+  // const user = {
+  //   firstName: 'John',
+  //   lastName: 'Doe'
+  // }
 
   // Close dropdown and mobile menu when clicking outside
   useEffect(() => {
@@ -35,7 +42,10 @@ const Navbar = () => {
   }, [])
 
   const handleLogout = () => {
-    // TODO: Add actual logout logic with backend call
+    // Clear token and user data from localStorage
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    // TODO: Add actual logout logic with backend call if needed
     console.log('Logging out')
     navigate('/')
   }
