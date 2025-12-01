@@ -2,8 +2,6 @@ import React, { useContext, useState, useEffect } from 'react'
 import { Outlet, Link, useNavigate } from 'react-router-dom'
 import { FaLink, FaUser } from 'react-icons/fa'
 import { TripContext } from '../context/TripContext'
-// COMMENTED OUT: Backend API imports for testing with mock data
-// import { getTripMembers, getCurrentUser } from '../utils/api'
 
 const UpcomingTripsPage = () => {
   const _ctx = useContext(TripContext) || {}
@@ -11,14 +9,13 @@ const UpcomingTripsPage = () => {
   const navigate = useNavigate()
   const [currentUser, setCurrentUser] = useState(null)
 
-  // Mock data for testing (same as ManageSharingPage)
-  const mockCurrentUser = { id: 1, first_name: 'Alice', last_name: 'Johnson', email: 'alice.johnson@example.com' }
-  
-  const mockMembers = [
-    { id: 1, user_id: 1, first_name: 'Alice', last_name: 'Johnson', email: 'alice.johnson@example.com', role: 'owner' },
-    { id: 2, user_id: 2, first_name: 'Bob', last_name: 'Smith', email: 'bob.smith@example.com', role: 'editor' },
-    { id: 3, user_id: 3, first_name: 'Charlie', last_name: 'Davis', email: 'charlie.davis@example.com', role: 'viewer' }
-  ]
+  // COMMENTED OUT: Mock data for testing - replaced with backend fetch
+  // const mockCurrentUser = { id: 1, first_name: 'Alice', last_name: 'Johnson', email: 'alice.johnson@example.com' }
+  // const mockMembers = [
+  //   { id: 1, user_id: 1, first_name: 'Alice', last_name: 'Johnson', email: 'alice.johnson@example.com', role: 'owner' },
+  //   { id: 2, user_id: 2, first_name: 'Bob', last_name: 'Smith', email: 'bob.smith@example.com', role: 'editor' },
+  //   { id: 3, user_id: 3, first_name: 'Charlie', last_name: 'Davis', email: 'charlie.davis@example.com', role: 'viewer' }
+  // ]
 
   // Filter out past trips (only show upcoming/future trips)
   const today = new Date()
@@ -32,7 +29,6 @@ const UpcomingTripsPage = () => {
 
   useEffect(() => {
     loadCurrentUser()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
@@ -44,32 +40,53 @@ const UpcomingTripsPage = () => {
 
   const loadCurrentUser = async () => {
     try {
-      // COMMENTED OUT: Backend API call
-      // const user = await getCurrentUser()
-      // setCurrentUser(user)
-      
-      // Using mock data for testing
-      await new Promise(resolve => setTimeout(resolve, 300)) // Simulate loading
-      setCurrentUser(mockCurrentUser)
+      // Get current user from localStorage (set by LoginPage/ProfilePage)
+      const storedUser = localStorage.getItem('user')
+      if (storedUser) {
+        const user = JSON.parse(storedUser)
+        // Transform to match expected format (firstName -> first_name)
+        setCurrentUser({
+          id: user.id,
+          first_name: user.firstName,
+          last_name: user.lastName,
+          email: user.email
+        })
+      }
     } catch (err) {
       console.error('Error loading current user:', err)
     }
   }
 
   const loadTripMembers = async () => {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      console.log('No token found - skipping member loading')
+      return
+    }
+
     const membersData = { ...tripMembers }
     for (const trip of futureTrips) {
       // Skip if already loaded
       if (tripMembers[trip.id]) continue
       
       try {
-        // COMMENTED OUT: Backend API call
-        // const members = await getTripMembers(trip.id)
-        // membersData[trip.id] = members || []
-        
-        // Using mock data for testing - only if not already set
-        await new Promise(resolve => setTimeout(resolve, 300)) // Simulate loading
-        membersData[trip.id] = mockMembers
+        // Fetch trip members from backend
+        // Backend should return: [{ id, user_id, first_name, last_name, email, role }, ...]
+        const res = await fetch(`http://localhost:3000/api/trips/${trip.id}/members`, {
+          method: 'GET',
+          headers: { 
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        })
+
+        if (res.ok) {
+          const members = await res.json()
+          membersData[trip.id] = members || []
+        } else {
+          console.error(`Failed to fetch members for trip ${trip.id}`)
+          membersData[trip.id] = []
+        }
       } catch (err) {
         console.error(`Error loading members for trip ${trip.id}:`, err)
         membersData[trip.id] = []

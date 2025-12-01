@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { FaUser, FaSignOutAlt, FaBars, FaTimes } from 'react-icons/fa'
-import logo from '../assets/images/logo.png'
 
 const Navbar = () => {
   const navigate = useNavigate()
@@ -61,15 +60,21 @@ const Navbar = () => {
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
           <NavLink className="flex flex-shrink-0 items-center" to="/homepage">
-            <img
-              className="h-10 w-auto"
-              src={logo}
-              alt="SmartTrip Planner"
-            />
+            <div className="bg-white border-4 border-black rounded-full p-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
+              <svg className="w-6 h-6 text-black" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" />
+                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="currentColor" />
+              </svg>
+            </div>
             <span className="hidden sm:block text-white text-xl sm:text-2xl font-black uppercase ml-2"
               >SmarTrip Planner</span
             >
           </NavLink>
+
+          {/* Mobile Title - Centered */}
+          <span className="sm:hidden text-white text-lg font-black uppercase absolute left-1/2 transform -translate-x-1/2"
+            >SMARTRIP</span
+          >
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-2">

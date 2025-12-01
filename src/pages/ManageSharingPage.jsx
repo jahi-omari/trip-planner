@@ -1,11 +1,8 @@
 
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect, useMemo } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { FaUser, FaUserPlus, FaTimes, FaArrowLeft } from 'react-icons/fa'
 import { TripContext } from '../context/TripContext'
-// COMMENTED OUT: Backend API imports for testing with mock data
-// import { getTripMembers, addTripMember, removeTripMember, getAllUsers, getCurrentUser } from '../utils/api'
-
 
 const ManageSharingPage = () => {
   const { tripId } = useParams()
@@ -13,22 +10,22 @@ const ManageSharingPage = () => {
   const { upcomingTrips = [], tripMembers, setTripMembers } = useContext(TripContext) || {}
   const trip = upcomingTrips?.find(t => String(t.id) === String(tripId))
   
-  // Mock data for testing
-  const mockUsers = [
-    { id: 1, first_name: 'Alice', last_name: 'Johnson', email: 'alice.johnson@example.com' },
-    { id: 2, first_name: 'Bob', last_name: 'Smith', email: 'bob.smith@example.com' },
-    { id: 3, first_name: 'Charlie', last_name: 'Davis', email: 'charlie.davis@example.com' },
-    { id: 4, first_name: 'Diana', last_name: 'Martinez', email: 'diana.martinez@example.com' },
-    { id: 5, first_name: 'Ethan', last_name: 'Wilson', email: 'ethan.wilson@example.com' }
-  ]
+  // COMMENTED OUT: Mock data for testing - replaced with backend fetch
+  // const mockUsers = [
+  //   { id: 1, first_name: 'Alice', last_name: 'Johnson', email: 'alice.johnson@example.com' },
+  //   { id: 2, first_name: 'Bob', last_name: 'Smith', email: 'bob.smith@example.com' },
+  //   { id: 3, first_name: 'Charlie', last_name: 'Davis', email: 'charlie.davis@example.com' },
+  //   { id: 4, first_name: 'Diana', last_name: 'Martinez', email: 'diana.martinez@example.com' },
+  //   { id: 5, first_name: 'Ethan', last_name: 'Wilson', email: 'ethan.wilson@example.com' }
+  // ]
   
-  const mockCurrentUser = { id: 1, first_name: 'Alice', last_name: 'Johnson', email: 'alice.johnson@example.com' }
+  // const mockCurrentUser = { id: 1, first_name: 'Alice', last_name: 'Johnson', email: 'alice.johnson@example.com' }
   
-  const mockMembers = [
-    { id: 1, user_id: 1, first_name: 'Alice', last_name: 'Johnson', email: 'alice.johnson@example.com', role: 'owner' },
-    { id: 2, user_id: 2, first_name: 'Bob', last_name: 'Smith', email: 'bob.smith@example.com', role: 'editor' },
-    { id: 3, user_id: 3, first_name: 'Charlie', last_name: 'Davis', email: 'charlie.davis@example.com', role: 'viewer' }
-  ]
+  // const mockMembers = [
+  //   { id: 1, user_id: 1, first_name: 'Alice', last_name: 'Johnson', email: 'alice.johnson@example.com', role: 'owner' },
+  //   { id: 2, user_id: 2, first_name: 'Bob', last_name: 'Smith', email: 'bob.smith@example.com', role: 'editor' },
+  //   { id: 3, user_id: 3, first_name: 'Charlie', last_name: 'Davis', email: 'charlie.davis@example.com', role: 'viewer' }
+  // ]
   
   const [currentUser, setCurrentUser] = useState(null)
   const [allUsers, setAllUsers] = useState([])
@@ -43,8 +40,8 @@ const ManageSharingPage = () => {
   const [showRoleChangeNotification, setShowRoleChangeNotification] = useState(false)
   const [currentUserRole, setCurrentUserRole] = useState(null)
   
-  // Get members for this trip from context
-  const members = tripMembers?.[tripId] || []
+  // Get members for this trip from context (memoized to prevent re-render issues)
+  const members = useMemo(() => tripMembers?.[tripId] || [], [tripMembers, tripId])
 
   useEffect(() => {
     loadData()
@@ -78,31 +75,77 @@ const ManageSharingPage = () => {
       setLoading(true)
       setError(null)
       
-      // COMMENTED OUT: Backend API calls
-      // const [userResponse, membersResponse, usersResponse] = await Promise.all([
-      //   getCurrentUser(),
-      //   getTripMembers(tripId),
-      //   getAllUsers()
-      // ])
-      // setCurrentUser(userResponse)
-      // setMembers(membersResponse || [])
-      // setAllUsers(usersResponse || [])
-      
-      // Using mock data for testing
-      await new Promise(resolve => setTimeout(resolve, 500)) // Simulate loading
-      setCurrentUser(mockCurrentUser)
-      
-      // Initialize members for this trip in context if not already set
-      if (!tripMembers[tripId]) {
-        setTripMembers({ ...tripMembers, [tripId]: mockMembers })
+      const token = localStorage.getItem('token')
+      // Note: Backend authentication required - uncomment when backend is ready
+      // if (!token) {
+      //   setError('Not authenticated')
+      //   navigate('/')
+      //   return
+      // }
+
+      // Fetch current user from localStorage (set by LoginPage/ProfilePage)
+      const storedUser = localStorage.getItem('user')
+      if (storedUser) {
+        const user = JSON.parse(storedUser)
+        setCurrentUser(user)
       }
-      
-      setAllUsers(mockUsers)
-      
-      // Set current user's role
-      const currentMembers = tripMembers[tripId] || mockMembers
-      const userMember = currentMembers.find(m => m.user_id === mockCurrentUser.id)
-      setCurrentUserRole(userMember?.role || null)
+
+      // For testing without backend: show error but don't redirect
+      if (!token) {
+        setError('Backend not connected - member management requires authentication')
+        setLoading(false)
+        return
+      }
+
+      // Fetch trip members
+      // Backend should return: [{ id, user_id, first_name, last_name, email, role }, ...]
+      const membersRes = await fetch(`http://localhost:3000/api/trips/${tripId}/members`, {
+        method: 'GET',
+        headers: { 
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      })
+
+      if (!membersRes.ok) {
+        const errorData = await membersRes.json().catch(() => ({}))
+        throw new Error(errorData.message || 'Failed to fetch trip members')
+      }
+
+      const membersData = await membersRes.json()
+      setTripMembers({ ...tripMembers, [tripId]: membersData || [] })
+
+      // Fetch all users for search
+      // Backend should return: [{ id, firstName, lastName, email }, ...]
+      const usersRes = await fetch('http://localhost:3000/api/users', {
+        method: 'GET',
+        headers: { 
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      })
+
+      if (!usersRes.ok) {
+        const errorData = await usersRes.json().catch(() => ({}))
+        throw new Error(errorData.message || 'Failed to fetch users')
+      }
+
+      const usersData = await usersRes.json()
+      // Transform backend format (firstName, lastName) to match component format (first_name, last_name)
+      const transformedUsers = usersData.map(u => ({
+        id: u.id,
+        first_name: u.firstName,
+        last_name: u.lastName,
+        email: u.email
+      }))
+      setAllUsers(transformedUsers)
+
+      // Set current user's role from members list
+      if (storedUser) {
+        const user = JSON.parse(storedUser)
+        const userMember = membersData.find(m => m.user_id === user.id)
+        setCurrentUserRole(userMember?.role || null)
+      }
     } catch (err) {
       console.error('Error loading data:', err)
       setError(err.message || 'Failed to load data')
@@ -115,24 +158,44 @@ const ManageSharingPage = () => {
     try {
       setError(null)
       
-      // COMMENTED OUT: Backend API call
-      // await addTripMember(tripId, {
-      //   email: user.email,
-      //   role: selectedRole
-      // })
-      // const membersResponse = await getTripMembers(tripId)
-      // setMembers(membersResponse || [])
-      
-      // Using mock data for testing
-      const newMember = {
-        id: members.length + 1,
-        user_id: user.id,
-        first_name: user.first_name,
-        last_name: user.last_name,
-        email: user.email,
-        role: selectedRole
+      const token = localStorage.getItem('token')
+      if (!token) {
+        setError('Not authenticated')
+        return
       }
-      setTripMembers({ ...tripMembers, [tripId]: [...members, newMember] })
+
+      // Add trip member
+      // Backend should accept: { email: string, role: string }
+      const res = await fetch(`http://localhost:3000/api/trips/${tripId}/members`, {
+        method: 'POST',
+        headers: { 
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: user.email,
+          role: selectedRole
+        })
+      })
+
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}))
+        throw new Error(errorData.message || 'Failed to add member')
+      }
+
+      // Refresh members list
+      const membersRes = await fetch(`http://localhost:3000/api/trips/${tripId}/members`, {
+        method: 'GET',
+        headers: { 
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      })
+
+      if (membersRes.ok) {
+        const membersData = await membersRes.json()
+        setTripMembers({ ...tripMembers, [tripId]: membersData || [] })
+      }
       
       // Show notification
       setShowNotification(true)
@@ -157,13 +220,39 @@ const ManageSharingPage = () => {
     try {
       setError(null)
       
-      // COMMENTED OUT: Backend API call
-      // await removeTripMember(tripId, memberId)
-      // const membersResponse = await getTripMembers(tripId)
-      // setMembers(membersResponse || [])
-      
-      // Using mock data for testing
-      setTripMembers({ ...tripMembers, [tripId]: members.filter(m => m.id !== memberId) })
+      const token = localStorage.getItem('token')
+      if (!token) {
+        setError('Not authenticated')
+        return
+      }
+
+      // Remove trip member
+      const res = await fetch(`http://localhost:3000/api/trips/${tripId}/members/${memberId}`, {
+        method: 'DELETE',
+        headers: { 
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      })
+
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}))
+        throw new Error(errorData.message || 'Failed to remove member')
+      }
+
+      // Refresh members list
+      const membersRes = await fetch(`http://localhost:3000/api/trips/${tripId}/members`, {
+        method: 'GET',
+        headers: { 
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      })
+
+      if (membersRes.ok) {
+        const membersData = await membersRes.json()
+        setTripMembers({ ...tripMembers, [tripId]: membersData || [] })
+      }
       
       // Show notification
       setShowRemoveNotification(true)
@@ -178,16 +267,41 @@ const ManageSharingPage = () => {
     try {
       setError(null)
       
-      // COMMENTED OUT: Backend API call
-      // await updateTripMemberRole(tripId, memberId, { role: newRole })
-      // const membersResponse = await getTripMembers(tripId)
-      // setMembers(membersResponse || [])
-      
-      // Using mock data for testing
-      setTripMembers({ 
-        ...tripMembers, 
-        [tripId]: members.map(m => m.id === memberId ? { ...m, role: newRole } : m)
+      const token = localStorage.getItem('token')
+      if (!token) {
+        setError('Not authenticated')
+        return
+      }
+
+      // Update member role
+      // Backend should accept: { role: string }
+      const res = await fetch(`http://localhost:3000/api/trips/${tripId}/members/${memberId}`, {
+        method: 'PATCH',
+        headers: { 
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ role: newRole })
       })
+
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}))
+        throw new Error(errorData.message || 'Failed to change role')
+      }
+
+      // Refresh members list
+      const membersRes = await fetch(`http://localhost:3000/api/trips/${tripId}/members`, {
+        method: 'GET',
+        headers: { 
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      })
+
+      if (membersRes.ok) {
+        const membersData = await membersRes.json()
+        setTripMembers({ ...tripMembers, [tripId]: membersData || [] })
+      }
       
       // Show role change notification
       setShowRoleChangeNotification(true)

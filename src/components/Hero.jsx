@@ -3,7 +3,7 @@ import React from 'react'
 const Hero = ({title, subtitle}) => {
   return (
     <>
-    <section className="relative overflow-hidden" style={{backgroundColor: '#615fff', minHeight: 'calc(100vh - 80px)'}}>
+    <section className="relative overflow-hidden" style={{backgroundColor: '#8b96ff', minHeight: 'calc(100vh - 80px)'}}>
       {/* Decorative Travel Icons */}
       <div className="absolute inset-0">
         {/* Airplane Path 1 - Top curved path */}
